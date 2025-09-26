@@ -1,0 +1,9 @@
+[package]
+name = "ree"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = "4.5.48"
+qdrant-client = "1.15.0"
+uuid = "1.18.1"
