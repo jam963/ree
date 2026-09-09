@@ -1,0 +1,24 @@
+{
+  "context": {
+    "date": "2026-09-08",
+    "cpu": "AMD Ryzen 9 8945HS",
+    "ram": "30 GiB",
+    "rust": "1.90.0",
+    "profile": "release",
+    "platform_profile": "quiet",
+    "scaling_governor": "powersave",
+    "database_filesystem": "tmpfs /tmp",
+    "schema_version": 1,
+    "sqlite_vec": "0.1.6",
+    "note": "Exploratory single run on the development machine. A small Git no-op smoke test overlapped the first second. Not an SSD benchmark or an idle-machine release qualification. Peak RAM was not instrumented."
+  },
+  "result": {
+    "chunks": 1000000,
+    "chunks_per_second": 5098.758150685061,
+    "database_bytes": 3791208448,
+    "insert_seconds": 196.126188073,
+    "query_seconds": [1.262509571, 1.269539409, 1.265002809, 1.265320585, 1.263306207],
+    "type": "synthetic_scale",
+    "warning": "synthetic vectors; not model quality or inference measurements"
+  }
+}

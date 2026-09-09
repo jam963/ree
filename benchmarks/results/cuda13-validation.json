@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-08",
+  "runtime": "onnxruntime-1.28.0",
+  "ort_crate": "2.0.0-rc.13",
+  "cpu": "AMD Ryzen 9 8945HS",
+  "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "vram_mib": 8188,
+  "driver": "610.57.04",
+  "installed_cuda_runtime": "13.3",
+  "installed_cudnn": "9.25.0",
+  "system_packages_modified": false,
+  "cuda12_compatibility_libraries_installed": false,
+  "ld_library_path_override": false,
+  "ordinary_tests_passed": 57,
+  "real_tests_passed": [
+    "cpu_token_windows_and_repeatability",
+    "cpu_int8_cuda_fp16_cosine_and_ranking_parity",
+    "actual_cuda_oom_retries_and_initialization_fallback",
+    "cuda_auto_ingestion_sync_failure_preservation_and_rebuild"
+  ],
+  "cuda_accuracy": {
+    "reference": "same official FP16 artifact executed on CPU",
+    "minimum_observed_cosine": 0.9999927,
+    "required_cosine": 0.999,
+    "batch_shape_stability_required_cosine": 0.999,
+    "padded_lengths": [64, 256, 512],
+    "additional_batch_sizes": [1, 2, 4],
+    "use_tf32": false,
+    "enable_skip_layer_norm_strict_mode": true
+  },
+  "quantization_compatibility": {
+    "comparison": "official CPU INT8 vs CUDA FP16",
+    "original_provisional_cosine_bound": 0.98,
+    "original_bound_passed": false,
+    "minimum_observed_cosine": 0.95009214,
+    "minimum_int8_vs_cpu_fp16_cosine": 0.95008224,
+    "revised_provisional_regression_bound": 0.94,
+    "smoke_query_top1_rankings_match": true,
+    "note": "The difference is INT8 artifact drift, also observed without CUDA. This is not full multi-domain retrieval qualification."
+  },
+  "real_oom_recovery": {
+    "arena_limit_bytes": 1342177280,
+    "input_sequences": 256,
+    "tokens_per_sequence": 512,
+    "initial_batch_items": 256,
+    "oom_reductions": 5,
+    "final_batch_items": 8,
+    "provider_after_recovery": "cuda",
+    "cpu_fallbacks": 0,
+    "vectors_validated": 256,
+    "gpu_reset_attempted": false
+  },
+  "real_initialization_failure": {
+    "arena_limit_bytes": 1024,
+    "explicit_cuda_rejected": true,
+    "auto_cpu_fallback_succeeded": true
+  },
+  "real_visibility_mask_checks": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "auto_provider": "cpu",
+    "auto_exit_code": 0,
+    "explicit_cuda_exit_code": 3
+  },
+  "release_cli_smoke": {
+    "provider": "cuda",
+    "precision": "fp16",
+    "documents_committed": 1,
+    "provider_fallbacks": 0,
+    "elapsed_ms": 7548
+  },
+  "scope": "This development machine only. Device reset/loss and multiple physical GPUs are tested through injected probes/runtimes, not destructive hardware operations."
+}

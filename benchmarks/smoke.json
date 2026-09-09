@@ -1,0 +1,17 @@
+{
+  "documents": [
+    {"id":"sqlite","text":"ree stores normalized embedding vectors and document chunks in a local SQLite database."},
+    {"id":"rust","text":"Rust program entry point: fn main() { println!(\"hello\"); }"},
+    {"id":"japanese","text":"日本語の文書を検索するために、文章をベクトルに変換します。"},
+    {"id":"arabic","text":"تُحفظ المستندات والمتجهات في قاعدة بيانات محلية دون إرسال النص إلى خادم خارجي."},
+    {"id":"ocean","text":"Ocean tides are influenced by the gravitational pull of the Moon and the Sun."},
+    {"id":"config","text":"Set chunk_size = 512 and overlap = 64 in the TOML configuration file."}
+  ],
+  "queries": [
+    {"id":"q1","text":"Where does ree store embeddings?","relevant":["sqlite"],"domain":"web"},
+    {"id":"q2","text":"Rust hello world main function","relevant":["rust"],"domain":"code"},
+    {"id":"q3","text":"日本語の文章をベクトルに変換する","relevant":["japanese"],"domain":"multilingual"},
+    {"id":"q4","text":"أين تُحفظ المستندات محليًا؟","relevant":["arabic"],"domain":"multilingual"},
+    {"id":"q5","text":"Configure overlapping token windows","relevant":["config"],"domain":"technical"}
+  ]
+}
