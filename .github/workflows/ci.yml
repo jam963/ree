@@ -14,4 +14,5 @@ jobs:
       # Real model/GPU qualification remains ignored and local-only.
       - run: cargo test --locked --all-targets
       - run: python3 -m unittest discover -s benchmarks -p 'test_*.py'
+      - run: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s packaging -p 'test_*.py'
       - run: cargo run --locked --example generate_docs

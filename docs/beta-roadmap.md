@@ -15,6 +15,15 @@ security defects whenever discovered rather than waiting for the hardening gate.
 Performance changes must preserve deterministic chunking, complete-document
 atomicity, source isolation, and CPU fallback semantics.
 
+## Local-feedback exception — September 11, 2026
+
+The user explicitly chose: commit the current work, make a local beta installable,
+then pause broader development for qualitative usage feedback. Packaging and local
+installation therefore proceed **before** gates 2–5 are fully qualified. Those
+gates remain open, not passed or discarded; discovered correctness/data-loss/security
+defects still take priority. This is not authorization for a public production
+release. See [installation and beta limitations](installation.md).
+
 ## 1. Select and freeze the shipping model — selected for beta
 
 **Decision, 2026-09-10:** the user selected **Arctic M v2, 768 dimensions** and
@@ -186,7 +195,8 @@ full PLAN.md or production-1.0 completion.
 
 ## 6. Build the release installation, then beta test
 
-Only after the preceding gates:
+Original sequence (the September 11 local-feedback exception above now allows
+local installation first; public release qualification remains deferred):
 
 - Commit and tag the selected pre-1.0 version; build versioned Linux archives from
   the locked source/runtime artifacts, including checksums and required notices.
@@ -205,8 +215,9 @@ schema compatibility and backup requirements must be explicit.
 
 ## Scope discipline
 
-This sequence does not add a search command, model marketplace, or new platform
-matrix. Git authentication/branch selection, persistent glob deletion scopes,
+Search was subsequently added by explicit scope extension as recorded above.
+This sequence does not add a model marketplace or new platform matrix.
+Git authentication/branch selection, persistent glob deletion scopes,
 non-UTF-8 path support and general user-selectable model migration remain tracked
 limitations; they are not automatically added to the selected-model beta work. Review
 whether any must block the beta at the hardening gate rather than silently

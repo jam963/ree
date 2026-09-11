@@ -25,8 +25,10 @@ license notices appropriate to any libraries you package.
 
 `cargo install --path . --locked` installs the binary and supports CPU execution.
 Cargo does not install the adjacent optional provider libraries; copy/package
-those separately for GPU support. Release production/CI packaging is not yet
-published. Cross-compilation and non-x86_64 Linux qualification remain untested.
+those separately for GPU support. The [local beta builder/installer](installation.md)
+now packages both providers with notices and versioned installation/rollback.
+No public production/CI release is published. Cross-compilation, cross-distribution
+portability and non-x86_64 Linux qualification remain untested.
 
 ## Automatic selection
 

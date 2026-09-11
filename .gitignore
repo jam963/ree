@@ -1,3 +1,5 @@
 /target
+/dist/
+/packaging/__pycache__/
 /benchmarks/__pycache__/
 /benchmarks/results/**/.runner.lock

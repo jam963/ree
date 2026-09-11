@@ -3,6 +3,33 @@
 This records implementation and verification, not a declaration that every gate
 in PLAN.md is complete. The original design plan is preserved unchanged.
 
+## Local feedback beta — 2026-09-11
+
+The user chose to checkpoint development and install **0.1.0-beta.1** for qualitative
+feedback before completing the remaining roadmap gates. This explicitly changes
+execution order, not correctness requirements or the status of unqualified work.
+[Installation](installation.md) documents versioned packaging, user/system prefixes,
+checksums, adjacent CUDA providers, notices/source inventory, upgrade/rollback,
+data-safe uninstall, and the first-use checklist. No public release is implied.
+The prior performance/extraction/security/large-document gates remain open.
+
+The pre-packaging checkpoint is commit `17c880a`; all-target Rust and benchmark
+Python tests were rerun successfully before committing it. Historical test counts
+below describe their recorded snapshots, not installation qualification.
+
+Packaging verification: **151 Rust tests pass, six ignored; 20 benchmark Python
+and 12 installer/archive tests pass; Clippy with warnings denied, formatting and
+diff checks pass.** A staged installation outside the build tree passed 36 CLI
+checks with isolated data and copied existing weights: CPU-only inference without
+adjacent providers, automatic CPU selection, strict-CUDA refusal when hidden,
+actual installed CUDA provider loading, all three search modes, streaming and
+socket child execution, synchronization/failure preservation, rebuild and removal.
+These are small functional fixtures, not throughput or broad quality qualification.
+A real-provider test found that an executable symlink alone misdirects ONNX Runtime
+provider lookup; the installed launcher now resolves and execs the actual versioned
+binary. No runtime recipe or personal database was changed. The final archive's
+source/build identity and installed smoke logs are generated separately in `dist/`.
+
 ## Speedup v2 follow-up — 2026-09-10
 
 [Speedup v2](speedup-v2.md) implements streaming query reuse, an optional private
@@ -30,7 +57,8 @@ The [beta roadmap](beta-roadmap.md) records the agreed order for remaining work:
 5. Audit security and harden the release.
 6. Package a versioned installation, then begin hands-on beta testing.
 
-**Next:** continue the remaining beta work with **Arctic M v2, 768 dimensions**.
+**Current override:** install the local feedback beta, then collect usage feedback
+before resuming broader development. The remaining work uses **Arctic M v2, 768 dimensions**.
 The user chose to ship Arctic rather than spend more time on broader evaluation;
 [model decision v1](model-decision-v1.md) records the existing revision/artifact
 pins and deliberately deferred empirical work. Model selection is no longer the

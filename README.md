@@ -3,6 +3,12 @@
 **r**ust, **e**mbed **e**verything. Linux-first, local inference, SQLite storage,
 no mandatory daemon. `ree` ingests, synchronizes, and searches documents.
 
+**Local beta: 0.1.0-beta.1.** Build a versioned installable archive with
+`python3 packaging/build.py`, then run its `python3 install.py install` to install
+under `~/.local` (or use `--prefix /usr/local` with sudo for system-wide installation).
+See [installation, rollback, and first-use checklist](docs/installation.md).
+This feedback beta deliberately precedes the remaining qualification gates.
+
 ```sh
 cargo build --release --locked
 ./target/release/ree ./docs
