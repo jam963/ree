@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python3",
+    "benchmarks/run-retrieval-pilot.py",
+    "--scratch",
+    "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco",
+    "--output",
+    "benchmarks/results/retrieval-pilot-20260909",
+    "--resume"
+  ],
+  "runner_pid": 351235,
+  "time_utc": "2026-09-09T18:53:37.458299+00:00",
+  "verification_sha256": "ffac0e4da687c39b4658d355d416c4ab9311b3dbf73be8f21827e8d97f88974f"
+}

@@ -188,6 +188,109 @@ fn assert_order(v: &[Vec<f32>], n: usize) {
 }
 
 #[test]
+fn interactive_queries_skip_calibration_profiles_and_growth_but_keep_fallback() {
+    for request in ["auto", "cuda", "cpu"] {
+        let mut f = Fixture::new(request);
+        f.config.batch_size = None;
+        f.config.chunk_size = 512;
+        let mut s = Scheduler::initialize_interactive(
+            &f.config,
+            Box::new(Factory(f.state.clone())),
+            Box::new(Probe {
+                devices: vec![gpu(0, 7 << 30)],
+                error: None,
+                free: f.free.clone(),
+            }),
+            &mut f.events,
+        )
+        .unwrap();
+        assert!(
+            f.state.lock().unwrap().calls.is_empty(),
+            "must not calibrate"
+        );
+        assert!(!f.config.cache.join("profiles").exists());
+        for _ in 0..40 {
+            assert_order(&s.embed(&[vec![0, 1, 2]], &mut f.events).unwrap(), 1);
+        }
+        assert_eq!(
+            s.limits.max_items, 1,
+            "interactive workloads must not grow batches"
+        );
+        if request != "cpu" {
+            f.state.lock().unwrap().max_gpu_items = Some(0);
+            let result = s.embed(&[vec![0, 1, 2]], &mut f.events);
+            if request == "auto" {
+                assert_order(&result.unwrap(), 1);
+                assert_eq!(s.provider(), Some("cpu"));
+                assert_eq!(s.fallbacks, 1);
+            } else {
+                assert!(result.is_err());
+                assert_eq!(f.state.lock().unwrap().creates, vec![Some(0)]);
+            }
+        }
+    }
+}
+
+#[test]
+fn default_cpu_underfilled_success_never_grows_limits() {
+    let mut f = Fixture::new("cpu");
+    f.config.batch_size = None;
+    let mut s = f.start(vec![], None).unwrap();
+    let before = (s.limits.max_items, s.limits.max_padded_tokens);
+    for _ in 0..80 {
+        s.embed(&[vec![0, 1, 2]], &mut f.events).unwrap();
+    }
+    assert_eq!((s.limits.max_items, s.limits.max_padded_tokens), before);
+    assert_eq!(s.workload_calls, 80);
+    assert_eq!(s.calibration_calls, 0);
+    assert_eq!(s.real_tokens, 240);
+    assert_eq!(s.padded_tokens, 240);
+}
+
+#[test]
+fn cached_limits_are_bounded_by_actual_revalidation_not_nominal_requests() {
+    for (items, tokens, expected) in [(64, 32768, 16), (16, 512, 1)] {
+        let mut f = Fixture::new("cuda");
+        f.config.batch_size = None;
+        f.config.chunk_size = 512;
+        let g = gpu(0, 7 << 30);
+        let key = ree::util::hash(
+            format!(
+                "bounded-calibration-v2:{}:fp16:{}:{}:{}:{}:token-output",
+                ree::model::MODEL_KEY,
+                g.uuid,
+                g.driver,
+                ree::model::RUNTIME_VERSION,
+                f.config.chunk_size
+            )
+            .as_bytes(),
+        );
+        let dir = f.config.cache.join("profiles");
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(
+            dir.join(format!("{key}.json")),
+            serde_json::to_vec(&serde_json::json!({"max_items":items,"max_padded_tokens":tokens}))
+                .unwrap(),
+        )
+        .unwrap();
+        // End the first probe without a larger candidate. This is above the
+        // embed reduction threshold, below the calibration growth threshold.
+        f.free.lock().unwrap().extend([7 << 30, (8u64 << 30) / 5]);
+        let mut s = f.start(vec![g], None).unwrap();
+        let state = f.state.lock().unwrap();
+        assert_eq!(state.calls.len(), 1);
+        assert_eq!(state.calls[0].1.len(), expected);
+        drop(state);
+        assert_eq!(s.limits.max_items, expected);
+        assert_eq!(s.limits.max_padded_tokens, expected * 512);
+        assert_eq!(s.calibration_calls, 1);
+        assert_eq!(s.workload_calls, 0);
+        s.embed(&vec![vec![0, 1, 2]; 64], &mut f.events).unwrap();
+        assert_eq!(s.limits.max_items, expected);
+    }
+}
+
+#[test]
 fn no_driver_and_no_devices_use_cpu() {
     for error in [Some("NVML library unavailable"), None] {
         let mut f = Fixture::new("auto");

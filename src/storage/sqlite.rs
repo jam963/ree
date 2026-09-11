@@ -111,6 +111,7 @@ pub struct Document {
 }
 impl Database {
     pub fn open(path: &Path, writable: bool) -> Result<Self> {
+        let _span = crate::metrics::Span::new("database_open");
         register_vec();
         let conn = if writable {
             Connection::open(path)?
@@ -127,21 +128,32 @@ impl Database {
         );
         if writable {
             conn.pragma_update(None, "journal_mode", "WAL")?;
-            if version == 0 {
+            if version < migrations::VERSION {
                 conn.execute_batch("BEGIN IMMEDIATE")?;
-                match conn.execute_batch(migrations::INITIAL) {
+                let migration = (|| -> Result<()> {
+                    if version == 0 {
+                        conn.execute_batch(migrations::INITIAL)?;
+                    }
+                    if version < 2 {
+                        conn.execute_batch(migrations::RETRIEVAL)?;
+                    }
+                    Ok(())
+                })();
+                match migration {
                     Ok(()) => conn.execute_batch("COMMIT")?,
                     Err(e) => {
                         let _ = conn.execute_batch("ROLLBACK");
-                        return Err(e.into());
+                        return Err(
+                            e.context("database migration failed; original schema retained")
+                        );
                     }
                 }
             }
             conn.execute("UPDATE runs SET status='interrupted',finished_at=CURRENT_TIMESTAMP WHERE status='running'", [])?;
         } else {
             ensure!(
-                version == migrations::VERSION,
-                "database needs migration; run an ingestion first"
+                version >= 1,
+                "database is uninitialized; run ree migrate or ingest documents first"
             );
         }
         Ok(Self { conn })
@@ -247,7 +259,7 @@ impl Database {
             )
             .optional()?;
         Ok(
-            json!({"type":"status","schema_version":migrations::VERSION,"sources":count("source_roots")?,"documents":count("documents")?,"chunks":count("chunks")?,"embeddings":count("active_embeddings")?,"generation":generation}),
+            json!({"type":"status","schema_version":self.schema_version()?,"sources":count("source_roots")?,"documents":count("documents")?,"chunks":count("chunks")?,"embeddings":count("active_embeddings")?,"generation":generation}),
         )
     }
     pub fn sources(&self) -> Result<Vec<Value>> {
@@ -280,8 +292,19 @@ impl Database {
         Ok(self.conn.last_insert_rowid())
     }
     pub fn pending_chunks(&self, generation: i64, limit: usize) -> Result<Vec<(String, Vec<i64>)>> {
-        let mut stmt = self.conn.prepare("SELECT id,token_ids_json FROM chunks c WHERE NOT EXISTS(SELECT 1 FROM embedding_records r WHERE r.chunk_id=c.id AND r.generation_id=?1) ORDER BY id LIMIT ?2")?;
-        let rows = stmt.query_map(params![generation, limit], |r| {
+        self.pending_chunks_after(generation, "", limit)
+    }
+    /// Keyset pagination prevents rescanning all previously rebuilt chunks on
+    /// every batch. The writer lock excludes insertion below the cursor during
+    /// a rebuild; a resumed invocation starts at the beginning to cover holes.
+    pub fn pending_chunks_after(
+        &self,
+        generation: i64,
+        after: &str,
+        limit: usize,
+    ) -> Result<Vec<(String, Vec<i64>)>> {
+        let mut stmt = self.conn.prepare_cached("SELECT id,token_ids_json FROM chunks c WHERE id>?2 AND NOT EXISTS(SELECT 1 FROM embedding_records r WHERE r.chunk_id=c.id AND r.generation_id=?1) ORDER BY id LIMIT ?3")?;
+        let rows = stmt.query_map(params![generation, after, limit], |r| {
             Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?))
         })?;
         rows.map(|r| {
@@ -341,16 +364,12 @@ fn insert_vector(
     vector: &[f32],
 ) -> Result<()> {
     model::validate_vector(vector)?;
-    tx.execute(
-        "INSERT INTO embedding_records(chunk_id,generation_id) VALUES(?1,?2)",
-        params![chunk, generation],
-    )?;
+    tx.prepare_cached("INSERT INTO embedding_records(chunk_id,generation_id) VALUES(?1,?2)")?
+        .execute(params![chunk, generation])?;
     let id = tx.last_insert_rowid();
     let blob: Vec<u8> = vector.iter().flat_map(|f| f.to_le_bytes()).collect();
-    tx.execute(
-        "INSERT INTO embeddings(rowid,embedding,generation_id) VALUES(?1,?2,?3)",
-        params![id, blob, generation],
-    )?;
+    tx.prepare_cached("INSERT INTO embeddings(rowid,embedding,generation_id) VALUES(?1,?2,?3)")?
+        .execute(params![id, blob, generation])?;
     Ok(())
 }
 impl Store for Database {
@@ -360,6 +379,7 @@ impl Store for Database {
         chunks: &[Chunk],
         vectors: &[Vec<f32>],
     ) -> Result<()> {
+        let _span = crate::metrics::Span::new("document_write");
         ensure!(chunks.len() == vectors.len(), "chunk/vector count mismatch");
         for v in vectors {
             model::validate_vector(v)?;
@@ -370,7 +390,7 @@ impl Store for Database {
         tx.execute("INSERT INTO documents(id,source_root_id,uri,content_hash,text_hash,media_type,extractor,recipe,size_bytes,modified_ns,metadata_json,last_seen_run) VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12)",params![d.id,d.root,d.uri,d.content_hash,d.text_hash,d.media_type,d.extractor,d.recipe,d.size,d.modified_ns,d.metadata.to_string(),d.run])?;
         for (i, (c, v)) in chunks.iter().zip(vectors).enumerate() {
             let id = hash(format!("{}\0{}\0{i}\0{}", d.id, d.recipe, c.text).as_bytes());
-            tx.execute("INSERT INTO chunks(id,document_id,ordinal,text,token_start,token_end,token_count,byte_start,byte_end,chunk_hash,token_ids_json) VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)",params![id,d.id,i,c.text,c.token_start,c.token_end,c.token_end-c.token_start,c.byte_start,c.byte_end,hash(c.text.as_bytes()),serde_json::to_string(&c.input_ids)?])?;
+            tx.prepare_cached("INSERT INTO chunks(id,document_id,ordinal,text,token_start,token_end,token_count,byte_start,byte_end,chunk_hash,token_ids_json) VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)")?.execute(params![id,d.id,i,c.text,c.token_start,c.token_end,c.token_end-c.token_start,c.byte_start,c.byte_end,hash(c.text.as_bytes()),serde_json::to_string(&c.input_ids)?])?;
             insert_vector(&tx, generation, &id, v)?;
         }
         tx.commit()?;

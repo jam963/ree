@@ -25,18 +25,52 @@ pub struct Counts {
     pub deleted: usize,
     pub failed: usize,
 }
-struct Prepared {
-    uri: String,
-    result: Result<Payload>,
+// Only two entries per queue; keep the common document inline rather than add
+// a heap allocation for every file to optimize rare small diagnostic events.
+#[allow(clippy::large_enum_variant)]
+enum Prepared {
+    Document {
+        uri: String,
+        result: Result<Payload>,
+    },
+    Event(Value),
+}
+
+struct PreparationEvents {
+    sender: crossbeam_channel::Sender<Prepared>,
+    line: Vec<u8>,
+}
+impl std::io::Write for PreparationEvents {
+    fn write(&mut self, bytes: &[u8]) -> std::io::Result<usize> {
+        for &byte in bytes {
+            if self.line.len() >= 128 * 1024 {
+                return Err(std::io::Error::other("preparation event exceeds limit"));
+            }
+            self.line.push(byte);
+            if byte == b'\n' {
+                let value = serde_json::from_slice(&self.line).map_err(std::io::Error::other)?;
+                self.sender
+                    .send(Prepared::Event(value))
+                    .map_err(std::io::Error::other)?;
+                self.line.clear();
+            }
+        }
+        Ok(bytes.len())
+    }
+    fn flush(&mut self) -> std::io::Result<()> {
+        Ok(())
+    }
 }
 struct Payload {
     content_hash: String,
     size: u64,
     modified_ns: Option<String>,
     extracted: Option<Extracted>,
+    chunks: Option<Vec<crate::chunk::Chunk>>,
     metadata: Value,
 }
 
+#[allow(clippy::too_many_arguments)]
 fn prepare(
     item: Item,
     config: &Config,
@@ -44,7 +78,10 @@ fn prepare(
     cache: Option<&Database>,
     root: &str,
     recipe: &str,
+    mut chunker: Option<&mut (dyn model::passage::Chunker + 'static)>,
+    events: &mut Events,
 ) -> Prepared {
+    let _span = crate::metrics::Span::new("preparation_service");
     let result = (|| -> Result<Payload> {
         let (bytes, extension, modified_ns) = match item.content {
             Content::Bytes(bytes, ext) => (bytes, ext, None),
@@ -92,15 +129,29 @@ fn prepare(
         } else {
             Some(extract::extract(&bytes, &extension, config, forced)?)
         };
+        // Bound extra token/chunk staging to small extracted documents. Large
+        // documents keep the original single-consumer tokenization path.
+        let chunks = match (&extracted, &mut chunker) {
+            (Some(text), Some(chunker)) if text.text.len() <= 16 * 1024 => {
+                let chunks = chunker.chunk(&text.text, events)?;
+                let bytes: usize = chunks
+                    .iter()
+                    .map(|c| c.text.len() + c.input_ids.len() * 8)
+                    .sum();
+                (bytes <= 256 * 1024).then_some(chunks)
+            }
+            _ => None,
+        };
         Ok(Payload {
             content_hash,
             size,
             modified_ns,
             extracted,
+            chunks,
             metadata: item.metadata,
         })
     })();
-    Prepared {
+    Prepared::Document {
         uri: item.uri,
         result,
     }
@@ -160,13 +211,17 @@ fn process(
     counts: &mut Counts,
     pending: &mut Vec<Pending>,
 ) -> Result<()> {
-    let id = document_id(root, &p.uri);
+    let (uri, result) = match p {
+        Prepared::Event(value) => return events.emit(value),
+        Prepared::Document { uri, result } => (uri, result),
+    };
+    let id = document_id(root, &uri);
     // Seen is recorded independently of extraction/inference success, ensuring
     // a failed document keeps its old valid chunks during deletion reconciliation.
     db.seen(&id, run)?;
-    let payload = match p.result {
+    let payload = match result {
         Ok(payload) => payload,
-        Err(e) => return failure(db, events, run, &p.uri, &e, counts),
+        Err(e) => return failure(db, events, run, &uri, &e, counts),
     };
     let Some(extracted) = payload.extracted else {
         counts.unchanged += 1;
@@ -180,19 +235,23 @@ fn process(
         counts.unchanged += 1;
         return Ok(());
     }
-    let chunks = match engine.chunk(&extracted.text, events) {
+    let chunks = match payload
+        .chunks
+        .map(Ok)
+        .unwrap_or_else(|| engine.chunk(&extracted.text, events))
+    {
         Ok(v) => v,
         Err(e) => {
             if e.downcast_ref::<crate::error::AppError>().is_some() {
                 return Err(e);
             }
-            return failure(db, events, run, &p.uri, &e, counts);
+            return failure(db, events, run, &uri, &e, counts);
         }
     };
     let document = Document {
         id,
         root: root.into(),
-        uri: p.uri.clone(),
+        uri,
         content_hash: payload.content_hash,
         text_hash: hash(extracted.text.as_bytes()),
         media_type: extracted.media_type,
@@ -238,14 +297,18 @@ fn flush_documents(
         // A failed mixed-document CPU batch is retried per document to isolate
         // bad inputs. No output is committed until that document is complete.
         let result = match &vectors {
-            Ok(v) => Ok(v[offset..offset + p.chunks.len()].to_vec()),
-            Err(_) => engine.embed(
-                &p.chunks
-                    .iter()
-                    .map(|c| c.input_ids.clone())
-                    .collect::<Vec<_>>(),
-                events,
-            ),
+            Ok(v) => Ok(std::borrow::Cow::Borrowed(
+                &v[offset..offset + p.chunks.len()],
+            )),
+            Err(_) => engine
+                .embed(
+                    &p.chunks
+                        .iter()
+                        .map(|c| c.input_ids.clone())
+                        .collect::<Vec<_>>(),
+                    events,
+                )
+                .map(std::borrow::Cow::Owned),
         };
         offset += p.chunks.len();
         match result {
@@ -291,13 +354,14 @@ fn ingest_root(
     )?;
     let recipe = hash(
         format!(
-            "{}:{}:{}:{}:{:?}:{:?}:{}:{}",
+            "{}:{}:{}:{}:{:?}:{:?}:{:?}:{}:{}",
             model::MODEL_KEY,
             extract::VERSION,
             config.chunk_size,
             config.overlap,
             options.extractor,
             config.extractors,
+            config.pdf,
             config.metadata,
             root.metadata
         )
@@ -326,7 +390,7 @@ fn ingest_root(
                     Err(e) => {
                         traversal_ref.store(false, Ordering::Relaxed);
                         discovery_results
-                            .send(Prepared {
+                            .send(Prepared::Document {
                                 uri: root.identity.clone(),
                                 result: Err(e),
                             })
@@ -340,7 +404,9 @@ fn ingest_root(
             let results = results_tx.clone();
             let root_id = &id;
             let recipe_ref = &recipe;
+            let mut chunker = engine.chunker();
             scope.spawn(move || {
+                let mut preparation_events = Events::with_writer(PreparationEvents { sender: results.clone(), line: vec![] }, false, false);
                 // A read-only connection per extractor avoids a million-entry
                 // in-memory hash map and skips extraction for content-hash hits.
                 let cache = if options.force {
@@ -360,11 +426,17 @@ fn ingest_root(
                             cache.as_ref(),
                             root_id,
                             recipe_ref,
+                            chunker.as_deref_mut(),
+                            &mut preparation_events,
                         ))
                         .is_err()
                     {
                         break;
                     }
+                    if crate::metrics::enabled() {
+                        let _ = preparation_events.emit(json!({"type":"stage_metrics","scope":"preparation_worker","overlapping":true,"stages":crate::metrics::take()}));
+                    }
+                    let _ = preparation_events.flush();
                 }
             });
         }

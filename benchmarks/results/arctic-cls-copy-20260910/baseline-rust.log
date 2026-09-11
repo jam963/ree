@@ -1,0 +1,226 @@
+   Compiling ree v0.1.0 (/home/jacob/Projects/ree)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.83s
+     Running unittests src/lib.rs (target/debug/deps/ree-05022e227432d649)
+
+running 35 tests
+test chunk::tests::empty_and_invalid ... ok
+test chunk::tests::unicode_exact_overlap ... ok
+test config::tests::sizes ... ok
+test extract::external::tests::extension_cannot_escape_snapshot_directory ... ok
+test config::tests::metadata_precedence ... ok
+test extract::notebook::tests::no_binary_outputs ... ok
+test extract::pdf::tests::rejects_bad_page_counts_and_limits ... ok
+test extract::pdf::tests::disabled_ocr_and_inconsistent_page_boundaries ... ok
+test extract::pdf::tests::aggregate_output_is_bounded_and_partial_ocr_is_not_returned ... ok
+test input::url::tests::protected_ranges ... ok
+test model::batch::tests::padded_budget ... ok
+test extract::text::tests::binary ... ok
+test extract::pdf::tests::page_limit_checked_before_rendering_or_text_extraction ... ok
+test input::tests::kinds ... ok
+test extract::pdf::tests::mixed_pdf_preserves_text_and_records_unicode_page_offsets ... ok
+test extract::text::tests::legacy ... ok
+test extract::text::tests::unicode_and_boms ... ok
+test model::batch::tests::reduction_has_floor ... ok
+test model::device::tests::failures ... ok
+test model::device::tests::cuda13_unsupported_architectures_are_not_selected ... ok
+test input::url::tests::identities ... ok
+test extract::html::tests::removes_active_content ... ok
+test model::device::tests::cuda_ordinals_are_matched_to_nvml_by_uuid ... ok
+test model::device::tests::headroom_saturates ... ok
+test model::device::tests::most_free_not_zero ... ok
+test model::tests::explicit_cuda_never_falls_back ... ok
+test model::tests::invalid_vectors_rejected ... ok
+test extract::pdf::tests::rendered_symlinks_rejected_and_workspace_removed_on_failure ... ok
+test model::telemetry::tests::cpu_telemetry_does_not_require_gpu_libraries ... ok
+test model::tests::one_item_oom_falls_back ... ok
+test model::tests::reduced_retry_keeps_order ... ok
+test extract::external::tests::arguments_not_shell ... ok
+test extract::external::tests::bounds_output_and_runtime ... ok
+test extract::external::tests::inherited_pipes_do_not_outlive_timeout ... ok
+test extract::external::tests::workspace_and_single_file_writes_are_bounded ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running unittests src/main.rs (target/debug/deps/ree-d00900101f8f8844)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/batching.rs (target/debug/deps/batching-07b78ace15770413)
+
+running 1 test
+test tiny_documents_share_inference_batches_and_noop_skips_helpers ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/cli.rs (target/debug/deps/cli-8f76b77877df79a8)
+
+running 5 tests
+test missing_inputs_return_partial_not_success ... ok
+test synthetic_database_cannot_be_mixed_with_real_embeddings ... ok
+test invalid_args_are_json_and_code_two ... ok
+test global_options_before_subcommands_are_not_ingestion_inputs ... ok
+test empty_stdin_dedup_named_source_and_maintenance_offline ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/crash_recovery.rs (target/debug/deps/crash_recovery-5179c3030256970c)
+
+running 3 tests
+test crash_worker ... ok
+
+running 1 test
+
+running 1 test
+test killed_document_commit_rolls_back_and_retry_is_idempotent ... ok
+test killed_activation_keeps_old_generation_and_resumes_shadow ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/cuda_e2e.rs (target/debug/deps/cuda_e2e-41b0c50d86093bcf)
+
+running 1 test
+test cuda_auto_ingestion_sync_failure_preservation_and_rebuild ... ignored, real CUDA 13 end-to-end ingestion/sync/rebuild on development host only
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cuda_real_oom.rs (target/debug/deps/cuda_real_oom-4d7f121f7e7d089b)
+
+running 1 test
+test actual_cuda_oom_retries_and_initialization_fallback ... ignored, real CUDA 13: local RTX 4070 only; enforces small ONNX arena, no GPU reset
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cuda_recovery.rs (target/debug/deps/cuda_recovery-76c06876ea56b01f)
+
+running 14 tests
+test cpu_request_does_not_require_nvml ... ok
+test explicit_cuda_initialization_failure_never_creates_cpu ... ok
+test silent_provider_fallback_is_rejected ... ok
+test no_driver_and_no_devices_use_cpu ... ok
+test init_provider_model_and_warmup_errors_fall_back ... ok
+test cpu_fallback_initialization_failure_is_fatal ... ok
+test shrinking_vram_reduces_limits_and_invalid_vectors_are_not_returned ... ok
+test reduced_session_failure_falls_back_without_retry_loop ... ok
+test most_free_gpu_is_selected_and_explicit_index_is_respected ... ok
+test midrun_oom_preserves_order_and_bounds_user_batch ... ok
+test calibration_oom_reduces_recreates_and_recovers ... ok
+test one_item_oom_falls_back_but_explicit_cuda_fails ... ok
+test device_loss_and_unknown_errors_resume_at_first_uncommitted_chunk ... ok
+test oom_and_device_loss_writes_are_idempotent ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/ingestion.rs (target/debug/deps/ingestion-88855f5ddf2ae58b)
+
+running 13 tests
+test dotfiles_ignored_files_and_symlink_files_are_attempted ... ok
+test migration_reopen_and_newer_schema_rejection ... ok
+{"error_code":"binary_input","message":"binary_input: NUL bytes detected","source":"/tmp/.tmpplMl7I/docs/x","type":"failed"}
+test metadata_is_json_and_empty_documents_replace ... ok
+test invalid_vector_write_is_atomic ... ok
+{"error_code":"input_failed","message":"injected inference failure","source":"/tmp/.tmpplMl7I/docs/x","type":"failed"}
+{"error_code":"binary_input","message":"binary_input: NUL bytes detected","source":"/tmp/.tmpTKgYda/docs/bad","type":"failed"}
+test fail_fast_prevents_reconciliation ... ok
+test overlapping_roots_are_independent ... ok
+test extraction_and_inference_failures_preserve_old_vectors ... ok
+test rebuild_failure_resume_activation_and_direct_vector_sql ... ok
+{"error_code":"input_failed","message":"No such file or directory (os error 2)","source":"/tmp/.tmpeWZduM/docs","type":"failed"}
+test incomplete_walk_does_not_prune ... ok
+test sync_noop_change_delete_rename_and_isolation ... ok
+{"error_code":"input_failed","message":"pdfinfo: Syntax Error: Couldn't find trailer dictionary\nSyntax Error: Couldn't find trailer dictionary\nSyntax Error: Couldn't read xref table\n: extractor failed with exit status: 1","source":"/tmp/.tmpg4AwJF/pdfs/report.pdf","type":"failed"}
+test pdf_custom_override_and_failed_builtin_preserve_old_chunks ... ok
+test rebuild_keyset_pagination_covers_resumed_holes_across_batches ... ok
+test writer_lock_rejects_concurrency_and_releases_on_drop ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.01s
+
+     Running tests/model_real.rs (target/debug/deps/model_real-3953cc3b4b732220)
+
+running 2 tests
+test cpu_int8_cuda_fp16_cosine_and_ranking_parity ... ignored, requires installed CUDA 13 and both real artifacts on development GPU
+test cpu_token_windows_and_repeatability ... ignored, downloads model; run only on the development machine
+
+test result: ok. 0 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/pdf_real.rs (target/debug/deps/pdf_real-e8c24fa8c6081544)
+
+running 1 test
+test text_pages_and_real_bounded_rendering ... ignored, requires local Poppler helpers; exercises optional Tesseract or missing-tool failure
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/remote.rs (target/debug/deps/remote-bda0c9d5ad945cab)
+
+running 2 tests
+test private_network_denied_before_connect ... ok
+test bounded_local_http_and_scheme_validation ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/generate_docs.rs (target/debug/examples/generate_docs-b842ac17beb2bd94)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/pipeline_scale.rs (target/debug/examples/pipeline_scale-a7ba5e76b2c5d816)
+
+running 1 test
+test telemetry::tests::memory_units_and_sampling_without_gpu ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/prepare_corpus.rs (target/debug/examples/prepare_corpus-e992008a556c78ba)
+
+running 11 tests
+test quality::tests::binary_metrics_have_known_answers ... ok
+test quality::tests::rejects_ambiguous_corpora_before_inference ... ok
+test quality::tests::self_matches_and_score_ties_are_explicit ... ok
+test quality::tests::graded_ndcg_preserves_judgments ... ok
+test tests::input_order_does_not_change_selection_or_text ... ok
+test tests::query_selection_has_a_stable_hash_and_never_skips_for_budget ... ok
+test tests::preserves_all_judgments_and_ranked_negatives ... ok
+test tests::refuses_easy_subsets_and_positive_loss ... ok
+test tests::rejects_corruption_duplicates_and_dangling_references ... ok
+test tests::negative_lists_require_unique_real_nonpositive_candidates ... ok
+test tests::line_and_manifest_limits_fail_closed ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests examples/qualify.rs (target/debug/examples/qualify-4454653fbd6f3a2b)
+
+running 9 tests
+test quality::tests::binary_metrics_have_known_answers ... ok
+test tests::legacy_recipes_keep_production_output_selection ... ok
+test quality::tests::rejects_ambiguous_corpora_before_inference ... ok
+test quality::tests::graded_ndcg_preserves_judgments ... ok
+test quality::tests::self_matches_and_score_ties_are_explicit ... ok
+test tests::repeatability_metrics_detect_drift ... ok
+test tests::manifest_sidecars_are_verified_and_unknown_fields_rejected ... ok
+test telemetry::tests::memory_units_and_sampling_without_gpu ... ok
+test vector_export::tests::round_trip_requires_complete_hash_valid_unit_vectors ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/scale.rs (target/debug/examples/scale-c2d64ab5b06a1f55)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/score_compatibility.rs (target/debug/examples/score_compatibility-1c33b0f9233b0718)
+
+running 8 tests
+test quality::tests::binary_metrics_have_known_answers ... ok
+test quality::tests::graded_ndcg_preserves_judgments ... ok
+test quality::tests::rejects_ambiguous_corpora_before_inference ... ok
+test quality::tests::self_matches_and_score_ties_are_explicit ... ok
+test tests::homogeneous_and_mixed_indexes_use_the_correct_vectors ... ok
+test tests::cosine_summary_and_projection_do_not_hide_drift ... ok
+test tests::incompatible_exports_are_rejected_before_scoring ... ok
+test vector_export::tests::round_trip_requires_complete_hash_valid_unit_vectors ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

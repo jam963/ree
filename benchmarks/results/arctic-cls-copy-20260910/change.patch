@@ -1,0 +1,426 @@
+--- a/docs/arctic-optimization-plan-v1.md
++++ b/docs/arctic-optimization-plan-v1.md
+@@ -1,10 +1,20 @@
+ # Arctic optimization audit and plan v1
+ 
+-Date: **2026-09-10**. Status: **audit complete; changes below are proposed, not
+-implemented**. Scope: the selected [Arctic 768 beta recipe](model-decision-v1.md),
+-not another model-selection exercise. No new model inference or performance
+-measurement was run for this audit. Production source and frozen pilot binaries
+-are unchanged.
++Date: **2026-09-10**. Status: **audit complete; first copy-removal patch now
++implemented and offline-tested; scheduler fixes and measurements pending**.
++Scope: the selected [Arctic 768 beta recipe](model-decision-v1.md), not another
++model-selection exercise. The findings and line references below describe the
++pre-patch audit; no new model inference or performance measurement ran for it.
++
++**Implementation follow-up, 2026-09-10:** token pooling now borrows the extracted
++output and copies/converts only CLS slices. Mean pooling retains per-token
++conversion, division and accumulation order without full-tensor materialization.
++Nine offline fixtures cover bitwise f32/f16 outputs, padding, shapes, normalization
++and the CLS conversion count. Checks: 111 Rust tests pass (five ignored), 19 Python
++tests pass, Clippy and formatting pass. Model pins, scheduler and normalization
++source are unchanged. Frozen release binaries and a pre-edit source archive were
++preserved. No measured speedup or real-model equivalence is claimed; see
++[patch evidence](../benchmarks/results/arctic-cls-copy-20260910/README.md).
+ 
+ ## Existing evidence: larger batches are not uniformly faster
+ 
+--- a/docs/beta-roadmap.md
++++ b/docs/beta-roadmap.md
+@@ -99,10 +99,11 @@
+ 
+ **Audit complete, 2026-09-10:** [Arctic optimization plan v1](arctic-optimization-plan-v1.md)
+ records the existing timing evidence, replayed cache/growth issues and a
+-shape-preserving CLS output-copy opportunity. No optimization or new inference
+-measurement has been performed. First proposed patch: remove the redundant CLS
+-output copy with exact offline output tests, then address calibration/growth
+-regressions and use short targeted stage measurements rather than a broad sweep.
++shape-preserving CLS output-copy opportunity. The first copy-removal patch is now
++[implemented and offline-tested](../benchmarks/results/arctic-cls-copy-20260910/README.md);
++no new model inference or speed measurement has been performed. Next: address
++calibration/growth regressions separately, then use short targeted stage
++measurements rather than a broad sweep.
+ 
+ **Goal:** tune the selected shipping recipe against measured bottlenecks.
+ 
+--- a/docs/implementation-status.md
++++ b/docs/implementation-status.md
+@@ -35,11 +35,14 @@
+ limits larger than the actual calibration batch. Source review found a redundant
+ 12-MiB host output copy for batch-8/512-token CLS pooling, which retains only
+ 24 KiB of vectors. This is an allocation calculation, not a measured speedup.
+-First proposed patch is shape-preserving copy removal with exact output fixtures;
+-cache/growth fixes and short stage measurements follow separately. No production
+-behavior changed or new model inference ran. Current checks: 102 Rust tests pass
+-(five ignored), 19 Python tests pass, four replay observations reproduce, and
+-frozen pilot source/release-executable hashes remain unchanged.
++The first shape-preserving copy-removal patch is now implemented with nine
++[offline output fixtures](../benchmarks/results/arctic-cls-copy-20260910/README.md).
++Checks: 111 Rust tests pass (five ignored), 19 Python tests pass; Clippy and
++formatting pass. Baseline source and both frozen release executables were
++preserved before edits. Runtime output pooling changed; scheduler, normalization,
++model recipe and frozen release binaries did not. Cache/growth fixes and short
++stage measurements remain separate next steps. No new model inference ran and
++no speed improvement has been measured.
+ 
+ ## Implemented
+ 
+--- a/src/model/onnx.rs
++++ b/src/model/onnx.rs
+@@ -6,6 +6,9 @@
+     value::Tensor,
+ };
+ use std::path::Path;
++
++#[cfg(test)]
++mod tests;
+ 
+ #[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
+ #[serde(rename_all = "snake_case")]
+@@ -164,35 +167,53 @@
+         .context(
+             "ONNX token embedding output is missing (check the pinned qualification recipe)",
+         )?;
+-        let (shape, data) = if let Ok((shape, data)) = output.try_extract_tensor::<f32>() {
+-            (shape.to_vec(), data.to_vec())
++        if let Ok((shape, data)) = output.try_extract_tensor::<f32>() {
++            pool_tokens(shape, data, inputs, length, &self.recipe, |v| v)
+         } else {
+             let (shape, data) = output.try_extract_tensor::<half::f16>()?;
+-            (shape.to_vec(), data.iter().map(|v| v.to_f32()).collect())
++            pool_tokens(shape, data, inputs, length, &self.recipe, |v| v.to_f32())
++        }
++    }
++}
++
++fn pool_tokens<T: Copy>(
++    shape: &[i64],
++    data: &[T],
++    inputs: &[Vec<i64>],
++    length: usize,
++    recipe: &InferenceRecipe,
++    to_f32: impl Fn(T) -> f32,
++) -> Result<Vec<Vec<f32>>> {
++    let batch = inputs.len();
++    let dimensions = recipe.dimensions;
++    ensure!(
++        shape == [batch as i64, length as i64, dimensions as i64],
++        "unexpected ONNX output shape {shape:?}"
++    );
++    let mut vectors = Vec::with_capacity(batch);
++    for (i, input) in inputs.iter().enumerate() {
++        let start = i * length * dimensions;
++        let mut vector = match recipe.pooling {
++            // Read only CLS values from the runtime-owned output. In particular,
++            // do not copy/convert the full batch × length × dimensions tensor.
++            Pooling::Cls => data[start..start + dimensions]
++                .iter()
++                .copied()
++                .map(&to_f32)
++                .collect(),
++            Pooling::Mean => {
++                let mut v = vec![0.; dimensions];
++                for token in 0..input.len() {
++                    for (d, value) in v.iter_mut().enumerate() {
++                        // Retain per-token division and accumulation order.
++                        *value += to_f32(data[start + token * dimensions + d]) / input.len() as f32;
++                    }
++                }
++                v
++            }
+         };
+-        let dimensions = self.recipe.dimensions;
+-        ensure!(
+-            shape == vec![batch as i64, length as i64, dimensions as i64],
+-            "unexpected ONNX output shape {shape:?}"
+-        );
+-        let mut vectors = Vec::with_capacity(batch);
+-        for (i, input) in inputs.iter().enumerate() {
+-            let start = i * length * dimensions;
+-            let mut vector = match self.recipe.pooling {
+-                Pooling::Cls => data[start..start + dimensions].to_vec(),
+-                Pooling::Mean => {
+-                    let mut v = vec![0.; dimensions];
+-                    for token in 0..input.len() {
+-                        for (d, value) in v.iter_mut().enumerate() {
+-                            *value += data[start + token * dimensions + d] / input.len() as f32;
+-                        }
+-                    }
+-                    v
+-                }
+-            };
+-            normalize_dense(&mut vector)?;
+-            vectors.push(vector);
+-        }
+-        Ok(vectors)
+-    }
+-}
++        normalize_dense(&mut vector)?;
++        vectors.push(vector);
++    }
++    Ok(vectors)
++}
+--- /dev/null
++++ b/src/model/onnx/tests.rs
+@@ -0,0 +1,260 @@
++use super::*;
++use half::f16;
++
++// Historical full-materialization algorithm. Keep its accumulation order and
++// normalization separate from the optimized pooling loop as a bitwise oracle.
++fn materialized_reference(
++    data: Vec<f32>,
++    inputs: &[Vec<i64>],
++    length: usize,
++    recipe: &InferenceRecipe,
++) -> Result<Vec<Vec<f32>>> {
++    let dimensions = recipe.dimensions;
++    let mut vectors = Vec::with_capacity(inputs.len());
++    for (i, input) in inputs.iter().enumerate() {
++        let start = i * length * dimensions;
++        let mut vector = match recipe.pooling {
++            Pooling::Cls => data[start..start + dimensions].to_vec(),
++            Pooling::Mean => {
++                let mut v = vec![0.; dimensions];
++                for token in 0..input.len() {
++                    for (d, value) in v.iter_mut().enumerate() {
++                        *value += data[start + token * dimensions + d] / input.len() as f32;
++                    }
++                }
++                v
++            }
++        };
++        normalize_dense(&mut vector)?;
++        vectors.push(vector);
++    }
++    Ok(vectors)
++}
++
++fn assert_bits(actual: &[Vec<f32>], expected: &[Vec<f32>]) {
++    let bits = |vectors: &[Vec<f32>]| {
++        vectors
++            .iter()
++            .map(|v| v.iter().map(|x| x.to_bits()).collect::<Vec<_>>())
++            .collect::<Vec<_>>()
++    };
++    assert_eq!(bits(actual), bits(expected));
++}
++
++fn check_reference(pooling: Pooling) {
++    for (batch, length, dimensions) in [(1, 2, 3), (3, 7, 5), (8, 512, 768)] {
++        let recipe = InferenceRecipe {
++            dimensions,
++            pooling: pooling.clone(),
++            ..Default::default()
++        };
++        let inputs: Vec<_> = (0..batch).map(|i| vec![42; length - i % 3]).collect();
++        let shape = [batch as i64, length as i64, dimensions as i64];
++        let data: Vec<f32> = (0..batch * length * dimensions)
++            .map(|i| ((i * 37 % 1009) as f32 - 504.) / 113.)
++            .collect();
++        let expected = materialized_reference(data.clone(), &inputs, length, &recipe).unwrap();
++        let actual = pool_tokens(&shape, &data, &inputs, length, &recipe, |v| v).unwrap();
++        assert_bits(&actual, &expected);
++
++        // Compare against conversion of the entire f16 tensor, not the original
++        // f32 values: f16 rounding is part of the qualification contract.
++        let data: Vec<_> = data.into_iter().map(f16::from_f32).collect();
++        let expected = materialized_reference(
++            data.iter().map(|v| v.to_f32()).collect(),
++            &inputs,
++            length,
++            &recipe,
++        )
++        .unwrap();
++        let actual = pool_tokens(&shape, &data, &inputs, length, &recipe, |v| v.to_f32()).unwrap();
++        assert_bits(&actual, &expected);
++    }
++}
++
++#[test]
++fn cls_matches_materialized_f32_and_f16_bitwise() {
++    check_reference(Pooling::Cls);
++}
++
++#[test]
++fn mean_matches_materialized_f32_and_f16_bitwise() {
++    check_reference(Pooling::Mean);
++}
++
++#[test]
++fn cls_selects_each_first_token_and_ignores_non_cls_values() {
++    let recipe = InferenceRecipe {
++        dimensions: 3,
++        ..Default::default()
++    };
++    let inputs = vec![vec![0, 2], vec![0, 42, 2]];
++    let mut data = vec![f32::NAN; 2 * 3 * 3];
++    data[..3].copy_from_slice(&[3., 4., -0.]);
++    data[9..12].copy_from_slice(&[-4., 0., 3.]);
++    let expected = vec![vec![0.6, 0.8, -0.], vec![-0.8, 0., 0.6]];
++    assert_bits(
++        &pool_tokens(&[2, 3, 3], &data, &inputs, 3, &recipe, |v| v).unwrap(),
++        &expected,
++    );
++    let half: Vec<_> = data.into_iter().map(f16::from_f32).collect();
++    assert_bits(
++        &pool_tokens(&[2, 3, 3], &half, &inputs, 3, &recipe, |v| v.to_f32()).unwrap(),
++        &expected,
++    );
++}
++
++#[test]
++fn cls_converts_only_the_retained_values() {
++    let recipe = InferenceRecipe {
++        dimensions: 3,
++        ..Default::default()
++    };
++    let inputs = vec![vec![0, 2], vec![0, 42, 2]];
++    let data = vec![f16::ONE; 2 * 3 * 3];
++    let converted = std::cell::Cell::new(0);
++    let vectors = pool_tokens(&[2, 3, 3], &data, &inputs, 3, &recipe, |v| {
++        converted.set(converted.get() + 1);
++        v.to_f32()
++    })
++    .unwrap();
++    assert_eq!(vectors.len(), 2);
++    assert_eq!(converted.get(), 2 * 3);
++}
++
++#[test]
++fn mean_excludes_padding_but_includes_all_input_tokens() {
++    let recipe = InferenceRecipe {
++        dimensions: 2,
++        pooling: Pooling::Mean,
++        ..Default::default()
++    };
++    let inputs = vec![vec![0, 2], vec![0, 42, 2]];
++    let data = [6., 0., 0., 8., f32::NAN, f32::NAN, 0., 3., 0., 6., 0., 9.];
++    let expected = vec![vec![0.6, 0.8], vec![0., 1.]];
++    assert_bits(
++        &pool_tokens(&[2, 3, 2], &data, &inputs, 3, &recipe, |v| v).unwrap(),
++        &expected,
++    );
++    let half: Vec<_> = data.into_iter().map(f16::from_f32).collect();
++    assert_bits(
++        &pool_tokens(&[2, 3, 2], &half, &inputs, 3, &recipe, |v| v.to_f32()).unwrap(),
++        &expected,
++    );
++}
++
++#[test]
++fn rejects_wrong_rank_batch_length_or_dimensions_before_indexing() {
++    let inputs = vec![vec![0, 2]; 2];
++    for pooling in [Pooling::Cls, Pooling::Mean] {
++        let recipe = InferenceRecipe {
++            dimensions: 3,
++            pooling,
++            ..Default::default()
++        };
++        for shape in [
++            vec![],
++            vec![2, 2],
++            vec![2, 2, 3, 1],
++            vec![1, 2, 3],
++            vec![2, 1, 3],
++            vec![2, 2, 4],
++            vec![2, 3, 2],
++            vec![2, 0, 3],
++            vec![2, -2, 3],
++        ] {
++            let error = pool_tokens(&shape, &[] as &[f32], &inputs, 2, &recipe, |v| v).unwrap_err();
++            assert!(
++                error
++                    .to_string()
++                    .starts_with("unexpected ONNX output shape")
++            );
++            let error = pool_tokens(&shape, &[] as &[f16], &inputs, 2, &recipe, |v| v.to_f32())
++                .unwrap_err();
++            assert!(
++                error
++                    .to_string()
++                    .starts_with("unexpected ONNX output shape")
++            );
++        }
++    }
++}
++
++#[test]
++fn rejects_zero_and_non_finite_vectors_without_partial_results() {
++    let inputs = vec![vec![0, 2]; 2];
++    for pooling in [Pooling::Cls, Pooling::Mean] {
++        let recipe = InferenceRecipe {
++            dimensions: 2,
++            pooling,
++            ..Default::default()
++        };
++        for bad in [0., f32::NAN, f32::INFINITY, f32::NEG_INFINITY] {
++            // The first item is valid; failure in the second must fail the call.
++            let data = [3., 4., 3., 4., bad, bad, bad, bad];
++            let expected = materialized_reference(data.to_vec(), &inputs, 2, &recipe)
++                .unwrap_err()
++                .to_string();
++            assert_eq!(
++                pool_tokens(&[2, 2, 2], &data, &inputs, 2, &recipe, |v| v)
++                    .unwrap_err()
++                    .to_string(),
++                expected,
++            );
++            let half: Vec<_> = data.into_iter().map(f16::from_f32).collect();
++            assert_eq!(
++                pool_tokens(&[2, 2, 2], &half, &inputs, 2, &recipe, |v| v.to_f32())
++                    .unwrap_err()
++                    .to_string(),
++                expected,
++            );
++        }
++    }
++}
++
++#[test]
++fn f16_normalization_preserves_subnormals_extremes_and_signed_zero() {
++    let recipe = InferenceRecipe {
++        dimensions: 3,
++        ..Default::default()
++    };
++    let inputs = vec![vec![0, 2]];
++    for values in [
++        [f16::from_bits(1), f16::from_bits(0x8002), f16::NEG_ZERO],
++        [f16::MAX, f16::MIN, f16::NEG_ZERO],
++    ] {
++        let data: Vec<_> = values.into_iter().cycle().take(6).collect();
++        let expected = materialized_reference(
++            data.iter().map(|v| v.to_f32()).collect(),
++            &inputs,
++            2,
++            &recipe,
++        )
++        .unwrap();
++        assert_bits(
++            &pool_tokens(&[1, 2, 3], &data, &inputs, 2, &recipe, |v| v.to_f32()).unwrap(),
++            &expected,
++        );
++    }
++}
++
++#[test]
++fn normalization_preserves_small_large_and_signed_zero_values() {
++    for values in [
++        [f32::from_bits(1), -f32::from_bits(2), -0.],
++        [f32::MAX, -f32::MAX / 2., 0.],
++        [f16::from_bits(1).to_f32(), f16::MAX.to_f32(), -0.],
++    ] {
++        let recipe = InferenceRecipe {
++            dimensions: 3,
++            ..Default::default()
++        };
++        let inputs = vec![vec![0, 2]];
++        let data: Vec<_> = values.into_iter().cycle().take(6).collect();
++        let expected = materialized_reference(data.clone(), &inputs, 2, &recipe).unwrap();
++        assert_bits(
++            &pool_tokens(&[1, 2, 3], &data, &inputs, 2, &recipe, |v| v).unwrap(),
++            &expected,
++        );
++    }
++}

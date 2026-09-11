@@ -3,7 +3,7 @@ name = "ree"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.88"
-description = "Local-first text ingestion and embeddings in SQLite"
+description = "Local-first document ingestion, embeddings, and retrieval in SQLite"
 license = "MIT OR Apache-2.0"
 
 [dependencies]

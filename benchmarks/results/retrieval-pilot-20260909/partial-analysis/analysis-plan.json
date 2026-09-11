@@ -1,0 +1,30 @@
+{
+  "analyzer_sha256": "80824cf5aa732cbcee189b2e9f5436586be6212065b15c492519a0da1ca2c8c9",
+  "host_ac_online": "0",
+  "host_power_profile": "quiet",
+  "included_candidates": [
+    "arctic",
+    "granite",
+    "e5"
+  ],
+  "parent_plan_sha256": "b6672122dc875b010eeeefa753eb78f3a033e8d90cfa4e2a3c8a3ca532bfecdf",
+  "parent_state": {
+    "error": "RuntimeError: AC or power profile changed during inference",
+    "runner_pid": 306102,
+    "state": "failed",
+    "time_utc": "2026-09-09T17:08:09.708802+00:00"
+  },
+  "pending_candidates": [
+    {
+      "candidate": "jina-code",
+      "reason": "ValueError: partial encoding log; preserve it and retry in a separate run directory"
+    },
+    {
+      "candidate": "bge-m3",
+      "reason": "FileNotFoundError: [Errno 2] No such file or directory: '/home/jacob/Projects/ree/benchmarks/results/retrieval-pilot-20260909/bge-m3-nfcorpus-cpu.jsonl'"
+    }
+  ],
+  "scope": "offline partial analysis only; no inference or performance measurement",
+  "scorer_sha256": "94a9ca72b26dedf14957c465c75217d0fbd547ef7755f78a7b58b6c3b1d7480a",
+  "selection_rule": "both fixed corpora and both providers complete, independent of scores"
+}

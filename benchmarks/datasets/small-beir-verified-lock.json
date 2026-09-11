@@ -1,0 +1,148 @@
+{
+  "datasets": [
+    {
+      "corpus_revision": "e28763e68d85db0fa71652ba3c4afabf8c5b3bb7",
+      "declared_license": "CC-BY-SA-4.0",
+      "domain": "biomedical",
+      "id": "nfcorpus",
+      "qrels_revision": "a451b3b26d3ae1358f259c1a3a4dd61fcea35a65",
+      "revision_policy": "Pinned pre-Parquet JSONL distribution; no dataset-supplied code is executed. Not claimed to be newest dataset revision.",
+      "upstream_rights_review": "pending; retain downloaded texts in local scratch, do not redistribute"
+    },
+    {
+      "corpus_revision": "984eed826375f18d27936c4a32bf0f8491e3f414",
+      "declared_license": "CC-BY-SA-4.0",
+      "domain": "scientific",
+      "id": "scifact",
+      "qrels_revision": "2938d17dc3b09882fdb8c12bbbe2e2dc0e75a029",
+      "revision_policy": "Pinned pre-Parquet JSONL distribution; no dataset-supplied code is executed. Not claimed to be newest dataset revision.",
+      "upstream_rights_review": "pending; retain downloaded texts in local scratch, do not redistribute"
+    },
+    {
+      "corpus_revision": "900330faa8ca2828a468dfe795f9d3c3887c8cfc",
+      "declared_license": "CC-BY-SA-4.0",
+      "domain": "argumentation",
+      "id": "arguana",
+      "qrels_revision": "ae5468c6f1c198109a8af5f0d4dc58bd18b6fea7",
+      "revision_policy": "Pinned pre-Parquet JSONL distribution; no dataset-supplied code is executed. Not claimed to be newest dataset revision.",
+      "upstream_rights_review": "pending; retain downloaded texts in local scratch, do not redistribute"
+    }
+  ],
+  "files": [
+    {
+      "bytes": 13995,
+      "git_blob_sha1": "bc58b6940a415a26e38244f8c688ff5ef134abf0",
+      "path": "datasets/nfcorpus/README.md",
+      "sha256": "fd34a2830e557f1e32d46d0b34a218d280c9800ee4071579610d4ff587b4fd45",
+      "url": "https://huggingface.co/datasets/BeIR/nfcorpus/resolve/e28763e68d85db0fa71652ba3c4afabf8c5b3bb7/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 1978293,
+      "path": "datasets/nfcorpus/corpus.jsonl.gz",
+      "sha256": "ae4d6ab2ab88d880e7e180776c956a09c19c43a703457742cd850d2422035802",
+      "url": "https://huggingface.co/datasets/BeIR/nfcorpus/resolve/e28763e68d85db0fa71652ba3c4afabf8c5b3bb7/corpus.jsonl.gz",
+      "verified": true
+    },
+    {
+      "bytes": 79080,
+      "path": "datasets/nfcorpus/queries.jsonl.gz",
+      "sha256": "baba3504a2736b0e32265962f04acc4fecfaf9649e0ea08e49ff441246f75364",
+      "url": "https://huggingface.co/datasets/BeIR/nfcorpus/resolve/e28763e68d85db0fa71652ba3c4afabf8c5b3bb7/queries.jsonl.gz",
+      "verified": true
+    },
+    {
+      "bytes": 13995,
+      "git_blob_sha1": "bc58b6940a415a26e38244f8c688ff5ef134abf0",
+      "path": "datasets/nfcorpus-qrels/README.md",
+      "sha256": "fd34a2830e557f1e32d46d0b34a218d280c9800ee4071579610d4ff587b4fd45",
+      "url": "https://huggingface.co/datasets/BeIR/nfcorpus-qrels/resolve/a451b3b26d3ae1358f259c1a3a4dd61fcea35a65/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 279572,
+      "git_blob_sha1": "615081e6e8a76050060caf45d23fe68342d8d360",
+      "path": "datasets/nfcorpus-qrels/test.tsv",
+      "sha256": "f8fba6ef3d4dd9c3a242a8ba4ae38276fc3622fce7dcbae764766d564542fd2a",
+      "url": "https://huggingface.co/datasets/BeIR/nfcorpus-qrels/resolve/a451b3b26d3ae1358f259c1a3a4dd61fcea35a65/test.tsv",
+      "verified": true
+    },
+    {
+      "bytes": 13995,
+      "git_blob_sha1": "bc58b6940a415a26e38244f8c688ff5ef134abf0",
+      "path": "datasets/scifact/README.md",
+      "sha256": "fd34a2830e557f1e32d46d0b34a218d280c9800ee4071579610d4ff587b4fd45",
+      "url": "https://huggingface.co/datasets/BeIR/scifact/resolve/984eed826375f18d27936c4a32bf0f8491e3f414/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 2758600,
+      "path": "datasets/scifact/corpus.jsonl.gz",
+      "sha256": "2f4a2a264485e5b5b95ae9cd5534817447757423991a4767d6da811539c0853e",
+      "url": "https://huggingface.co/datasets/BeIR/scifact/resolve/984eed826375f18d27936c4a32bf0f8491e3f414/corpus.jsonl.gz",
+      "verified": true
+    },
+    {
+      "bytes": 49271,
+      "path": "datasets/scifact/queries.jsonl.gz",
+      "sha256": "c29574b9cb8fdf043df8494f689de15f4604ac4b585eb34bda9b6a389aa6c4d3",
+      "url": "https://huggingface.co/datasets/BeIR/scifact/resolve/984eed826375f18d27936c4a32bf0f8491e3f414/queries.jsonl.gz",
+      "verified": true
+    },
+    {
+      "bytes": 13995,
+      "git_blob_sha1": "bc58b6940a415a26e38244f8c688ff5ef134abf0",
+      "path": "datasets/scifact-qrels/README.md",
+      "sha256": "fd34a2830e557f1e32d46d0b34a218d280c9800ee4071579610d4ff587b4fd45",
+      "url": "https://huggingface.co/datasets/BeIR/scifact-qrels/resolve/2938d17dc3b09882fdb8c12bbbe2e2dc0e75a029/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 5389,
+      "git_blob_sha1": "c62f58c75f10c0cee23483b7269bff2902ae4080",
+      "path": "datasets/scifact-qrels/test.tsv",
+      "sha256": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+      "url": "https://huggingface.co/datasets/BeIR/scifact-qrels/resolve/2938d17dc3b09882fdb8c12bbbe2e2dc0e75a029/test.tsv",
+      "verified": true
+    },
+    {
+      "bytes": 13995,
+      "git_blob_sha1": "bc58b6940a415a26e38244f8c688ff5ef134abf0",
+      "path": "datasets/arguana/README.md",
+      "sha256": "fd34a2830e557f1e32d46d0b34a218d280c9800ee4071579610d4ff587b4fd45",
+      "url": "https://huggingface.co/datasets/BeIR/arguana/resolve/900330faa8ca2828a468dfe795f9d3c3887c8cfc/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 3146106,
+      "path": "datasets/arguana/corpus.jsonl.gz",
+      "sha256": "6572c13e17aa51d42c0498e765c70cfc9f15550a2140213ea267767e3a9f9134",
+      "url": "https://huggingface.co/datasets/BeIR/arguana/resolve/900330faa8ca2828a468dfe795f9d3c3887c8cfc/corpus.jsonl.gz",
+      "verified": true
+    },
+    {
+      "bytes": 617785,
+      "path": "datasets/arguana/queries.jsonl.gz",
+      "sha256": "faae9bb245700b764c29d98a1972d1b10ebb8dfb4e7bb349741e8d4f20d29b13",
+      "url": "https://huggingface.co/datasets/BeIR/arguana/resolve/900330faa8ca2828a468dfe795f9d3c3887c8cfc/queries.jsonl.gz",
+      "verified": true
+    },
+    {
+      "bytes": 13995,
+      "git_blob_sha1": "bc58b6940a415a26e38244f8c688ff5ef134abf0",
+      "path": "datasets/arguana-qrels/README.md",
+      "sha256": "fd34a2830e557f1e32d46d0b34a218d280c9800ee4071579610d4ff587b4fd45",
+      "url": "https://huggingface.co/datasets/BeIR/arguana-qrels/resolve/ae5468c6f1c198109a8af5f0d4dc58bd18b6fea7/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 96296,
+      "git_blob_sha1": "339f67f1e686ce562701181dc249c40b78e393a7",
+      "path": "datasets/arguana-qrels/test.tsv",
+      "sha256": "0c47b481fa8b47fb9ca5e74bc8a017bdea14518c0e4a5d21345291180b3aca76",
+      "url": "https://huggingface.co/datasets/BeIR/arguana-qrels/resolve/ae5468c6f1c198109a8af5f0d4dc58bd18b6fea7/test.tsv",
+      "verified": true
+    }
+  ],
+  "version": 1
+}

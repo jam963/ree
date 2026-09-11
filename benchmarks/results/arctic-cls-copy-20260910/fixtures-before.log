@@ -1,0 +1,15 @@
+   Compiling ree v0.1.0 (/home/jacob/Projects/ree)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.07s
+     Running unittests src/lib.rs (target/debug/deps/ree-05022e227432d649)
+
+running 7 tests
+test model::onnx::tests::cls_selects_each_first_token_and_ignores_non_cls_values ... ok
+test model::onnx::tests::rejects_wrong_rank_batch_length_or_dimensions_before_indexing ... ok
+test model::onnx::tests::rejects_zero_and_non_finite_vectors_without_partial_results ... ok
+test model::onnx::tests::normalization_preserves_small_large_and_signed_zero_values ... ok
+test model::onnx::tests::mean_excludes_padding_but_includes_all_input_tokens ... ok
+test model::onnx::tests::cls_matches_materialized_f32_and_f16_bitwise ... ok
+test model::onnx::tests::mean_matches_materialized_f32_and_f16_bitwise ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 35 filtered out; finished in 0.57s
+

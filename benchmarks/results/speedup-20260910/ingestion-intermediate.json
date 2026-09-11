@@ -1,0 +1,195 @@
+{
+  "directory": "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/ingestion-1789060040334967686",
+  "summary": [
+    {
+      "kind": "cold",
+      "device": "cpu",
+      "variant": "after",
+      "n": 3,
+      "median": 15.203480968993972,
+      "p95": 15.475239767998573,
+      "minimum": 15.01249044299766,
+      "maximum": 15.475239767998573
+    },
+    {
+      "kind": "cold",
+      "device": "cpu",
+      "variant": "before",
+      "n": 3,
+      "median": 15.091242512993631,
+      "p95": 15.311413793999236,
+      "minimum": 15.074100844998611,
+      "maximum": 15.311413793999236
+    },
+    {
+      "kind": "cold",
+      "device": "cuda",
+      "variant": "after",
+      "n": 5,
+      "median": 3.462690903004841,
+      "p95": 3.619551142997807,
+      "minimum": 3.337056352989748,
+      "maximum": 3.619551142997807
+    },
+    {
+      "kind": "cold",
+      "device": "cuda",
+      "variant": "before",
+      "n": 5,
+      "median": 3.700470884999959,
+      "p95": 5.3809539189969655,
+      "minimum": 3.590872771994327,
+      "maximum": 5.3809539189969655
+    },
+    {
+      "kind": "cold",
+      "device": "cuda",
+      "variant": "cls",
+      "n": 5,
+      "median": 3.7682096369971987,
+      "p95": 3.808032173998072,
+      "minimum": 3.7404543459997512,
+      "maximum": 3.808032173998072
+    },
+    {
+      "kind": "cold",
+      "device": "cuda",
+      "variant": "combined",
+      "n": 5,
+      "median": 3.7751535620045615,
+      "p95": 3.811044474990922,
+      "minimum": 3.593890920004924,
+      "maximum": 3.811044474990922
+    },
+    {
+      "kind": "cold",
+      "device": "cuda",
+      "variant": "overlap",
+      "n": 5,
+      "median": 3.511527485999977,
+      "p95": 3.674328801003867,
+      "minimum": 3.2741204949998064,
+      "maximum": 3.674328801003867
+    },
+    {
+      "kind": "session_first",
+      "device": "cpu",
+      "variant": "after",
+      "n": 3,
+      "median": 15.022496995,
+      "p95": 15.323940436,
+      "minimum": 14.933934674,
+      "maximum": 15.323940436
+    },
+    {
+      "kind": "session_first",
+      "device": "cpu",
+      "variant": "overlap",
+      "n": 3,
+      "median": 15.13759593,
+      "p95": 15.190003342,
+      "minimum": 14.659050073,
+      "maximum": 15.190003342
+    },
+    {
+      "kind": "session_first",
+      "device": "cuda",
+      "variant": "after",
+      "n": 3,
+      "median": 5.383934147,
+      "p95": 17.451851709,
+      "minimum": 4.515188137,
+      "maximum": 17.451851709
+    },
+    {
+      "kind": "session_first",
+      "device": "cuda",
+      "variant": "cls",
+      "n": 3,
+      "median": 3.9447908270000003,
+      "p95": 17.239460165,
+      "minimum": 3.715383155,
+      "maximum": 17.239460165
+    },
+    {
+      "kind": "session_first",
+      "device": "cuda",
+      "variant": "combined",
+      "n": 3,
+      "median": 3.882255544,
+      "p95": 16.897636907,
+      "minimum": 3.8589026,
+      "maximum": 16.897636907
+    },
+    {
+      "kind": "session_first",
+      "device": "cuda",
+      "variant": "overlap",
+      "n": 3,
+      "median": 4.539210418,
+      "p95": 16.754127582,
+      "minimum": 3.476746654,
+      "maximum": 16.754127582
+    },
+    {
+      "kind": "sustained",
+      "device": "cpu",
+      "variant": "after",
+      "n": 9,
+      "median": 14.030725058,
+      "p95": 14.990325066,
+      "minimum": 13.857500485,
+      "maximum": 14.990325066
+    },
+    {
+      "kind": "sustained",
+      "device": "cpu",
+      "variant": "overlap",
+      "n": 9,
+      "median": 14.058340382,
+      "p95": 14.944113566,
+      "minimum": 13.797581012,
+      "maximum": 14.944113566
+    },
+    {
+      "kind": "sustained",
+      "device": "cuda",
+      "variant": "after",
+      "n": 9,
+      "median": 2.674134037,
+      "p95": 13.865498139,
+      "minimum": 1.750899754,
+      "maximum": 13.865498139
+    },
+    {
+      "kind": "sustained",
+      "device": "cuda",
+      "variant": "cls",
+      "n": 9,
+      "median": 1.922284668,
+      "p95": 13.435109667,
+      "minimum": 1.751366021,
+      "maximum": 13.435109667
+    },
+    {
+      "kind": "sustained",
+      "device": "cuda",
+      "variant": "combined",
+      "n": 9,
+      "median": 1.70416034,
+      "p95": 13.391983965,
+      "minimum": 1.689156723,
+      "maximum": 13.391983965
+    },
+    {
+      "kind": "sustained",
+      "device": "cuda",
+      "variant": "overlap",
+      "n": 9,
+      "median": 2.7500845419999997,
+      "p95": 13.475374793,
+      "minimum": 1.80609353,
+      "maximum": 13.475374793
+    }
+  ]
+}

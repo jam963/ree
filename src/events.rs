@@ -7,6 +7,7 @@ pub struct Events {
     pub quiet: bool,
     pub verbose: bool,
     progress: bool,
+    request_id: Option<String>,
 }
 impl Events {
     pub fn new(quiet: bool, verbose: bool, progress: bool) -> Self {
@@ -15,6 +16,7 @@ impl Events {
             quiet,
             verbose,
             progress: progress && std::io::stderr().is_terminal(),
+            request_id: None,
         }
     }
     /// Inject a sink for structured-event tests or library embedding.
@@ -24,9 +26,18 @@ impl Events {
             quiet,
             verbose,
             progress: false,
+            request_id: None,
         }
     }
-    pub fn emit(&mut self, event: Value) -> Result<()> {
+    pub fn set_request_id(&mut self, id: &str) {
+        self.request_id = Some(id.to_owned());
+    }
+    pub fn emit(&mut self, mut event: Value) -> Result<()> {
+        if let Some(id) = &self.request_id {
+            event["v"] = json!(1);
+            event["id"] = json!(id);
+            event["engine_pid"] = json!(std::process::id());
+        }
         let error = event["type"] == "failed" || event["type"] == "fatal";
         if !self.quiet || error {
             serde_json::to_writer(&mut self.output, &event)?;

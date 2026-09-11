@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/home/jacob/Projects/ree/target/release/examples/score_compatibility",
+    "--corpus",
+    "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/prepared-small-beir-v1/scifact-corpus.json",
+    "--cpu-vectors",
+    "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/retrieval-pilot-5b_j09cu/granite-scifact-cpu",
+    "--cuda-vectors",
+    "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/retrieval-pilot-5b_j09cu/granite-scifact-cuda"
+  ],
+  "no_inference": true
+}

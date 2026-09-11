@@ -63,6 +63,96 @@ fn cpu_token_windows_and_repeatability() -> Result<()> {
     Ok(())
 }
 #[test]
+#[ignore = "downloads model; query encoding and retrieval on the development machine only"]
+fn cpu_query_encoder_and_search_end_to_end() -> Result<()> {
+    use ree::{
+        cli::Options,
+        config::Config,
+        model::{
+            LocalEngine,
+            query::{self, QueryEmbedder},
+        },
+        pipeline,
+        retrieval::{self, SearchMode, SearchRequest},
+        storage::Database,
+    };
+    local_host()?;
+    let temp = tempfile::tempdir()?;
+    let config_path = temp.path().join("config.toml");
+    std::fs::write(&config_path, "")?;
+    let options = Options {
+        config: Some(config_path),
+        db: Some(temp.path().join("ree.db")),
+        device: Some("cpu".into()),
+        ..Default::default()
+    };
+    let config = Config::load(&options)?;
+    let mut events = Events::new(true, false, false);
+    let path = download::ensure_artifact(&config.cache, download::TOKENIZER, &mut events)?;
+    let mut tokenizer = Tokenizer::from_file(path).map_err(|e| anyhow::anyhow!(e))?;
+    tokenizer.with_padding(None);
+    tokenizer
+        .with_truncation(None)
+        .map_err(|e| anyhow::anyhow!(e))?;
+    let text = "Where are embeddings stored?";
+    let ids = query::encode(&tokenizer, text)?;
+    let reference = tokenizer
+        .encode(format!("query: {text}"), true)
+        .map_err(|e| anyhow::anyhow!(e))?;
+    assert_eq!(
+        ids,
+        reference
+            .get_ids()
+            .iter()
+            .map(|&i| i64::from(i))
+            .collect::<Vec<_>>()
+    );
+    let mut engine = LocalEngine::new(config.clone());
+    let embedded = engine.embed_query(text, &mut events)?;
+    model::validate_vector(&embedded.vector)?;
+    assert_eq!(embedded.provider, "cpu");
+    assert_eq!(embedded.token_count, ids.len());
+    let docs = temp.path().join("docs");
+    std::fs::create_dir(&docs)?;
+    std::fs::write(
+        docs.join("storage.txt"),
+        "SQLite stores embeddings in a local database.",
+    )?;
+    std::fs::write(
+        docs.join("ocean.txt"),
+        "The ocean is blue and contains salt water.",
+    )?;
+    let mut db = Database::open(&config.db, true)?;
+    // A separate engine ensures this test also exercises the ordinary ingestion
+    // scheduler; query initialization must not change ingestion defaults.
+    pipeline::ingest(
+        &mut db,
+        &mut LocalEngine::new(config.clone()),
+        &mut events,
+        &config,
+        &options,
+        &[docs.to_string_lossy().into_owned()],
+    )?;
+    let mut reader = Database::open(&config.db, false)?;
+    let report = retrieval::search(
+        &mut reader,
+        &mut engine,
+        &SearchRequest {
+            query: text.into(),
+            mode: SearchMode::Semantic,
+            limit: 2,
+            root: None,
+            media_type: None,
+        },
+        &mut events,
+    )?;
+    assert_eq!(report.results.len(), 2);
+    assert!(report.results[0].chunk.uri.ends_with("storage.txt"));
+    assert_eq!(report.query_provider.as_deref(), Some("cpu"));
+    Ok(())
+}
+
+#[test]
 #[ignore = "requires installed CUDA 13 and both real artifacts on development GPU"]
 fn cpu_int8_cuda_fp16_cosine_and_ranking_parity() -> Result<()> {
     let devices = local_host()?;

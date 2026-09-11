@@ -1,0 +1,63 @@
+{
+  "archived_export_files": [],
+  "archived_incomplete_export": "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/retrieval-pilot-5b_j09cu/interrupted-attempts/jina-code-scifact-cuda",
+  "archived_log_files": [
+    {
+      "bytes": 4119,
+      "name": "jina-code-scifact-cuda.jsonl",
+      "sha256": "bebcb6335af78c5992a30888f4d22ce05c078b82cb7209a64ef1ff7f461924b6"
+    },
+    {
+      "bytes": 0,
+      "name": "jina-code-scifact-cuda.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 13230,
+      "name": "jina-code-scifact-cuda-before.json",
+      "sha256": "677631ae65b8643d8ad3608b21bec9963112701c039246a92344b3c923fdd2d8"
+    }
+  ],
+  "archived_logs": "benchmarks/results/retrieval-pilot-20260909/interrupted-attempts/jina-code-scifact-cuda",
+  "completed_encoding_runs": 15,
+  "interrupted_job": "jina-code-scifact-cuda",
+  "last_document_progress": {
+    "documents_encoded": 256,
+    "documents_total": 5183,
+    "elapsed_seconds": 3.495698534,
+    "type": "quality_progress"
+  },
+  "newly_completed_jobs": [
+    "jina-code-nfcorpus-cpu",
+    "jina-code-nfcorpus-cuda",
+    "jina-code-scifact-cpu"
+  ],
+  "observed_ac_online": "1",
+  "observed_platform_profile": "performance",
+  "post_pause_verification": {
+    "all_complete_jobs_ac_balanced_before_after": true,
+    "complete_exports_verified": 15,
+    "frozen_sources_and_executables_match": true,
+    "full_summary_exists": false,
+    "preexisting_run_files_unchanged_except_mutable_status": true
+  },
+  "previous_pause_record": "pause.json",
+  "reason": "Power-condition guard fired; subsequent inspection found AC online and performance profile instead of balanced. No model failure observed.",
+  "recorded_utc": "2026-09-09T19:20:31.425716+00:00",
+  "remaining_encoding_runs": 5,
+  "resume_requires": {
+    "AC_online": 1,
+    "otherwise_idle_machine": true,
+    "platform_profile": "balanced",
+    "unchanged_frozen_sources_and_executables": true
+  },
+  "retry_policy": "Incomplete attempt preserved separately; original job paths cleared for fresh retry by --resume. Never reuse interrupted vectors as a completed export.",
+  "runner_failure": {
+    "error": "RuntimeError: AC or power profile changed during inference",
+    "runner_pid": 351235,
+    "state": "failed",
+    "time_utc": "2026-09-09T19:18:53.083170+00:00"
+  },
+  "state": "paused; no inference running",
+  "verification_record": "resume-verification.json"
+}

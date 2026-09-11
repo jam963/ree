@@ -26,6 +26,105 @@ impl Engine for EngineProbe {
     }
 }
 #[test]
+fn preparation_can_overlap_inference_without_moving_the_runtime() -> Result<()> {
+    use std::sync::{
+        Arc,
+        atomic::{AtomicUsize, Ordering},
+    };
+    struct Chunker(Arc<AtomicUsize>);
+    impl ree::model::passage::Chunker for Chunker {
+        fn chunk(&mut self, text: &str, events: &mut Events) -> Result<Vec<Chunk>> {
+            self.0.fetch_add(1, Ordering::SeqCst);
+            EngineProbe { batches: vec![] }.chunk(text, events)
+        }
+    }
+    struct Overlap {
+        prepared: Arc<AtomicUsize>,
+        calls: usize,
+    }
+    impl Engine for Overlap {
+        fn chunker(&self) -> Option<Box<dyn ree::model::passage::Chunker>> {
+            Some(Box::new(Chunker(self.prepared.clone())))
+        }
+        fn chunk(&mut self, _: &str, _: &mut Events) -> Result<Vec<Chunk>> {
+            panic!("small documents should arrive chunked")
+        }
+        fn embed(&mut self, inputs: &[Vec<i64>], events: &mut Events) -> Result<Vec<Vec<f32>>> {
+            if self.calls == 0 {
+                assert_eq!(inputs.len(), 32);
+                let start = std::time::Instant::now();
+                while self.prepared.load(Ordering::SeqCst) < 34 {
+                    assert!(
+                        start.elapsed() < std::time::Duration::from_secs(2),
+                        "preparation did not overlap inference"
+                    );
+                    std::thread::sleep(std::time::Duration::from_millis(1));
+                }
+                assert!(
+                    self.prepared.load(Ordering::SeqCst) <= 36,
+                    "preparation queue escaped its bounds"
+                );
+            }
+            self.calls += 1;
+            EngineProbe { batches: vec![] }.embed(inputs, events)
+        }
+    }
+    let temp = tempfile::tempdir()?;
+    let docs = temp.path().join("docs");
+    std::fs::create_dir(&docs)?;
+    for i in 0..64 {
+        std::fs::write(docs.join(format!("{i}.txt")), format!("document {i}"))?;
+    }
+    let file = temp.path().join("config.toml");
+    std::fs::write(&file, "")?;
+    let options = Options {
+        db: Some(temp.path().join("ree.db")),
+        config: Some(file),
+        ..Default::default()
+    };
+    let config = Config::load(&options)?;
+    let mut db = Database::open(&config.db, true)?;
+    let prepared = Arc::new(AtomicUsize::new(0));
+    let mut engine = Overlap {
+        prepared: prepared.clone(),
+        calls: 0,
+    };
+    let mut events = Events::new(true, false, false);
+    let inputs = [docs.to_string_lossy().into()];
+    assert_eq!(
+        pipeline::ingest(
+            &mut db,
+            &mut engine,
+            &mut events,
+            &config,
+            &options,
+            &inputs
+        )?,
+        0
+    );
+    assert_eq!(engine.calls, 2);
+    assert_eq!(prepared.load(Ordering::SeqCst), 64);
+    assert_eq!(
+        pipeline::ingest(
+            &mut db,
+            &mut engine,
+            &mut events,
+            &config,
+            &options,
+            &inputs
+        )?,
+        0
+    );
+    assert_eq!(
+        prepared.load(Ordering::SeqCst),
+        64,
+        "no-op must not tokenize"
+    );
+    assert_eq!(engine.calls, 2);
+    Ok(())
+}
+
+#[test]
 fn tiny_documents_share_inference_batches_and_noop_skips_helpers() -> Result<()> {
     let temp = tempfile::tempdir()?;
     let docs = temp.path().join("docs");

@@ -1,0 +1,50 @@
+{
+  "source_archive_verified": true,
+  "checkpoint_release_copies_verified": true,
+  "original_release_binaries_unchanged": true,
+  "changed_existing_checkpoint_files": [
+    "docs/arctic-optimization-plan-v1.md",
+    "docs/beta-roadmap.md",
+    "docs/implementation-status.md",
+    "src/model/onnx.rs"
+  ],
+  "pilot_source_differences": [
+    "src/model/onnx.rs"
+  ],
+  "source_sha256": {
+    "docs/arctic-optimization-plan-v1.md": "cf5b80c34aa5d8bad1392121436fcafa64785b1e9c8612b44f490b093a3b9803",
+    "docs/beta-roadmap.md": "9b2a4306f0d6b62a73af15cc62433ba3cd3a8f16cf092490a235e0703a88d042",
+    "docs/implementation-status.md": "d9a03b9baf2ec3d2fc37d18db86cd405f8d7eb768e2feb36a7693eb7a20e89c7",
+    "src/model/onnx.rs": "a981a2cc7880cf1b6f1423862399c4f091ab003bc05e41767dc6f60c0f0c90b5",
+    "src/model/onnx/tests.rs": "6581e4fdeb4321772b1c6f56af08091bcfd3e83bb8148b932dce170ed25d0d34",
+    "src/model/mod.rs": "e586799ddb713564441f11019c30d606af4f877021672d6bffef6e3a8015e293"
+  },
+  "tests": {
+    "baseline-rust.log": {
+      "passed": 102,
+      "failed": 0,
+      "ignored": 5
+    },
+    "after-rust.log": {
+      "passed": 111,
+      "failed": 0,
+      "ignored": 5
+    }
+  },
+  "cargo_fmt_check": "passed",
+  "git_diff_check": "passed",
+  "artifacts_sha256": {
+    "README.md": "8ff011fb7c7011fcd468170a76d2e46e09eb8450a9c4534342eb4c72241be30b",
+    "after-python.log": "78b6aba8e7b0ab9d803e04625fc02ba6d43624a2c306614ea786dc1d3eddafcd",
+    "after-rust.log": "5890dfca5164777ba1c2146823e38b3d4a06dac84b5bf2cabdb711ad804a3a4c",
+    "baseline-manifest.json": "573f9e827c7b03f2e2d9266f040269a8032c3a8a109505ee6d7009c9226bb8cc",
+    "baseline-python.log": "b11b8132e22f6c5b14c6182a1aafdc3c63838a0bcb625098fa5175cd8f5ac2af",
+    "baseline-rust.log": "7cc43a575945420c3c67387c3953b748746b02ffb81e5d929854a0dca383f42d",
+    "change.patch": "9a903c76d9a63dc1bfb4a22793740a59c5000957c72e3b250c9003173d183b0f",
+    "clippy.log": "82266603ade421a189e015a86e8e5b7e4ff2de529703815abc68745ca468cd8f",
+    "fixtures-before-sha256.json": "05f67ffa77617c9774621ca854128dc357c170e4fb37e6ff33c62a1faa1e3d74",
+    "fixtures-before.log": "2919496bff896f1653ec8f4a993c62e39e7632ed1ea72dfd345f63778481eafd"
+  },
+  "real_model_inference_run": false,
+  "performance_measured": false
+}

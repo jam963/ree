@@ -1,0 +1,693 @@
+{
+  "results": [
+    {
+      "candidate": "arctic",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/arctic-cpu.json",
+        "--device",
+        "cpu",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cpu",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 768,
+        "mixed_vs_individual_max_abs_difference": 0.02658550813794136,
+        "mixed_vs_individual_min_cosine": 0.975423257591879,
+        "provider": "cpu",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "arctic",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/arctic-cuda.json",
+        "--device",
+        "cuda:0",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cuda",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 768,
+        "mixed_vs_individual_max_abs_difference": 0.00019320659339427948,
+        "mixed_vs_individual_min_cosine": 0.9999984148238772,
+        "provider": "cuda",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "granite",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/granite-cpu.json",
+        "--device",
+        "cpu",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cpu",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 384,
+        "mixed_vs_individual_max_abs_difference": 0.0,
+        "mixed_vs_individual_min_cosine": 1.0,
+        "provider": "cpu",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "granite",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/granite-cuda.json",
+        "--device",
+        "cuda:0",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cuda",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 384,
+        "mixed_vs_individual_max_abs_difference": 6.51925802230835e-08,
+        "mixed_vs_individual_min_cosine": 0.999999999999891,
+        "provider": "cuda",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "e5",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/e5-cpu.json",
+        "--device",
+        "cpu",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cpu",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 384,
+        "mixed_vs_individual_max_abs_difference": 0.02668066695332527,
+        "mixed_vs_individual_min_cosine": 0.9891260962842572,
+        "provider": "cpu",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "e5",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/e5-cuda.json",
+        "--device",
+        "cuda:0",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cuda",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 384,
+        "mixed_vs_individual_max_abs_difference": 0.00021138042211532593,
+        "mixed_vs_individual_min_cosine": 0.9999988703024741,
+        "provider": "cuda",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "bge-m3",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/bge-m3-cpu.json",
+        "--device",
+        "cpu",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cpu",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 1024,
+        "mixed_vs_individual_max_abs_difference": 0.0,
+        "mixed_vs_individual_min_cosine": 1.0,
+        "provider": "cpu",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "bge-m3",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/bge-m3-cuda.json",
+        "--device",
+        "cuda:0",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cuda",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 1024,
+        "mixed_vs_individual_max_abs_difference": 8.940696716308594e-08,
+        "mixed_vs_individual_min_cosine": 0.9999999999997568,
+        "provider": "cuda",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            62,
+            16610,
+            12937,
+            5,
+            2
+          ],
+          [
+            0,
+            6,
+            98449,
+            154,
+            46413,
+            610,
+            15073,
+            2
+          ],
+          [
+            0,
+            6,
+            14783,
+            5201,
+            132,
+            16,
+            10666,
+            28412,
+            141,
+            19,
+            90295,
+            58,
+            127,
+            13817,
+            58,
+            3142,
+            51912,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "jina-code",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/jina-code-cpu.json",
+        "--device",
+        "cpu",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cpu",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 768,
+        "mixed_vs_individual_max_abs_difference": 0.02267284505069256,
+        "mixed_vs_individual_min_cosine": 0.9824918288579234,
+        "provider": "cpu",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            37,
+            4065,
+            2039,
+            18,
+            2
+          ],
+          [
+            0,
+            13475,
+            9778,
+            44761,
+            6069,
+            56689,
+            19497,
+            13003,
+            14065,
+            15202,
+            5176,
+            9629,
+            40942,
+            2
+          ],
+          [
+            0,
+            2581,
+            3578,
+            357,
+            297,
+            23843,
+            21291,
+            9522,
+            678,
+            332,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    },
+    {
+      "candidate": "jina-code",
+      "command": [
+        "target/release/examples/qualify",
+        "--manifest",
+        "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/jina-code-cuda.json",
+        "--device",
+        "cuda:0",
+        "--power-mode",
+        "balanced",
+        "--load-repeats",
+        "1",
+        "--validate-only"
+      ],
+      "device": "cuda",
+      "exit_code": 0,
+      "validation": {
+        "dimensions": 768,
+        "mixed_vs_individual_max_abs_difference": 0.00031413137912750244,
+        "mixed_vs_individual_min_cosine": 0.9999982925605334,
+        "provider": "cuda",
+        "scope": "load/shapes/finite unit vectors; batch drift diagnostic, not retrieval quality qualification",
+        "token_ids": [
+          [
+            0,
+            37,
+            4065,
+            2039,
+            18,
+            2
+          ],
+          [
+            0,
+            13475,
+            9778,
+            44761,
+            6069,
+            56689,
+            19497,
+            13003,
+            14065,
+            15202,
+            5176,
+            9629,
+            40942,
+            2
+          ],
+          [
+            0,
+            2581,
+            3578,
+            357,
+            297,
+            23843,
+            21291,
+            9522,
+            678,
+            332,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "type": "candidate_validation"
+      }
+    }
+  ],
+  "scope": "actual Rust tokenizer/ONNX/provider capability tests; not retrieval quality scores"
+}

@@ -44,27 +44,44 @@ A CUDA session sets `device_id` and arena memory limit, performs a full-length
 warm-up, and checks the ONNX profile for executed CUDA nodes. A successful NVML
 probe or compiled provider alone is not reported as CUDA activation. A missing
 provider/runtime, model-load error, or warm-up failure falls back to the CPU INT8
-artifact in `auto`. Explicit `cuda`/`cuda:N` refuses CPU fallback.
+artifact in `auto`. Explicit `cuda`/`cuda:N` refuses CPU fallback and skips CPU
+artifact provisioning/checksums entirely. Automatic mode still provisions rescue
+weights first; a later fallback re-verifies them before creating the CPU session.
 
 ## Batching and recovery
 
 Inputs are tokenized before scheduling; batches are sorted by token length and
 bounded by item count and padded tokens. A GPU warm-up probe grows candidate
 limits geometrically, compares measured rates, stops with headroom, and writes a
-profile keyed by model, precision, GPU UUID, driver, runtime, and sequence length.
-Profiles are revalidated by inference, not trusted as static memory guarantees.
-NVML is retained across batches rather than repeatedly initialized.
-The initial probe cap is 16 items (up to 64 for an explicit request); subsequent
-stable batches can grow slowly. This is deliberately conservative, not a claim
-of local saturation on all workloads. Free VRAM is sampled before each batch.
+profile keyed by policy, model/graph variant, precision, GPU UUID, driver, runtime,
+and sequence length. The `bounded-calibration-v2` policy clamps cached item/token
+hints to the shape actually probed, with an initial cap of 16 (up to 64 explicitly).
+Split probes and OOM/low-memory reductions cannot restore unvalidated larger limits.
+Calibration checks a five-second budget between candidates; a running inference
+call itself is not preempted. Blind post-success growth is disabled on CPU and GPU.
+Profiles remain hints, not static memory guarantees or evidence of an optimal batch.
+NVML is retained, and free VRAM is sampled before each batch.
 
 OOM discards uncommitted output, reduces both limits, tears down/recreates the
 session, and retries smaller batches. A one-item OOM or non-OOM provider failure
 switches automatic runs to CPU. Explicit CUDA returns a failure instead. Vectors
 are checked for dimension, finiteness, and unit norm before publishing a complete
 document. Per-run events record reductions, fallbacks, final limits, and inference
-milliseconds. Full CUDA/cuDNN version telemetry and peak-VRAM sampling remain
-release work.
+milliseconds. Runtime events also report the thread budget and CUDA runtime,
+CUDA driver API, and cuDNN version queries (null when unavailable/not used).
+The local qualification harness samples NVML per-process/device memory and RSS;
+these sampled peaks are lower bounds, not exact instantaneous allocation peaks.
+Cold-cache startup and complete saturation qualification remain release work.
+
+## Reusable search and experiments
+
+Streaming and optional Unix-socket search keep a query-only engine child. Idle
+expiry exits/reaps it to release CUDA context allocations; it does not reset the
+GPU. `REE_TIMING=1` adds overlapping nanosecond stage counters. Experimental
+`REE_CLS_OUTPUT=1` uses a checksum-verified CLS-only derivative with unchanged host
+normalization; it is off by default. Preparation overlap is likewise opt-in and
+restricted to explicit CUDA after an INT8 equivalence failure. See
+[speedup v2](speedup-v2.md) for lifecycle, tests, benchmark gates and remaining work.
 
 ## Correctness and recovery tests
 
@@ -79,6 +96,18 @@ drift, not CUDA error. Observed cosines ranged from about 0.950 to 0.983, includ
 long repeated-token probes. The regression bound is now **provisionally 0.94**,
 with unchanged top-1 rankings required for smoke queries. This does not qualify
 retrieval quality on arbitrary corpora; the multi-model/corpus gate remains open.
+
+The later [two-corpus pilot](../benchmarks/results/retrieval-pilot-20260909/README.md)
+observed Arctic CPU INT8/CUDA FP16 document cosine as low as **0.91572** and a
+SciFact CUDA-query/CPU-index nDCG loss of **1.19 points** versus the better
+homogeneous reference (paired 95% interval −0.46..3.35). The 0.94 smoke regression
+bound is therefore not universal. Functional/atomic fallback recovery remains
+separate from retrieval-ranking compatibility; neither the CPU artifact nor all
+production batch/fallback shapes are qualified by the smoke tests. The production
+recipe is unchanged. The user selected Arctic 768 for beta on 2026-09-10 with
+broader evaluation deferred; see [the decision](model-decision-v1.md). This product
+choice retains existing fallback behavior but does not clear the observed
+mixed-precision ranking risk or qualify every production batch shape.
 
 `tests/cuda_recovery.rs` injects discovery/provider/model/warm-up failures,
 multiple GPUs, OOM, device loss, invalid vectors, VRAM shrinkage, strict mode,

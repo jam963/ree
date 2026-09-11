@@ -22,8 +22,9 @@ pub fn rebuild(db: &mut Database, engine: &mut dyn Engine, events: &mut Events) 
         json!({"type":"started","run_id":run,"operation":"rebuild","generation":generation}),
     )?;
     events.flush()?;
+    let mut cursor = String::new();
     loop {
-        let chunks = db.pending_chunks(generation, 64)?;
+        let chunks = db.pending_chunks_after(generation, &cursor, 64)?;
         if chunks.is_empty() {
             break;
         }
@@ -41,6 +42,7 @@ pub fn rebuild(db: &mut Database, engine: &mut dyn Engine, events: &mut Events) 
             }
         };
         db.write_vectors(generation, &ids, &vectors)?;
+        cursor = ids.last().unwrap().clone();
         count += ids.len();
         if events.verbose {
             events.emit(

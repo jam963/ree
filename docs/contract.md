@@ -10,7 +10,7 @@ appear on stderr; they are not part of the machine-readable contract.
 | `started` | `run_id`, `inputs` (ingestion), or `operation`, `generation` (rebuild) |
 | `download` | `artifact`, `bytes`, `revision` |
 | `download_retry` | `artifact`, failed `attempt`, `message` (at most three attempts; checksum failures are never activated) |
-| `runtime` | `provider`, `device` (GPU details or null), `precision`, `runtime`, `batch_limits` |
+| `runtime` | `provider`, `device` (GPU details or null), `precision`, `runtime`, `runtime_versions`, `threads`, `batch_limits` |
 | `device_fallback` | `from`, `to`, `reason`, optional `retry_batch_items` |
 | `batch_reduced` | `reason`, `max_items`, `max_padded_tokens` |
 | `document` | `source`, `chunks` (verbose only) |
@@ -20,6 +20,9 @@ appear on stderr; they are not part of the machine-readable contract.
 | `status` | `schema_version`, `sources`, `documents`, `chunks`, `embeddings`, `generation` |
 | `source` | `id`, `kind`, `identity`, `metadata`, last attempted/successful run |
 | `removed` | `source`, `roots` (zero is an idempotent no-op) |
+| `migrated` | `schema_version` (explicit `ree migrate`; no model/download) |
+| `search_result` | `rank`, chunk/document IDs, `text`, `uri`, `source_id`, `source`, `media_type`, extracted-text byte/token ranges, location/metadata, nullable `distance`, `bm25`, `fusion_score` |
+| `search_completed` | `mode`, returned `results`, `generation`, `model_key`, `query_provider`, `query_tokens`, candidate limits/counts, `warnings`, stage `timings` |
 | `doctor` | database/cache/model checks, NVML devices, provider compilation, lock, helpers |
 | `rebuild_checkpoint` | `generation`, `embedded` (verbose only) |
 
@@ -27,6 +30,11 @@ Completed ingestion counters: `documents` and `chunks` count successfully
 written replacements/additions, not total database size; `unchanged` counts
 hash hits; `deleted` counts removed documents; `failed` includes skipped binary
 and unsupported files. Thus an all-binary input returns partial code 1, not 0.
+
+`runtime_versions` reports the integer values returned by CUDA runtime/driver
+API and cuDNN version queries; unknown/not-used versions are null. For example,
+CUDA `13030` means 13.3 and cuDNN `92500` means 9.25. These fields describe loaded
+libraries, not a promise that every installed device supports that stack.
 
 Current input codes: `size_limit`, `private_network`, `missing_extractor`,
 `extractor_timeout`, `binary_input`, `unsupported`, `unsafe_symlink`,
@@ -43,6 +51,32 @@ Exit codes: 0 complete success; 1 partial success; 2 invalid arguments/config;
 returns 1 for a database-open/schema error; absent optional tools/models are
 reported without making offline doctor fatal. A compiled CUDA provider is not
 proof of activation: actual ingestion verifies CUDA nodes in a warm-up profile.
+
+## Retrieval
+
+See [retrieval](retrieval.md) for the full ranking, bounds, output, and migration
+contract. Search defaults to semantic mode, with explicit lexical/hybrid modes.
+Lexical search loads no model. Filters apply before top-k; results contain stored
+text, not generated answers or freshly opened sources. Search uses read-only
+snapshots without a writer lock and does not persist query history. No matches
+is success (code 0); `--quiet` suppresses results as well as completion events.
+Schema 1 remains readable for semantic search; lexical/hybrid requires the
+transactional schema-2 FTS backfill via `ree migrate` or another writable command.
+
+`query_provider` is the actual provider used after any fallback, not the provider
+of every stored vector. Dense retrieval emits the summary warning
+`mixed_int8_fp16_compatibility_unqualified` to preserve the known model-decision
+limitation. Null provider/token count means no query inference ran.
+
+## Persistent query protocol
+
+Streaming stdin and optional Unix-socket search use versioned, request-ID-tagged
+JSONL; ordinary single-shot output remains unchanged. Bounded queues, complete
+terminal responses, cancellation, slow-consumer handling, private socket ownership,
+and engine-process idle release are specified in [speedup v2](speedup-v2.md).
+Control/rejection events can precede earlier search completion: correlate IDs.
+Protocol modes reject `--quiet`/`--progress`; explicit socket CLI clients retain
+ordinary quiet/error behavior. Queries never acquire the ingestion writer lock.
 
 ## Identity and deletion
 

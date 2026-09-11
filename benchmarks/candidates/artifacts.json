@@ -1,0 +1,422 @@
+{
+  "files": [
+    {
+      "bytes": 312,
+      "git_blob_sha1": "b9abff2db3f2536dcda1e821307805f176a8087d",
+      "path": "models/arctic/1_Pooling/config.json",
+      "sha256": "2b1d283d4e7e9a64eef827933051d26478d271766eb234c76012f9012cd97907",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/1_Pooling/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 250888,
+      "git_blob_sha1": "39a7c4f5afe307f070394708c709e81a5083e96f",
+      "path": "models/arctic/README.md",
+      "sha256": "049aaf65db2b2e3713faf49b34a92728bd39eb7b16fb6987f93faaf62ba4531c",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 971,
+      "git_blob_sha1": "cd6f18690930a166278bec17923a71adeb677e98",
+      "path": "models/arctic/config.json",
+      "sha256": "2e0b386e7a826903b06c301f8d4dde2ac6279f7ccd3ea11f3911019a1ee0bc05",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 203,
+      "git_blob_sha1": "b11fb81a2a2b0e6ce5d44aabf2a71bf8c804eaab",
+      "path": "models/arctic/config_sentence_transformers.json",
+      "sha256": "e4037d7ad09d5c33b4c8b132e485f2fc0866707688ce46d2c642f066be1d3bd4",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/config_sentence_transformers.json",
+      "verified": true
+    },
+    {
+      "bytes": 964,
+      "git_blob_sha1": "b1879d702821e753ffe4245048eee415d54a9385",
+      "path": "models/arctic/special_tokens_map.json",
+      "sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/special_tokens_map.json",
+      "verified": true
+    },
+    {
+      "bytes": 17083009,
+      "path": "models/arctic/tokenizer.json",
+      "sha256": "f1cc44ad7faaeec47241864835473fd5403f2da94673f3f764a77ebcb0a803ec",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/tokenizer.json",
+      "verified": true
+    },
+    {
+      "bytes": 1340,
+      "git_blob_sha1": "ddf5350d3f7b2c0bf20ee2b10e3349dd6d8291bd",
+      "path": "models/arctic/tokenizer_config.json",
+      "sha256": "6f00514620aff01ba8b7291b2394e98daca5be264cb743805232d9ae27494b2a",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/tokenizer_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 191,
+      "git_blob_sha1": "7bee187588eb931bb73f2ccf257e06f09d52a8a4",
+      "path": "models/granite/1_Pooling/config.json",
+      "sha256": "7fae3727656cff4a760964a58f1e4b31695c97c75d2e26346df32a87d494bbca",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/1_Pooling/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 611191,
+      "git_blob_sha1": "14e452c997f540213182749df84a9cb9d79572f1",
+      "path": "models/granite/README.md",
+      "sha256": "965ca920eeee9d263046d84173264d6bc1e2cd922c00d2c5d501a1a9d4e20a79",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 697,
+      "git_blob_sha1": "316e1fe1b5cefd086bc1920e910fb5f9e6a79fed",
+      "path": "models/granite/config.json",
+      "sha256": "aa3b6a5d1d6efeacdb844fb8ba773556463af2195003ad5e70a6f014d11be9cf",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 54,
+      "git_blob_sha1": "42d076262fe42eec1f923135b424c5a2bada7931",
+      "path": "models/granite/sentence_bert_config.json",
+      "sha256": "ed20daeb5b882c3e1f116ce7b3d53e6643d11063aa9baaa31f5ae91770cfad8f",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/sentence_bert_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 238,
+      "git_blob_sha1": "9c1c545f1d1782ef68980dd2da0d08c4608ba7a6",
+      "path": "models/granite/special_tokens_map.json",
+      "sha256": "58dc0a3d15e3bad4861bcf2dee770ea327344d185182d4c5d2bf253285e53a83",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/special_tokens_map.json",
+      "verified": true
+    },
+    {
+      "bytes": 9081382,
+      "git_blob_sha1": "def7ff7fe58e8d7e8e5103a436c1c6ee3a38603d",
+      "path": "models/granite/tokenizer.json",
+      "sha256": "7fc9e475f2ac473f070052d92b0c46ec2b91d9cd672935feb6fd837a65d33f78",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/tokenizer.json",
+      "verified": true
+    },
+    {
+      "bytes": 462,
+      "git_blob_sha1": "3a896fa897fa974c4d72499767b4ac92d515675d",
+      "path": "models/granite/tokenizer_config.json",
+      "sha256": "740c9d63e16f34a7915b4c2be299db105d1fd2e6753f2a981769a353f8902280",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/tokenizer_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 200,
+      "git_blob_sha1": "acbd4014202bf4dbc6c03229bcbeef7c4feafb58",
+      "path": "models/e5/1_Pooling/config.json",
+      "sha256": "987f7a67a38fa564c849bb5d277c52ab9088a84368fc0be31a354125aebb12a0",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/1_Pooling/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 497538,
+      "git_blob_sha1": "e56327af55e9742caf76bff9ba83b6904cd2003d",
+      "path": "models/e5/README.md",
+      "sha256": "0038de97aee16258cecbad7ffda4b4febd6953e747a00e0ddbc8e6ed241e9c1c",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 655,
+      "git_blob_sha1": "60a2a84020f1d74cc53ea9e8c4e91cf4af6c2b68",
+      "path": "models/e5/config.json",
+      "sha256": "69137736cab8b8903a07fe8afaafdda25aac55415a12a55d1bffa9f581abf959",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 57,
+      "git_blob_sha1": "4eca68d85ecd3034cf4174d8a4033a75344ea62d",
+      "path": "models/e5/sentence_bert_config.json",
+      "sha256": "948201d8329907aae938fa62f9ceeed53f5694dacc2b87b9f3b78b37ee986529",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/sentence_bert_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 167,
+      "git_blob_sha1": "e0b1d18ecd0ae4ff1d47bd297d910c0cf83e504b",
+      "path": "models/e5/special_tokens_map.json",
+      "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/special_tokens_map.json",
+      "verified": true
+    },
+    {
+      "bytes": 17082730,
+      "path": "models/e5/tokenizer.json",
+      "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/tokenizer.json",
+      "verified": true
+    },
+    {
+      "bytes": 443,
+      "git_blob_sha1": "059214673d9d6d2ee319411e2ffec8c024b816d5",
+      "path": "models/e5/tokenizer_config.json",
+      "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/tokenizer_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 191,
+      "git_blob_sha1": "9bd85925f325e25246d94c4918dc02ab98f2a1b7",
+      "path": "models/bge-m3/1_Pooling/config.json",
+      "sha256": "e54c164a07274f2eb45bb724f54a79d1efcc90c41573887cd9a29aeee0597352",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/1_Pooling/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 15822,
+      "git_blob_sha1": "e5a320176edd6ee1cfb256e68ee5ac0004de9447",
+      "path": "models/bge-m3/README.md",
+      "sha256": "0b81ccf9134e5874d620a86e6905062ea999e779c34eb1a7e65eaeb7fe00e450",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 687,
+      "git_blob_sha1": "e6eda1c72da8f9dc30fdd9b69c73d35af3b7a7ad",
+      "path": "models/bge-m3/config.json",
+      "sha256": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 123,
+      "git_blob_sha1": "1fba91c78a6c8e17227058ab6d4d3acb5d8630a9",
+      "path": "models/bge-m3/config_sentence_transformers.json",
+      "sha256": "1eef72430e7194a1e59680e635aed81ffa083f05668dbc5bb1c56c04c0999c38",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/config_sentence_transformers.json",
+      "verified": true
+    },
+    {
+      "bytes": 698,
+      "git_blob_sha1": "aadef53b97586be7cafa2c06837a0bd53f1f1ded",
+      "path": "models/bge-m3/onnx/config.json",
+      "sha256": "f24afd5de914fba8c668426c43d208a1a54022500c63b2c160be20891686fce8",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 17082821,
+      "path": "models/bge-m3/onnx/tokenizer.json",
+      "sha256": "6710678b12670bc442b99edc952c4d996ae309a7020c1fa0096dd245c2faf790",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/tokenizer.json",
+      "verified": true
+    },
+    {
+      "bytes": 1173,
+      "git_blob_sha1": "328a00a9a560aadcf2a3064f917517359eb3cc26",
+      "path": "models/bge-m3/onnx/tokenizer_config.json",
+      "sha256": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/tokenizer_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 54,
+      "git_blob_sha1": "0140ba1eac83a3c9b857d64baba91969d988624b",
+      "path": "models/bge-m3/sentence_bert_config.json",
+      "sha256": "eb9b44b13c0f52a3b3685c3b1cbdea1ba8b04bea123b98f61610048940776eb1",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/sentence_bert_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 964,
+      "git_blob_sha1": "b1879d702821e753ffe4245048eee415d54a9385",
+      "path": "models/bge-m3/special_tokens_map.json",
+      "sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/special_tokens_map.json",
+      "verified": true
+    },
+    {
+      "bytes": 17098108,
+      "path": "models/bge-m3/tokenizer.json",
+      "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/tokenizer.json",
+      "verified": true
+    },
+    {
+      "bytes": 444,
+      "git_blob_sha1": "dc69ac559dcba2694012009aaa108c614541789a",
+      "path": "models/bge-m3/tokenizer_config.json",
+      "sha256": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/tokenizer_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 191,
+      "git_blob_sha1": "840dd8cf8ae52b1fc266734fa7d25506d2e5159c",
+      "path": "models/jina-code/1_Pooling/config.json",
+      "sha256": "6401a8eeaeca1f1fe2b1b46be987dcf2ee6085ec73f7d2263318ffc191dd91d3",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/1_Pooling/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 7439,
+      "git_blob_sha1": "add8360ea110377803141c5ee79087e42140ba15",
+      "path": "models/jina-code/README.md",
+      "sha256": "d3fcc84f4fa0b18b54e54a62171b7bb363109e776226edd02c96e105c097f494",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/README.md",
+      "verified": true
+    },
+    {
+      "bytes": 1216,
+      "git_blob_sha1": "645b6ca0ae35f56528641b9c3f4fdde5b3801fbd",
+      "path": "models/jina-code/config.json",
+      "sha256": "e426aa684c7f9a95c5f020aa855faf93a24f065f5fad0c9e17b124670cabdea6",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/config.json",
+      "verified": true
+    },
+    {
+      "bytes": 99,
+      "git_blob_sha1": "1698ffd71428cea597b9881b038bb159c8a146e5",
+      "path": "models/jina-code/sentence_bert_config.json",
+      "sha256": "7a17ba8cf5532d66e5e102613b7ff22905c2722f6c8c853e6bc02d5ad280cf51",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/sentence_bert_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 280,
+      "git_blob_sha1": "d5698132694f4f1bcff08fa7d937b1701812598e",
+      "path": "models/jina-code/special_tokens_map.json",
+      "sha256": "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/special_tokens_map.json",
+      "verified": true
+    },
+    {
+      "bytes": 2561316,
+      "git_blob_sha1": "64a31466e9fdd5ef043ff0f07b97ee2e256a205e",
+      "path": "models/jina-code/tokenizer.json",
+      "sha256": "b01c78a902aa4facb2f47f95449f48e2f7bbfea5d2472ee2f6ce92323c6f86e5",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/tokenizer.json",
+      "verified": true
+    },
+    {
+      "bytes": 493,
+      "git_blob_sha1": "e42970549d43ea34c4c0f5e459acaa05a1f5cabd",
+      "path": "models/jina-code/tokenizer_config.json",
+      "sha256": "f477aeb15ff9f78d3c1ddf2361d2b0b8b20cf55220f839f29a37f3a18efddd89",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/tokenizer_config.json",
+      "verified": true
+    },
+    {
+      "bytes": 613266244,
+      "path": "models/arctic/onnx/model_fp16.onnx",
+      "sha256": "f27ab40ab6e230265ba49a202a37f1ad031556256cbbc105d0ca9c0bdc7ec42e",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/onnx/model_fp16.onnx",
+      "verified": true
+    },
+    {
+      "bytes": 310916060,
+      "path": "models/arctic/onnx/model_int8.onnx",
+      "sha256": "03d923bb1850ebdccb068e2f3abd8aa43fe81c50d07d037ef103fe3d0fb78e3b",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/onnx/model_int8.onnx",
+      "verified": true
+    },
+    {
+      "bytes": 428102968,
+      "path": "models/granite/model.onnx",
+      "sha256": "387e6f91dce3c651cb3dc06661d74fb1d3947f20ed9c3ecf49d2b3b77086b954",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/model.onnx",
+      "verified": true
+    },
+    {
+      "bytes": 235052531,
+      "path": "models/e5/onnx/model_O4.onnx",
+      "sha256": "4654c156f3e4171abc9c716cdb771bf9116455d15ac1aab364aeeede0e3205b0",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/onnx/model_O4.onnx",
+      "verified": true
+    },
+    {
+      "bytes": 118346824,
+      "path": "models/e5/onnx/model_qint8_avx512_vnni.onnx",
+      "sha256": "dd476dd0c2514e9b9be83aeb3853fac0763e0bdf4a71645407587d77c48a2d88",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/onnx/model_qint8_avx512_vnni.onnx",
+      "verified": true
+    },
+    {
+      "bytes": 65552,
+      "git_blob_sha1": "3cdc05e5f550d8bd136f28efcea0ad5e6b4169c8",
+      "path": "models/bge-m3/onnx/Constant_7_attr__value",
+      "sha256": "cdf16f72c5d07b36484056e601ed9687f78477e5d85cee85a34f2406b7fb5906",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/Constant_7_attr__value",
+      "verified": true
+    },
+    {
+      "bytes": 724923,
+      "path": "models/bge-m3/onnx/model.onnx",
+      "sha256": "f84251230831afb359ab26d9fd37d5936d4d9bb5d1d5410e66442f630f24435b",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/model.onnx",
+      "verified": true
+    },
+    {
+      "bytes": 2266820608,
+      "path": "models/bge-m3/onnx/model.onnx_data",
+      "sha256": "1eebfb28493f67bba03ce0ef64bfdc7fc5a3bd9d7493f818bb1d78cd798416b4",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/model.onnx_data",
+      "verified": true
+    },
+    {
+      "bytes": 321072580,
+      "path": "models/jina-code/onnx/model_fp16.onnx",
+      "sha256": "1aafc4fcd63d2e6899e88402ff731e7c646c2e435048294a3cbc908a40d45d7c",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/onnx/model_fp16.onnx",
+      "verified": true
+    },
+    {
+      "bytes": 161895621,
+      "path": "models/jina-code/onnx/model_quantized.onnx",
+      "sha256": "ed45870251c9f0cf656e78aab0d37a23489066df8a222bb1c8caf8a45f2cb16d",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/onnx/model_quantized.onnx",
+      "verified": true
+    }
+  ],
+  "repositories": [
+    {
+      "candidate": "arctic",
+      "declared_license": "apache-2.0",
+      "repository": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "revision": "95c2741480856aa9666782eb4afe11959938017f",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "granite",
+      "declared_license": "apache-2.0",
+      "repository": "ibm-granite/granite-embedding-107m-multilingual",
+      "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "e5",
+      "declared_license": "mit",
+      "repository": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "bge-m3",
+      "declared_license": "mit",
+      "repository": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "jina-code",
+      "declared_license": "apache-2.0",
+      "repository": "jinaai/jina-embeddings-v2-base-code",
+      "revision": "516f4baf13dec4ddddda8631e019b5737c8bc250",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    }
+  ],
+  "scope": "Downloaded and hash-verified candidate files, not a model-selection decision",
+  "version": 1
+}

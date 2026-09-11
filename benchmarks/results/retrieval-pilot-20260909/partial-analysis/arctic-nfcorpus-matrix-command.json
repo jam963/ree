@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/home/jacob/Projects/ree/target/release/examples/score_compatibility",
+    "--corpus",
+    "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/prepared-small-beir-v1/nfcorpus-corpus.json",
+    "--cpu-vectors",
+    "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/retrieval-pilot-5b_j09cu/arctic-nfcorpus-cpu",
+    "--cuda-vectors",
+    "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/retrieval-pilot-5b_j09cu/arctic-nfcorpus-cuda"
+  ],
+  "no_inference": true
+}

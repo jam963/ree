@@ -154,6 +154,29 @@ fn extraction_and_inference_failures_preserve_old_vectors() {
     assert_eq!(f.texts(), vec!["new"]);
 }
 #[test]
+fn pdf_custom_override_and_failed_builtin_preserve_old_chunks() {
+    let mut f = Fixture::new();
+    let dir = f.dir("pdfs");
+    let path = dir.join("report.pdf");
+    std::fs::write(&path, b"%PDF-invalid-test-fixture").unwrap();
+    f.config.extractors.insert(
+        "pdf".into(),
+        ree::config::ExtractorConfig {
+            extensions: vec!["pdf".into()],
+            command: vec!["printf".into(), "previous valid extracted text".into()],
+            ..Default::default()
+        },
+    );
+    assert_eq!(f.ingest(&dir), 0);
+    assert_eq!(f.texts(), vec!["previous valid extracted text"]);
+    f.config.extractors.clear();
+    // Fails with either missing Poppler or invalid PDF; neither can publish an
+    // empty/partial replacement. No real converter is required in ordinary CI.
+    assert_eq!(f.ingest(&dir), 1);
+    assert_eq!(f.texts(), vec!["previous valid extracted text"]);
+    assert_eq!(f.count("embeddings"), 1);
+}
+#[test]
 fn incomplete_walk_does_not_prune() {
     use std::os::unix::fs::symlink;
     let mut f = Fixture::new();
@@ -250,6 +273,34 @@ fn rebuild_failure_resume_activation_and_direct_vector_sql() {
     assert!(["one", "two"].contains(&text.as_str()));
 }
 #[test]
+fn rebuild_keyset_pagination_covers_resumed_holes_across_batches() {
+    let mut f = Fixture::new();
+    let dir = f.dir("many");
+    for i in 0..200 {
+        std::fs::write(dir.join(format!("{i}.txt")), format!("document {i}")).unwrap();
+    }
+    assert_eq!(f.ingest(&dir), 0);
+    let g = f.db.rebuild_generation().unwrap();
+    let pending = f.db.pending_chunks(g, 200).unwrap();
+    let ids: Vec<_> = pending
+        .iter()
+        .step_by(3)
+        .map(|(id, _)| id.clone())
+        .collect();
+    let mut v = vec![0.; 768];
+    v[0] = 1.;
+    f.db.write_vectors(g, &ids, &vec![v; ids.len()]).unwrap();
+    let calls = f.engine.calls;
+    assert_eq!(
+        pipeline::rebuild::rebuild(&mut f.db, &mut f.engine, &mut f.events).unwrap(),
+        0
+    );
+    assert_eq!(f.engine.calls - calls, (200 - ids.len()).div_ceil(64));
+    assert_eq!(f.db.active_generation().unwrap(), g);
+    assert_eq!(f.count("embeddings"), 200);
+    assert!(f.db.pending_chunks(g, 200).unwrap().is_empty());
+}
+#[test]
 fn invalid_vector_write_is_atomic() {
     let mut f = Fixture::new();
     let dir = f.dir("docs");
@@ -277,7 +328,10 @@ fn writer_lock_rejects_concurrency_and_releases_on_drop() {
 #[test]
 fn migration_reopen_and_newer_schema_rejection() {
     let f = Fixture::new();
-    assert_eq!(f.db.status().unwrap()["schema_version"], 1);
+    assert_eq!(
+        f.db.status().unwrap()["schema_version"],
+        ree::storage::migrations::VERSION
+    );
     let run = f.db.start_run("ingest").unwrap();
     let db = Database::open(&f.config.db, true).unwrap();
     let status: String = db

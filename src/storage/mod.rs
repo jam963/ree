@@ -1,4 +1,5 @@
 pub mod migrations;
+pub mod search;
 pub mod sqlite;
 use crate::chunk::Chunk;
 use anyhow::Result;

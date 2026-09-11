@@ -1,16 +1,17 @@
 use crate::cli::Options;
 use anyhow::{Context, Result, bail, ensure};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};
 use std::{collections::BTreeMap, path::PathBuf};
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(default, deny_unknown_fields)]
 pub struct ExtractorConfig {
     pub extensions: Vec<String>,
     pub command: Vec<String>,
     pub timeout_seconds: u64,
     pub max_output_bytes: u64,
+    pub max_temp_bytes: u64,
 }
 impl Default for ExtractorConfig {
     fn default() -> Self {
@@ -19,7 +20,45 @@ impl Default for ExtractorConfig {
             command: vec![],
             timeout_seconds: 60,
             max_output_bytes: 64 * 1024 * 1024,
+            max_temp_bytes: 256 * 1024 * 1024,
         }
+    }
+}
+
+/// Shared bounds for built-in PDF extraction and per-page OCR.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(default, deny_unknown_fields)]
+pub struct PdfConfig {
+    pub ocr: bool,
+    pub timeout_seconds: u64,
+    pub max_output_bytes: u64,
+    pub max_temp_bytes: u64,
+    pub max_pages: usize,
+    pub max_image_side: u32,
+}
+impl Default for PdfConfig {
+    fn default() -> Self {
+        Self {
+            ocr: true,
+            timeout_seconds: 120,
+            max_output_bytes: 64 * 1024 * 1024,
+            max_temp_bytes: 256 * 1024 * 1024,
+            max_pages: 1000,
+            max_image_side: 2400,
+        }
+    }
+}
+impl PdfConfig {
+    pub fn validate(&self) -> Result<()> {
+        ensure!(
+            self.timeout_seconds > 0
+                && self.max_output_bytes > 0
+                && self.max_temp_bytes > 0
+                && self.max_pages > 0
+                && (128..=8192).contains(&self.max_image_side),
+            "invalid PDF limits: positive bounds and max_image_side in 128..=8192 required"
+        );
+        Ok(())
     }
 }
 
@@ -35,9 +74,10 @@ struct FileConfig {
     max_file_size: Option<String>,
     metadata: Map<String, Value>,
     extractors: BTreeMap<String, ExtractorConfig>,
+    pdf: PdfConfig,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Config {
     pub db: PathBuf,
     pub cache: PathBuf,
@@ -49,6 +89,7 @@ pub struct Config {
     pub max_file_size: u64,
     pub metadata: Value,
     pub extractors: BTreeMap<String, ExtractorConfig>,
+    pub pdf: PdfConfig,
     pub allow_private_network: bool,
 }
 
@@ -116,6 +157,7 @@ impl Config {
             )?,
             metadata: Value::Object(metadata),
             extractors: f.extractors,
+            pdf: f.pdf,
             allow_private_network: o.allow_private_network,
         };
         ensure!(
@@ -140,9 +182,13 @@ impl Config {
                     .is_some_and(|n| n.parse::<u32>().is_ok()),
             "device must be auto, cpu, cuda, or cuda:N"
         );
+        c.pdf.validate()?;
         for (name, e) in &c.extractors {
             ensure!(
-                !e.command.is_empty() && e.timeout_seconds > 0 && e.max_output_bytes > 0,
+                !e.command.is_empty()
+                    && e.timeout_seconds > 0
+                    && e.max_output_bytes > 0
+                    && e.max_temp_bytes > 0,
                 "invalid extractor {name}"
             );
         }

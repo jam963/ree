@@ -1,0 +1,45 @@
+{
+  "method": "Sequential f32 multiply and accumulate over retained native exports, matching the scorer policy",
+  "observations": [
+    {
+      "document_ids": [
+        "MED-1874",
+        "MED-2432"
+      ],
+      "document_texts_identical": true,
+      "homogeneous_f32_dot_scores": {
+        "cpu": {
+          "MED-1874": 0.5783222317695618,
+          "MED-2432": 0.5783222317695618
+        },
+        "cuda": {
+          "MED-1874": 0.5783225893974304,
+          "MED-2432": 0.57832270860672
+        }
+      },
+      "positive_qrel_grades": {"MED-1874": null, "MED-2432": null},
+      "query": "PLAIN-217"
+    },
+    {
+      "document_ids": [
+        "MED-2905",
+        "MED-3032"
+      ],
+      "document_texts_identical": true,
+      "homogeneous_f32_dot_scores": {
+        "cpu": {
+          "MED-2905": 0.5505437850952148,
+          "MED-3032": 0.5505437850952148
+        },
+        "cuda": {
+          "MED-2905": 0.5505430698394775,
+          "MED-3032": 0.5505432486534119
+        }
+      },
+      "positive_qrel_grades": {"MED-2905": 2, "MED-3032": null},
+      "query": "PLAIN-2660"
+    }
+  ],
+  "qrel_note": "Null means no positive qrel for that ID, not proof of irrelevance. Duplicate document text and ID-specific judgments are preserved without repair.",
+  "scope": "Offline diagnostic of BGE-M3 NFCorpus homogeneous provider ordering differences; no inference or corpus changes"
+}

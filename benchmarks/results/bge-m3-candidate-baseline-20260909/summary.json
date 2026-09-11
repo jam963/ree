@@ -1,0 +1,224 @@
+{
+  "aggregation": "median of three within-process mean embeddings/second values, per cell",
+  "cells": [
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 11.66723726068306,
+      "median_embeddings_per_second": 11.09858448409321,
+      "min_embeddings_per_second": 10.401270597581558,
+      "process_embeddings_per_second": [
+        10.401270597581558,
+        11.66723726068306,
+        11.09858448409321
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 14.92263244254033,
+      "median_embeddings_per_second": 14.410313644197931,
+      "min_embeddings_per_second": 14.369015497006563,
+      "process_embeddings_per_second": [
+        14.369015497006563,
+        14.410313644197931,
+        14.92263244254033
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 3.5072058086062032,
+      "median_embeddings_per_second": 3.4583343894798366,
+      "min_embeddings_per_second": 3.423927030034095,
+      "process_embeddings_per_second": [
+        3.4583343894798366,
+        3.5072058086062032,
+        3.423927030034095
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 3.4074079521635987,
+      "median_embeddings_per_second": 3.349663344375906,
+      "min_embeddings_per_second": 3.31846309694008,
+      "process_embeddings_per_second": [
+        3.4074079521635987,
+        3.31846309694008,
+        3.349663344375906
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 1.720554836430162,
+      "median_embeddings_per_second": 1.6391805914566155,
+      "min_embeddings_per_second": 1.5891801920171849,
+      "process_embeddings_per_second": [
+        1.6391805914566155,
+        1.5891801920171849,
+        1.720554836430162
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 1.5923538327544196,
+      "median_embeddings_per_second": 1.567925311275714,
+      "min_embeddings_per_second": 1.5297630630411299,
+      "process_embeddings_per_second": [
+        1.5297630630411299,
+        1.5923538327544196,
+        1.567925311275714
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 113.91417182289675,
+      "median_embeddings_per_second": 108.66368142903349,
+      "min_embeddings_per_second": 101.47571052024061,
+      "process_embeddings_per_second": [
+        101.47571052024061,
+        108.66368142903349,
+        113.91417182289675
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 165.8734494642381,
+      "median_embeddings_per_second": 106.76382487904546,
+      "min_embeddings_per_second": 83.4003192535031,
+      "process_embeddings_per_second": [
+        83.4003192535031,
+        106.76382487904546,
+        165.8734494642381
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 39.201937309563355,
+      "median_embeddings_per_second": 29.517722041824662,
+      "min_embeddings_per_second": 22.37891160324546,
+      "process_embeddings_per_second": [
+        22.37891160324546,
+        29.517722041824662,
+        39.201937309563355
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 37.29097876172946,
+      "median_embeddings_per_second": 30.392840548203385,
+      "min_embeddings_per_second": 21.716030491237362,
+      "process_embeddings_per_second": [
+        21.716030491237362,
+        30.392840548203385,
+        37.29097876172946
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 17.690942079498274,
+      "median_embeddings_per_second": 17.537191578146757,
+      "min_embeddings_per_second": 8.51271812516468,
+      "process_embeddings_per_second": [
+        8.51271812516468,
+        17.690942079498274,
+        17.537191578146757
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 17.40510786212293,
+      "median_embeddings_per_second": 17.382336671858937,
+      "min_embeddings_per_second": 9.202367257535768,
+      "process_embeddings_per_second": [
+        9.202367257535768,
+        17.40510786212293,
+        17.382336671858937
+      ],
+      "tokens": 512
+    }
+  ],
+  "recipes": {
+    "cpu": {
+      "model": "BAAI/bge-m3",
+      "model_sha256": "f84251230831afb359ab26d9fd37d5936d4d9bb5d1d5410e66442f630f24435b",
+      "power_mode": "balanced",
+      "precision": "fp32",
+      "recipe": {
+        "cls_id": 0,
+        "dimensions": 1024,
+        "pad_id": 1,
+        "pooling": "cls",
+        "sep_id": 2
+      },
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "runtime": "onnxruntime-1.28.0",
+      "threads": 8,
+      "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+    },
+    "cuda:0": {
+      "model": "BAAI/bge-m3",
+      "model_sha256": "f84251230831afb359ab26d9fd37d5936d4d9bb5d1d5410e66442f630f24435b",
+      "power_mode": "balanced",
+      "precision": "fp32",
+      "recipe": {
+        "cls_id": 0,
+        "dimensions": 1024,
+        "pad_id": 1,
+        "pooling": "cls",
+        "sep_id": 2
+      },
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "runtime": "onnxruntime-1.28.0",
+      "threads": 8,
+      "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+    }
+  },
+  "runs": [
+    {
+      "file": "cpu-1.jsonl",
+      "sha256": "9e6036a0ab46c5b4acdf6d78da1adf05483e0b19621ddcaf896cc19eb4cd731a"
+    },
+    {
+      "file": "cpu-2.jsonl",
+      "sha256": "fb3952926f9e38e1cc9b8fadd9ab870f9774a384c06ce57d72e602a65c089b49"
+    },
+    {
+      "file": "cpu-3.jsonl",
+      "sha256": "f75e0edee23b22ccf7948f9a8c998d76b196458f9a534029523ae97999403eae"
+    },
+    {
+      "file": "cuda-0-1.jsonl",
+      "sha256": "23e99851a41f73dbd5d7c0fccf360babb62db4a1236970b80296c59210bc262e"
+    },
+    {
+      "file": "cuda-0-2.jsonl",
+      "sha256": "6929eaf7e8b477b1dd03273999ba1e285a7d27825fd527fa7e61421e61ef6604"
+    },
+    {
+      "file": "cuda-0-3.jsonl",
+      "sha256": "a6053a6142adc33cf1f61679eea91e1f19befda42e34cc7a89d5895e3818db4a"
+    }
+  ],
+  "scope": "serial local throughput baseline, synthetic token IDs, no retrieval quality scores"
+}

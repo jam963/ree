@@ -1,0 +1,24 @@
+test_all_7200_query_rows_and_2000_live_roundtrips (test_retrieval_evidence.CompletedEvidence.test_all_7200_query_rows_and_2000_live_roundtrips) ... ok
+test_complete_coverage_and_artifact_bindings (test_retrieval_evidence.CompletedEvidence.test_complete_coverage_and_artifact_bindings) ... ok
+test_every_loss_flag_overlap_and_paired_point_delta (test_retrieval_evidence.CompletedEvidence.test_every_loss_flag_overlap_and_paired_point_delta) ... ok
+test_partial_results_and_second_interruption_are_preserved (test_retrieval_evidence.CompletedEvidence.test_partial_results_and_second_interruption_are_preserved) ... ok
+test_interruption_preserves_attempt_without_claiming_a_complete_export (test_retrieval_evidence.Evidence.test_interruption_preserves_attempt_without_claiming_a_complete_export) ... ok
+test_partial_coverage_is_explicit_and_bound_to_frozen_plan (test_retrieval_evidence.Evidence.test_partial_coverage_is_explicit_and_bound_to_frozen_plan) ... ok
+test_raw_metrics_rankings_and_loss_flags_are_consistent (test_retrieval_evidence.Evidence.test_raw_metrics_rankings_and_loss_flags_are_consistent) ... ok
+test_artifact_digests_and_symlink_rejection (test_tools.Tools.test_artifact_digests_and_symlink_rejection) ... ok
+test_baseline_refuses_ci_before_host_probes (test_tools.Tools.test_baseline_refuses_ci_before_host_probes) ... ok
+test_bootstrap_modulo_rejection_and_index_integrity (test_tools.Tools.test_bootstrap_modulo_rejection_and_index_integrity) ... ok
+test_bootstrap_stream_is_fixed_and_paired (test_tools.Tools.test_bootstrap_stream_is_fixed_and_paired) ... ok
+test_download_publication_and_verified_reuse (test_tools.Tools.test_download_publication_and_verified_reuse) ... ok
+test_gzip_bounds_crc_and_no_clobber (test_tools.Tools.test_gzip_bounds_crc_and_no_clobber) ... ok
+test_inspector_rejects_unsupported_and_malformed_graphs (test_tools.Tools.test_inspector_rejects_unsupported_and_malformed_graphs) ... ok
+test_onnx_io_and_external_references (test_tools.Tools.test_onnx_io_and_external_references) ... ok
+test_path_and_budget_guards_precede_network (test_tools.Tools.test_path_and_budget_guards_precede_network) ... ok
+test_pinned_recipes_match_static_external_data_inventory (test_tools.Tools.test_pinned_recipes_match_static_external_data_inventory) ... ok
+test_ranking_overlap_and_pilot_ci_guard (test_tools.Tools.test_ranking_overlap_and_pilot_ci_guard) ... ok
+test_short_oversized_and_bad_checksum_never_publish (test_tools.Tools.test_short_oversized_and_bad_checksum_never_publish) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.425s
+
+OK

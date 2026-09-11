@@ -1,0 +1,101 @@
+{
+  "date": "2026-09-10",
+  "rust_tests": {
+    "passed": 151,
+    "failed": 0,
+    "ignored": 6
+  },
+  "python_tests": {
+    "passed": 20
+  },
+  "clippy": "passed",
+  "fmt": "passed",
+  "cli_docs": "passed",
+  "baseline_binary_sha256": "106b1c41b0844ec32dafb7850be7b55e5fc0f3127c10d74bab23a77c516737f7",
+  "final_binary_sha256": "c48cec7e7b32a260d8a784d469f07f559252dccb57ba8ebef9235d9fd50ba0b0",
+  "final_search_responses": 681,
+  "all_final_search_rankings_match": true,
+  "idle_release_cycles": [
+    {
+      "pid": 579476,
+      "loaded_memory": "579476, 1310 MiB\n",
+      "released_memory": "",
+      "seconds": 1.1923245600046357
+    },
+    {
+      "pid": 579641,
+      "loaded_memory": "579641, 1310 MiB\n",
+      "released_memory": "",
+      "seconds": 1.1313727319939062
+    },
+    {
+      "pid": 579738,
+      "loaded_memory": "579738, 934 MiB\n",
+      "released_memory": "",
+      "seconds": 1.1673736049997387
+    },
+    {
+      "pid": 579868,
+      "loaded_memory": "579868, 928 MiB\n",
+      "released_memory": "",
+      "seconds": 1.1919080400111852
+    },
+    {
+      "pid": 579971,
+      "loaded_memory": "579971, 932 MiB\n",
+      "released_memory": "",
+      "seconds": 1.1751244570041308
+    }
+  ],
+  "telemetry": {
+    "samples": 110,
+    "ac_online_values": [
+      "1"
+    ],
+    "power_profiles": [
+      "balanced"
+    ],
+    "gpu_temperature_min": 44,
+    "gpu_temperature_max": 62,
+    "unknown_process_name_samples": 2
+  },
+  "raw_artifacts": {
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/measure-runs-1789062331451254303.jsonl": "0bf77ced29b4e9324b4cf3190d45229ed91cf7c51170e0522e56efc7c399562c",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/final-telemetry-1789062331451322561.jsonl": "c8d08df232a651acbc05d33806924ada64e185080dbefbdf923d07a121b2f25a",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/measure.py": "b2501d53592b57eb9fb2bcf7aa5f8d9ea266b45b745057b2279500db8e7de37f",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/ingestion.py": "4010fd53aa555bd9f9d7f8f6a0c75ffa41f4e4ef935411e706c656a0b9db1ae0",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/baseline-runs.json": "ddc9966e99889035ec1ddd41dcd218847aa071a39e891c927b2c9da20cceb92d",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/cls-cuda.jsonl": "48d22da7d2121359357efe1dc74d6d75358e17780fdb8da9687301e1cfcbf63e",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/cls-cpu.jsonl": "2927210e2f3358cbffd9376e58ee9924d393c3ee429b46e8851f202f638be5e6",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/source-before.tar.gz": "cc2f361c38e1a92a2865373c8e4e06ec67382b141912203172dabd089d5bd507",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/preimplementation.patch": "892325e838e0baf22e0d7fd40822bf9e0e79a9e3ba895e8ee3353e47a9492383",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/ingestion-1789060040334967686/parity.jsonl": "31a4eb47b85411435da8cbe71cb13278aa9e5ac9e4f8b9fd47d118c5bbb842c6",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/ingestion-1789060040334967686/runs.jsonl": "f86bc3acca2b0b4262a765a11eab3e1f87d9edd8acbef7106d49abe342b165c5",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/measure-runs-1789063754653044764.jsonl": "5b908e126a154216d9c927dd7ff233650a04e72a48e8c7c431cb71d13d541380",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/final-telemetry-1789063754653103806.jsonl": "9c1d8ae122e88fe774c3616e3a099fa8d06a61af08de1720de2de647a27f3a5f",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/source-manifest-pre-control-fix.json": "a51ca937fc795aba88bf1a855dbf31817a46dab6e6698f0e1367eb08a85de94a",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/measure-identity-pre-control-fix.json": "27ac20e35bf6fd085a8b9bb2d9653e17d0dc2ad78bdbe3c23ed785e8c84b8a16",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/measure-summary-pre-control-fix.json": "879c93eda760cc46091f8f1d58aa110f009fad2d9dc77984cf6ce680d1b9bcb0",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/cls-cuda-final.jsonl": "392372bb02c40bf24e9b42b97405507dba345c778ae325fe5d528331b00791ad",
+    "/home/jacob/.cache/ree-speedup-implementation-GHDkUcOH/cls-cpu-final.jsonl": "34fc6d07a52a1a34720246954c25cad804d0a5aea653aaf02280727e876887e6"
+  },
+  "per_process_warm_medians": {
+    "stream_warm": [
+      0.009713364503113553,
+      0.009457262000069022,
+      0.009444111994525883
+    ],
+    "socket_warm": [
+      0.009401562507264316,
+      0.009541790997900534,
+      0.009482790490437765
+    ]
+  },
+  "unfinished": [
+    "sustained CUDA ingestion stability",
+    "CPU preparation overlap equivalence (path disabled)",
+    "large-document/multi-chunk and slow-client soak",
+    "physical device-transfer-byte instrumentation",
+    "preoptimized-graph cache and I/O binding gates"
+  ]
+}

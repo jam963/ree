@@ -1,0 +1,54 @@
+{
+  "compile_command": [
+    "rustc",
+    "--edition=2024",
+    "/home/jacob/Projects/ree/benchmarks/results/arctic-scheduler-audit-20260910/scheduler-replay.rs",
+    "-L",
+    "dependency=/home/jacob/Projects/ree/target/debug/deps",
+    "-o",
+    "/tmp/ree-scheduler-audit-a_opgs1g/replay",
+    "--extern",
+    "anyhow=/home/jacob/Projects/ree/target/debug/deps/libanyhow-b3ab1b3ee9153273.rlib",
+    "--extern",
+    "ree=/home/jacob/Projects/ree/target/debug/deps/libree-7c429c8bb7a65c0d.rlib",
+    "--extern",
+    "serde_json=/home/jacob/Projects/ree/target/debug/deps/libserde_json-9e96701b81bfe0ea.rlib",
+    "--extern",
+    "tempfile=/home/jacob/Projects/ree/target/debug/deps/libtempfile-203410d97ae4717b.rlib"
+  ],
+  "dependency_build_command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "--test",
+    "cuda_recovery",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "exit_code": 0,
+  "linked_libraries": {
+    "anyhow": {
+      "path": "/home/jacob/Projects/ree/target/debug/deps/libanyhow-b3ab1b3ee9153273.rlib",
+      "sha256": "c32898d5e2115f82e2be399699ea553ac391829df3008662a84cc02aac798035"
+    },
+    "ree": {
+      "path": "/home/jacob/Projects/ree/target/debug/deps/libree-7c429c8bb7a65c0d.rlib",
+      "sha256": "8530dc8f4ba715f21d4650c2e389c4c33a4e3c2e8e26ed2f59be9f1bb311e059"
+    },
+    "serde_json": {
+      "path": "/home/jacob/Projects/ree/target/debug/deps/libserde_json-9e96701b81bfe0ea.rlib",
+      "sha256": "1ab421b45c82fa70d82e00dd8db63ae6f716ad5048f49e8f68cd1127948299e9"
+    },
+    "tempfile": {
+      "path": "/home/jacob/Projects/ree/target/debug/deps/libtempfile-203410d97ae4717b.rlib",
+      "sha256": "925269d621aa38b1e10963a5db6c12df4d2e3124225c45d4a949042ed2cdab10"
+    }
+  },
+  "observations": 4,
+  "replay_sha256": "7d9d608fddced4a6de97f1c59358f4ec465117a087894d9047ad8798eb9ae21f",
+  "rustc": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+  "scope": "Offline production-scheduler control-flow replay; injected runtime/device probes, no model inference. Assertions describe historical behavior, not desired defaults.",
+  "source_sha256": "8236f93c66d58741e22e7a5d0cba44cfa655454a187a756f9b38b8eaab0e6da1",
+  "temporary_replay_binary_removed_on_exit": true
+}

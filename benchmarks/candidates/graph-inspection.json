@@ -1,0 +1,609 @@
+{
+  "models": [
+    {
+      "external_data": [],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "token_embeddings",
+            "shape": [
+              "batch_size",
+              "sequence_length",
+              768
+            ]
+          },
+          {
+            "element_type": 1,
+            "name": "sentence_embedding",
+            "shape": [
+              "batch_size",
+              768
+            ]
+          }
+        ]
+      },
+      "ir_version": 10,
+      "operators": {
+        "::Add": 159,
+        "::Cast": 3,
+        "::Clip": 1,
+        "::Concat": 73,
+        "::Div": 38,
+        "::Equal": 1,
+        "::Erf": 12,
+        "::Expand": 2,
+        "::Gather": 103,
+        "::MatMul": 72,
+        "::Mul": 135,
+        "::Neg": 24,
+        "::Pow": 25,
+        "::ReduceL2": 1,
+        "::ReduceMean": 50,
+        "::Reshape": 48,
+        "::Shape": 50,
+        "::Slice": 51,
+        "::Softmax": 12,
+        "::Split": 24,
+        "::Sqrt": 25,
+        "::Sub": 26,
+        "::Transpose": 48,
+        "::Unsqueeze": 101,
+        "::Where": 1
+      },
+      "path": "models/arctic/onnx/model_fp16.onnx",
+      "producer": "pytorch",
+      "producer_version": "2.5.1",
+      "tensor_element_types": {
+        "7": 19,
+        "10": 147
+      }
+    },
+    {
+      "external_data": [],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "token_embeddings",
+            "shape": [
+              "batch_size",
+              "sequence_length",
+              768
+            ]
+          },
+          {
+            "element_type": 1,
+            "name": "sentence_embedding",
+            "shape": [
+              "batch_size",
+              768
+            ]
+          }
+        ]
+      },
+      "ir_version": 7,
+      "operators": {
+        "::Add": 159,
+        "::Cast": 49,
+        "::Clip": 1,
+        "::Concat": 73,
+        "::DequantizeLinear": 2,
+        "::Div": 38,
+        "::DynamicQuantizeLinear": 48,
+        "::Equal": 1,
+        "::Erf": 12,
+        "::Expand": 2,
+        "::Gather": 103,
+        "::MatMul": 24,
+        "::MatMulInteger": 48,
+        "::Mul": 231,
+        "::Neg": 24,
+        "::Pow": 25,
+        "::ReduceL2": 1,
+        "::ReduceMean": 50,
+        "::Reshape": 48,
+        "::Shape": 50,
+        "::Slice": 51,
+        "::Softmax": 12,
+        "::Split": 24,
+        "::Sqrt": 25,
+        "::Sub": 26,
+        "::Transpose": 48,
+        "::Unsqueeze": 101,
+        "::Where": 1
+      },
+      "path": "models/arctic/onnx/model_int8.onnx",
+      "producer": "onnx.quantize",
+      "producer_version": "0.1.0",
+      "tensor_element_types": {
+        "1": 147,
+        "2": 4,
+        "3": 96,
+        "7": 19
+      }
+    },
+    {
+      "external_data": [
+        "model.onnx_data"
+      ],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "token_embeddings",
+            "shape": [
+              "batch_size",
+              "sequence_length",
+              1024
+            ]
+          },
+          {
+            "element_type": 1,
+            "name": "sentence_embedding",
+            "shape": [
+              "batch_size",
+              "Divsentence_embedding_dim_1"
+            ]
+          }
+        ]
+      },
+      "ir_version": 6,
+      "operators": {
+        "::Abs": 1,
+        "::Add": 341,
+        "::Cast": 3,
+        "::Clip": 1,
+        "::Concat": 98,
+        "::Constant": 571,
+        "::ConstantOfShape": 1,
+        "::CumSum": 1,
+        "::Div": 98,
+        "::Equal": 2,
+        "::Erf": 24,
+        "::Expand": 2,
+        "::Gather": 198,
+        "::MatMul": 192,
+        "::Mul": 100,
+        "::Not": 1,
+        "::Pow": 51,
+        "::ReduceMean": 98,
+        "::ReduceSum": 1,
+        "::Reshape": 97,
+        "::Shape": 196,
+        "::Slice": 1,
+        "::Softmax": 24,
+        "::Sqrt": 49,
+        "::Sub": 50,
+        "::Transpose": 96,
+        "::Unsqueeze": 197,
+        "::Where": 1
+      },
+      "path": "models/bge-m3/onnx/model.onnx",
+      "producer": "pytorch",
+      "producer_version": "2.1.2",
+      "tensor_element_types": {
+        "1": 588,
+        "6": 1,
+        "7": 372
+      }
+    },
+    {
+      "external_data": [],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "token_type_ids",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "last_hidden_state",
+            "shape": [
+              "batch_size",
+              "sequence_length",
+              384
+            ]
+          }
+        ]
+      },
+      "ir_version": 6,
+      "operators": {
+        "::Add": 2,
+        "::Cast": 2,
+        "::Gather": 4,
+        "::LayerNormalization": 1,
+        "::MatMul": 36,
+        "::ReduceSum": 1,
+        "::Shape": 1,
+        "::Slice": 1,
+        "::Unsqueeze": 1,
+        "com.microsoft::Attention": 12,
+        "com.microsoft::FastGelu": 12,
+        "com.microsoft::SkipLayerNormalization": 24
+      },
+      "path": "models/e5/onnx/model_O4.onnx",
+      "producer": "onnxruntime.transformers",
+      "producer_version": "1.20.0",
+      "tensor_element_types": {
+        "7": 5,
+        "10": 149
+      }
+    },
+    {
+      "external_data": [],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "token_type_ids",
+            "shape": [
+              "batch_size",
+              "sequence_length"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "last_hidden_state",
+            "shape": [
+              "batch_size",
+              "sequence_length",
+              384
+            ]
+          }
+        ]
+      },
+      "ir_version": 6,
+      "operators": {
+        "::Add": 172,
+        "::Cast": 97,
+        "::Concat": 48,
+        "::Constant": 284,
+        "::DequantizeLinear": 3,
+        "::Div": 49,
+        "::DynamicQuantizeLinear": 96,
+        "::Erf": 12,
+        "::Gather": 100,
+        "::MatMulInteger": 96,
+        "::Mul": 242,
+        "::Pow": 25,
+        "::ReduceMean": 50,
+        "::Reshape": 48,
+        "::Shape": 97,
+        "::Slice": 1,
+        "::Softmax": 12,
+        "::Sqrt": 25,
+        "::Sub": 26,
+        "::Transpose": 48,
+        "::Unsqueeze": 99
+      },
+      "path": "models/e5/onnx/model_qint8_avx512_vnni.onnx",
+      "producer": "onnx.quantize",
+      "producer_version": "0.1.0",
+      "tensor_element_types": {
+        "1": 297,
+        "2": 6,
+        "3": 144,
+        "7": 185
+      }
+    },
+    {
+      "external_data": [],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch_size",
+              "sequence"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch_size",
+              "sequence"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "logits",
+            "shape": [
+              "Addlogits_dim_0",
+              "Addlogits_dim_1",
+              384
+            ]
+          },
+          {
+            "element_type": 1,
+            "name": "894",
+            "shape": [
+              "Addlogits_dim_0",
+              384
+            ]
+          }
+        ]
+      },
+      "ir_version": 8,
+      "operators": {
+        "::Add": 89,
+        "::Cast": 17,
+        "::Concat": 26,
+        "::Constant": 191,
+        "::ConstantOfShape": 2,
+        "::CumSum": 1,
+        "::Div": 25,
+        "::Equal": 3,
+        "::Erf": 6,
+        "::Expand": 2,
+        "::Gather": 20,
+        "::Gemm": 1,
+        "::MatMul": 48,
+        "::Mul": 40,
+        "::Not": 1,
+        "::Pow": 13,
+        "::ReduceMean": 26,
+        "::Reshape": 26,
+        "::Shape": 24,
+        "::Slice": 7,
+        "::Softmax": 6,
+        "::Sqrt": 31,
+        "::Sub": 14,
+        "::Tanh": 1,
+        "::Transpose": 24,
+        "::Unsqueeze": 38,
+        "::Where": 3
+      },
+      "path": "models/granite/model.onnx",
+      "producer": "pytorch",
+      "producer_version": "2.6.0",
+      "tensor_element_types": {
+        "1": 155,
+        "6": 1,
+        "7": 140
+      }
+    },
+    {
+      "external_data": [],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch",
+              "sequence"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch",
+              "sequence"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "last_hidden_state",
+            "shape": [
+              "batch_size",
+              "sequence_length",
+              768
+            ]
+          }
+        ]
+      },
+      "ir_version": 6,
+      "operators": {
+        "::Abs": 1,
+        "::Add": 255,
+        "::Cast": 5,
+        "::Concat": 49,
+        "::Constant": 464,
+        "::ConstantOfShape": 2,
+        "::Div": 85,
+        "::Equal": 2,
+        "::Erf": 12,
+        "::Expand": 2,
+        "::Gather": 101,
+        "::MatMul": 96,
+        "::Mul": 101,
+        "::Pow": 61,
+        "::Range": 1,
+        "::ReduceMean": 122,
+        "::Reshape": 49,
+        "::Shape": 100,
+        "::Slice": 25,
+        "::Softmax": 12,
+        "::Sqrt": 61,
+        "::Sub": 63,
+        "::Transpose": 48,
+        "::Unsqueeze": 105,
+        "::Where": 2
+      },
+      "path": "models/jina-code/onnx/model_fp16.onnx",
+      "producer": "pytorch",
+      "producer_version": "2.2.0",
+      "tensor_element_types": {
+        "7": 293,
+        "10": 429
+      }
+    },
+    {
+      "external_data": [],
+      "graph": {
+        "inputs": [
+          {
+            "element_type": 7,
+            "name": "input_ids",
+            "shape": [
+              "batch",
+              "sequence"
+            ]
+          },
+          {
+            "element_type": 7,
+            "name": "attention_mask",
+            "shape": [
+              "batch",
+              "sequence"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "element_type": 1,
+            "name": "last_hidden_state",
+            "shape": [
+              "batch_size",
+              "sequence_length",
+              768
+            ]
+          }
+        ]
+      },
+      "ir_version": 6,
+      "operators": {
+        "::Abs": 1,
+        "::Add": 255,
+        "::Cast": 76,
+        "::Concat": 49,
+        "::Constant": 464,
+        "::ConstantOfShape": 2,
+        "::DequantizeLinear": 2,
+        "::Div": 85,
+        "::DynamicQuantizeLinear": 48,
+        "::Equal": 2,
+        "::Erf": 12,
+        "::Expand": 2,
+        "::Gather": 101,
+        "::MatMul": 24,
+        "::MatMulInteger": 72,
+        "::Mul": 245,
+        "::Pow": 61,
+        "::Range": 1,
+        "::ReduceMean": 122,
+        "::Reshape": 49,
+        "::Shape": 100,
+        "::Slice": 25,
+        "::Softmax": 12,
+        "::Sqrt": 61,
+        "::Sub": 63,
+        "::Transpose": 48,
+        "::Unsqueeze": 105,
+        "::Where": 2
+      },
+      "path": "models/jina-code/onnx/model_quantized.onnx",
+      "producer": "onnx.quantize",
+      "producer_version": "0.1.0",
+      "tensor_element_types": {
+        "1": 429,
+        "2": 4,
+        "3": 144,
+        "7": 293
+      }
+    }
+  ],
+  "scope": "static I/O and external references, not full ONNX validation"
+}

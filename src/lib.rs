@@ -5,8 +5,10 @@ pub mod error;
 pub mod events;
 pub mod extract;
 pub mod input;
+pub mod metrics;
 pub mod model;
 pub mod pipeline;
+pub mod retrieval;
 pub mod storage;
 pub mod util;
 
@@ -20,13 +22,54 @@ use serde_json::json;
 use storage::{Database, WriterLock};
 
 pub fn run(cli: Cli, events: &mut Events) -> Result<u8> {
-    let config = Config::load(&cli.options).map_err(|e| AppError::new(2, format!("{e:#}")))?;
+    // Private IPC bypasses ambient config and outer event output. Its parent
+    // supplies the already resolved configuration over a private socketpair.
+    if matches!(cli.command, Some(Command::QueryEngine)) {
+        return retrieval::protocol::engine_main();
+    }
+    if matches!(&cli.command, Some(Command::Worker(_)))
+        || matches!(&cli.command, Some(Command::Search(args)) if args.stream)
+    {
+        return run_inner(cli, events);
+    }
+    let result = {
+        let _span = metrics::Span::new("command");
+        run_inner(cli, events)
+    };
+    if metrics::enabled() {
+        events.emit(json!({"type":"stage_metrics","scope":"command_thread","overlapping":true,"stages":metrics::take()}))?;
+    }
+    result
+}
+
+fn run_inner(cli: Cli, events: &mut Events) -> Result<u8> {
     if cli.command.is_some() && !cli.inputs.is_empty() {
-        return Err(AppError::new(
-            2,
-            "input paths cannot be combined with a maintenance command",
-        )
-        .into());
+        return Err(AppError::new(2, "input paths cannot be combined with a subcommand").into());
+    }
+    if let Some(Command::Search(args)) = &cli.command
+        && let Some(socket) = &args.socket
+    {
+        if cli.options.device.is_some()
+            || cli.options.db.is_some()
+            || cli.options.config.is_some()
+            || cli.options.gpu_memory_fraction.is_some()
+            || cli.options.batch_size.is_some()
+        {
+            return Err(AppError::new(2, "socket queries use the worker's fixed database/device/config; remove client overrides").into());
+        }
+        // A client neither loads ambient model configuration nor initializes ORT.
+        return retrieval::transport::client(
+            socket,
+            retrieval::SearchRequest::try_from(args.clone())?,
+            events,
+        );
+    }
+    let config = {
+        let _span = metrics::Span::new("configuration");
+        Config::load(&cli.options).map_err(|e| AppError::new(2, format!("{e:#}")))?
+    };
+    if cli.command.is_some() && !cli.inputs.is_empty() {
+        return Err(AppError::new(2, "input paths cannot be combined with a subcommand").into());
     }
     if cli.command.is_none() {
         if cli.inputs.is_empty() {
@@ -46,6 +89,48 @@ pub fn run(cli: Cli, events: &mut Events) -> Result<u8> {
         }
     }
     match cli.command {
+        Some(Command::Search(args)) => {
+            if args.stream {
+                if cli.options.quiet || cli.options.progress {
+                    return Err(
+                        AppError::new(2, "protocol mode rejects --quiet and --progress").into(),
+                    );
+                }
+                return retrieval::transport::serve(
+                    config,
+                    None,
+                    std::time::Duration::from_secs(args.idle_timeout),
+                    events,
+                );
+            }
+            let request = retrieval::SearchRequest::try_from(args)?;
+            request.validate()?;
+            let mut db = Database::open(&config.db, false).with_context(|| {
+                format!(
+                    "open search database {}; ingest documents or run ree migrate first",
+                    config.db.display()
+                )
+            })?;
+            let mut engine = LocalEngine::new(config.clone());
+            let report = retrieval::search(&mut db, &mut engine, &request, events)?;
+            report.emit(events)?;
+            Ok(0)
+        }
+        Some(Command::Worker(args)) => {
+            if cli.options.quiet || cli.options.progress {
+                return Err(AppError::new(2, "worker mode rejects --quiet and --progress").into());
+            }
+            let socket = args
+                .socket
+                .map(Ok)
+                .unwrap_or_else(retrieval::transport::default_socket)?;
+            retrieval::transport::serve(
+                config,
+                Some(socket),
+                std::time::Duration::from_secs(args.idle_timeout),
+                events,
+            )
+        }
         Some(Command::Doctor) => doctor(&config, events),
         Some(Command::Status) => {
             let db = Database::open(&config.db, false)?;
@@ -63,8 +148,22 @@ pub fn run(cli: Cli, events: &mut Events) -> Result<u8> {
             let _lock = WriterLock::acquire(&config.db)?;
             let mut db = Database::open(&config.db, true)
                 .with_context(|| format!("open database {}", config.db.display()))?;
+            if matches!(command, None | Some(Command::Rebuild)) {
+                let synthetic: bool = db.conn.query_row(
+                    "SELECT EXISTS(SELECT 1 FROM schema_metadata WHERE key='synthetic_vectors' AND value='true')", [], |r| r.get(0),
+                )?;
+                anyhow::ensure!(
+                    !synthetic,
+                    "synthetic benchmark database: ingestion/rebuild would mix fake and real embeddings; choose a separate --db"
+                );
+            }
             let mut engine = LocalEngine::new(config.clone());
             match command {
+                Some(Command::Migrate) => {
+                    events
+                        .emit(json!({"type":"migrated","schema_version":db.schema_version()?}))?;
+                    Ok(0)
+                }
                 Some(Command::Remove { source }) => {
                     let identity = std::path::Path::new(&source)
                         .canonicalize()
@@ -121,10 +220,18 @@ fn doctor(config: &Config, events: &mut Events) -> Result<u8> {
         Ok(Err(e)) => json!({"error":e.to_string()}),
         Err(_) => json!({"error":"ONNX Runtime could not initialize"}),
     };
-    let tools: Vec<_> = ["pdftotext", "pandoc", "libreoffice", "tesseract", "git"]
-        .iter()
-        .map(|p| json!({"program":p,"available":extract::external::available(p)}))
-        .collect();
+    let tools: Vec<_> = [
+        "pdfinfo",
+        "pdftotext",
+        "pdftoppm",
+        "pandoc",
+        "libreoffice",
+        "tesseract",
+        "git",
+    ]
+    .iter()
+    .map(|p| json!({"program":p,"available":extract::external::available(p),"version":extract::external::version(p)}))
+    .collect();
     let mut lock_path = config.db.as_os_str().to_owned();
     lock_path.push(".lock");
     let locked = std::fs::File::open(lock_path)

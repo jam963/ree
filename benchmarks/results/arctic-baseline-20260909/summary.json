@@ -1,0 +1,224 @@
+{
+  "aggregation": "median of three within-process mean embeddings/second values, per cell",
+  "cells": [
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 79.45682551293831,
+      "median_embeddings_per_second": 71.06673615666884,
+      "min_embeddings_per_second": 66.53225731334548,
+      "process_embeddings_per_second": [
+        66.53225731334548,
+        71.06673615666884,
+        79.45682551293831
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 101.54730445739432,
+      "median_embeddings_per_second": 91.51318022696313,
+      "min_embeddings_per_second": 89.0323469073103,
+      "process_embeddings_per_second": [
+        89.0323469073103,
+        91.51318022696313,
+        101.54730445739432
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 21.597859399870476,
+      "median_embeddings_per_second": 21.119905190887042,
+      "min_embeddings_per_second": 18.486539612204677,
+      "process_embeddings_per_second": [
+        18.486539612204677,
+        21.119905190887042,
+        21.597859399870476
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 19.984509966356057,
+      "median_embeddings_per_second": 18.61318753420034,
+      "min_embeddings_per_second": 18.245975893122893,
+      "process_embeddings_per_second": [
+        18.245975893122893,
+        18.61318753420034,
+        19.984509966356057
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 9.631782539932262,
+      "median_embeddings_per_second": 9.142231701367509,
+      "min_embeddings_per_second": 8.764403093569957,
+      "process_embeddings_per_second": [
+        9.142231701367509,
+        8.764403093569957,
+        9.631782539932262
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 8.237383480542597,
+      "median_embeddings_per_second": 8.15023098435154,
+      "min_embeddings_per_second": 7.708564032467432,
+      "process_embeddings_per_second": [
+        7.708564032467432,
+        8.15023098435154,
+        8.237383480542597
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 427.81711365996944,
+      "median_embeddings_per_second": 374.02263210946893,
+      "min_embeddings_per_second": 367.0029955518503,
+      "process_embeddings_per_second": [
+        427.81711365996944,
+        374.02263210946893,
+        367.0029955518503
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 1051.4141243976942,
+      "median_embeddings_per_second": 999.5241015871318,
+      "min_embeddings_per_second": 994.3607811380102,
+      "process_embeddings_per_second": [
+        1051.4141243976942,
+        999.5241015871318,
+        994.3607811380102
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 223.03388714431787,
+      "median_embeddings_per_second": 219.49785388168343,
+      "min_embeddings_per_second": 211.51951345773867,
+      "process_embeddings_per_second": [
+        223.03388714431787,
+        219.49785388168343,
+        211.51951345773867
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 285.7672710487277,
+      "median_embeddings_per_second": 284.70480787699626,
+      "min_embeddings_per_second": 283.353132397332,
+      "process_embeddings_per_second": [
+        284.70480787699626,
+        283.353132397332,
+        285.7672710487277
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 142.58134978912219,
+      "median_embeddings_per_second": 139.38710097828834,
+      "min_embeddings_per_second": 137.63161263813842,
+      "process_embeddings_per_second": [
+        142.58134978912219,
+        137.63161263813842,
+        139.38710097828834
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 126.62090947867699,
+      "median_embeddings_per_second": 126.45807064369565,
+      "min_embeddings_per_second": 126.30237642720736,
+      "process_embeddings_per_second": [
+        126.45807064369565,
+        126.62090947867699,
+        126.30237642720736
+      ],
+      "tokens": 512
+    }
+  ],
+  "recipes": {
+    "cpu": {
+      "model": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "model_sha256": "03d923bb1850ebdccb068e2f3abd8aa43fe81c50d07d037ef103fe3d0fb78e3b",
+      "power_mode": "balanced",
+      "precision": "int8",
+      "recipe": {
+        "cls_id": 0,
+        "dimensions": 768,
+        "pad_id": 1,
+        "pooling": "cls",
+        "sep_id": 2
+      },
+      "revision": "95c2741480856aa9666782eb4afe11959938017f",
+      "runtime": "onnxruntime-1.28.0",
+      "threads": 8,
+      "tokenizer_sha256": "f1cc44ad7faaeec47241864835473fd5403f2da94673f3f764a77ebcb0a803ec"
+    },
+    "cuda:0": {
+      "model": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "model_sha256": "f27ab40ab6e230265ba49a202a37f1ad031556256cbbc105d0ca9c0bdc7ec42e",
+      "power_mode": "balanced",
+      "precision": "fp16",
+      "recipe": {
+        "cls_id": 0,
+        "dimensions": 768,
+        "pad_id": 1,
+        "pooling": "cls",
+        "sep_id": 2
+      },
+      "revision": "95c2741480856aa9666782eb4afe11959938017f",
+      "runtime": "onnxruntime-1.28.0",
+      "threads": 8,
+      "tokenizer_sha256": "f1cc44ad7faaeec47241864835473fd5403f2da94673f3f764a77ebcb0a803ec"
+    }
+  },
+  "runs": [
+    {
+      "file": "cpu-1.jsonl",
+      "sha256": "c730d03864c0dfe132abf93cb4b613c2b9cba6c397a9b9ada7d839933d827f56"
+    },
+    {
+      "file": "cpu-2.jsonl",
+      "sha256": "6e2d2f0e4c36f20b2ab8aeb1f2c4895036b432c32358640b995e2ad1399487f3"
+    },
+    {
+      "file": "cpu-3.jsonl",
+      "sha256": "7f2f5e4cb97d4bb9fc6a00d15ee9ccf31e369ad45d0587e4b464e04d335b0dbf"
+    },
+    {
+      "file": "cuda-0-1.jsonl",
+      "sha256": "d8a0812e10ead609189022948215c0e8094b5ce41a2bb6667a3c8c1e45256637"
+    },
+    {
+      "file": "cuda-0-2.jsonl",
+      "sha256": "680a768f597d5231669a04b1b24fc8cd6ca2f6cb6a1f179f28414dc9419a3a7d"
+    },
+    {
+      "file": "cuda-0-3.jsonl",
+      "sha256": "558cf22b19e0757f2d6876f55192e505459243046aa966497ad4b766d0492d17"
+    }
+  ],
+  "scope": "serial local throughput baseline, synthetic token IDs, no retrieval quality scores"
+}

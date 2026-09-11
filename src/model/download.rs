@@ -32,6 +32,11 @@ pub fn path(cache: &Path, a: Artifact) -> PathBuf {
     cache.join("models").join(super::REVISION).join(a.name)
 }
 pub fn verified(path: &Path, a: Artifact) -> Result<bool> {
+    let _span = crate::metrics::Span::new(match a.name {
+        "tokenizer.json" => "verify_tokenizer",
+        "onnx/model_int8.onnx" => "verify_cpu",
+        _ => "verify_cuda",
+    });
     if !path.is_file() {
         return Ok(false);
     }
@@ -42,6 +47,7 @@ pub fn ensure_artifact(cache: &Path, a: Artifact, events: &mut Events) -> Result
     if verified(&dest, a)? {
         return Ok(dest);
     }
+    let _span = crate::metrics::Span::new("artifact_download");
     let parent = dest.parent().context("artifact parent")?;
     std::fs::create_dir_all(parent)?;
     events.emit(

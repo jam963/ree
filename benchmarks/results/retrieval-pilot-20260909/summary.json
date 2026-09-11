@@ -1,0 +1,3188 @@
+{
+  "bootstrap_replicates": 10000,
+  "ci_policy": "paired query bootstrap; unadjusted descriptive percentile intervals",
+  "plan_sha256": "b6672122dc875b010eeeefa753eb78f3a033e8d90cfa4e2a3c8a3ca532bfecdf",
+  "results": [
+    {
+      "candidate": "arctic",
+      "corpus": "nfcorpus",
+      "dimensions": 768,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        0.0007996273884074438,
+        0.018255299203825643
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.009505609786905178,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            -0.004944288111228724,
+            0.00678284532426067
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0010509616001858069,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.845,
+            "top1_agreement": 0.85
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.919,
+            "top1_agreement": 0.87
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            -0.0016947209099899634,
+            0.01181677514418571
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.004851710698330403,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.8960000000000001,
+            "top1_agreement": 0.86
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.853,
+            "top1_agreement": 0.81
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            -0.0011345576603017326,
+            0.016307790287886217
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0075745748704775795,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.911,
+            "top1_agreement": 0.97
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8370000000000001,
+            "top1_agreement": 0.85
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            -0.000638525994593625,
+            0.011884875766141677
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.005483398778340198,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.861,
+            "top1_agreement": 0.84
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.871,
+            "top1_agreement": 0.89
+          }
+        }
+      },
+      "mixed_cuda_documents": 1807,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cpu/cuda": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cpu/mixed": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cuda/cpu": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cuda/cuda": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cuda/mixed": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.5350238095238096,
+          "ndcg_at_10": 0.357617851532071,
+          "ndcg_ci95": [
+            0.2914783415865795,
+            0.4276728859529381
+          ],
+          "recall_at_10": 0.17236498371606018
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.5389563492063493,
+          "ndcg_at_10": 0.36607249971879036,
+          "ndcg_ci95": [
+            0.29918962489323836,
+            0.436786298642117
+          ],
+          "recall_at_10": 0.174925223565345
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.5400000000000003,
+          "ndcg_at_10": 0.36227175062064576,
+          "ndcg_ci95": [
+            0.29601165689446407,
+            0.4328610541177241
+          ],
+          "recall_at_10": 0.17408886485639793
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.5348333333333334,
+          "ndcg_at_10": 0.3595488864484986,
+          "ndcg_ci95": [
+            0.29211817002890167,
+            0.42986888212852514
+          ],
+          "recall_at_10": 0.17224995084068112
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.5375515873015875,
+          "ndcg_at_10": 0.36712346131897616,
+          "ndcg_ci95": [
+            0.2998316079476928,
+            0.4382628467170959
+          ],
+          "recall_at_10": 0.17499716231462972
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.5322619047619049,
+          "ndcg_at_10": 0.36164006254063596,
+          "ndcg_ci95": [
+            0.294171806931714,
+            0.43333642256617616
+          ],
+          "recall_at_10": 0.174006544204248
+        }
+      },
+      "raw_file": "arctic-nfcorpus-matrix.jsonl",
+      "raw_sha256": "5ed6fdd6ad983515724de0d30343f17a5d3bbf6407f95712d89ea76c5a42ac44",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1369007,
+          "items": 3633,
+          "longest_original": 2610,
+          "original_tokens": 1418269,
+          "truncated": 515
+        },
+        "queries": {
+          "encoded_tokens": 1050,
+          "items": 100,
+          "longest_original": 23,
+          "original_tokens": 1050,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9882454120963231,
+          "mean": 0.9825619911514017,
+          "median": 0.982752657323134,
+          "min": 0.9754767196923204
+        },
+        "cpu_cuda_documents": {
+          "count": 3633,
+          "max": 0.9684906255790865,
+          "mean": 0.9549886021241603,
+          "median": 0.9552276396397622,
+          "min": 0.9311463268141706
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9924377631267937,
+          "mean": 0.9875836796881039,
+          "median": 0.987438105542458,
+          "min": 0.9801246693907947
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999996105137945,
+          "mean": 0.9999994189853313,
+          "median": 0.9999994208039888,
+          "min": 0.9999991101618918
+        },
+        "dimensions": 768,
+        "sample_ids": [
+          "MED-1351",
+          "MED-1605",
+          "MED-1623",
+          "MED-1657",
+          "MED-1687",
+          "MED-2011",
+          "MED-2047",
+          "MED-2062",
+          "MED-2372",
+          "MED-2651",
+          "MED-2672",
+          "MED-2718",
+          "MED-2825",
+          "MED-2853",
+          "MED-3055",
+          "MED-3562",
+          "MED-3597",
+          "MED-3620",
+          "MED-4121",
+          "MED-4206",
+          "MED-4265",
+          "MED-4331",
+          "MED-4439",
+          "MED-4743",
+          "MED-4751",
+          "MED-4783",
+          "MED-4880",
+          "MED-5142",
+          "MED-5202",
+          "MED-5362",
+          "MED-713",
+          "MED-870"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "granite",
+      "corpus": "nfcorpus",
+      "dimensions": 384,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        0.0,
+        0.0
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.0,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 1.0
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        }
+      },
+      "mixed_cuda_documents": 1807,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.0884213019214216,
+            -0.0261239509661746
+          ],
+          "ndcg_delta": -0.055560990310430824
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.09800970738240347,
+            -0.0340271905696675
+          ],
+          "ndcg_delta": -0.0640156384971502
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.09341927928830666,
+            -0.03074861576328269
+          ],
+          "ndcg_delta": -0.0602148893990056
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.09065892016780656,
+            -0.027068281655979777
+          ],
+          "ndcg_delta": -0.05749202522685842
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.098332210287929,
+            -0.034760251484791845
+          ],
+          "ndcg_delta": -0.065066600097336
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.09274743592244052,
+            -0.029514531853498692
+          ],
+          "ndcg_delta": -0.059583201318995804
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.5179682539682541,
+          "ndcg_at_10": 0.30205686122164016,
+          "ndcg_ci95": [
+            0.2420421349028965,
+            0.36645809986568273
+          ],
+          "recall_at_10": 0.1345765068936935
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.5179682539682541,
+          "ndcg_at_10": 0.30205686122164016,
+          "ndcg_ci95": [
+            0.2420421349028965,
+            0.36645809986568273
+          ],
+          "recall_at_10": 0.1345765068936935
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.5179682539682541,
+          "ndcg_at_10": 0.30205686122164016,
+          "ndcg_ci95": [
+            0.2420421349028965,
+            0.36645809986568273
+          ],
+          "recall_at_10": 0.1345765068936935
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.5179682539682541,
+          "ndcg_at_10": 0.30205686122164016,
+          "ndcg_ci95": [
+            0.2420421349028965,
+            0.36645809986568273
+          ],
+          "recall_at_10": 0.1345765068936935
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.5179682539682541,
+          "ndcg_at_10": 0.30205686122164016,
+          "ndcg_ci95": [
+            0.2420421349028965,
+            0.36645809986568273
+          ],
+          "recall_at_10": 0.1345765068936935
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.5179682539682541,
+          "ndcg_at_10": 0.30205686122164016,
+          "ndcg_ci95": [
+            0.2420421349028965,
+            0.36645809986568273
+          ],
+          "recall_at_10": 0.1345765068936935
+        }
+      },
+      "raw_file": "granite-nfcorpus-matrix.jsonl",
+      "raw_sha256": "55b63adc1c1748913f70bcbeb0f24a9e84dbb65bb51a87aef46a403294df51ec",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1369007,
+          "items": 3633,
+          "longest_original": 2610,
+          "original_tokens": 1418269,
+          "truncated": 515
+        },
+        "queries": {
+          "encoded_tokens": 750,
+          "items": 100,
+          "longest_original": 20,
+          "original_tokens": 750,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0
+        },
+        "cpu_cuda_documents": {
+          "count": 3633,
+          "max": 0.9999999999999376,
+          "mean": 0.9999999999999108,
+          "median": 0.999999999999886,
+          "min": 0.999999999999771
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9999999999999376,
+          "mean": 0.9999999999999061,
+          "median": 0.9999999999999079,
+          "min": 0.9999999999998646
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999999999999609,
+          "mean": 0.9999999999999291,
+          "median": 0.9999999999999309,
+          "min": 0.9999999999998648
+        },
+        "dimensions": 384,
+        "sample_ids": [
+          "MED-1351",
+          "MED-1605",
+          "MED-1623",
+          "MED-1657",
+          "MED-1687",
+          "MED-2011",
+          "MED-2047",
+          "MED-2062",
+          "MED-2372",
+          "MED-2651",
+          "MED-2672",
+          "MED-2718",
+          "MED-2825",
+          "MED-2853",
+          "MED-3055",
+          "MED-3562",
+          "MED-3597",
+          "MED-3620",
+          "MED-4121",
+          "MED-4206",
+          "MED-4265",
+          "MED-4331",
+          "MED-4439",
+          "MED-4743",
+          "MED-4751",
+          "MED-4783",
+          "MED-4880",
+          "MED-5142",
+          "MED-5202",
+          "MED-5362",
+          "MED-713",
+          "MED-870"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "e5",
+      "corpus": "nfcorpus",
+      "dimensions": 384,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        -0.009706093675392508,
+        0.013549590552976986
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.001870366914271282,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            -0.0004148799263280961,
+            0.013764760405436123
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.004503568882993525,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.7759999999999999,
+            "top1_agreement": 0.71
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8860000000000001,
+            "top1_agreement": 0.88
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            0.0015047686294518748,
+            0.01661257441615701
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.007181027476582114,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.82,
+            "top1_agreement": 0.82
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.746,
+            "top1_agreement": 0.79
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            -0.007527985305633788,
+            0.009234561033406273
+          ],
+          "ndcg_loss_vs_better_homogeneous": -0.001633655408120882,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.897,
+            "top1_agreement": 0.85
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.747,
+            "top1_agreement": 0.74
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            -0.0025528100537663854,
+            0.013155158872632633
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.003566870458637017,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.79,
+            "top1_agreement": 0.76
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.7759999999999999,
+            "top1_agreement": 0.81
+          }
+        }
+      },
+      "mixed_cuda_documents": 1807,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.06298441413192846,
+            -0.014506667601798851
+          ],
+          "ndcg_delta": -0.03784638691602704
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.07423919516402273,
+            -0.026273942601782674
+          ],
+          "ndcg_delta": -0.048934237071468656
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.07298548412064505,
+            -0.024584215495995602
+          ],
+          "ndcg_delta": -0.04781094656691265
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.0620215289007652,
+            -0.012117830587671607
+          ],
+          "ndcg_delta": -0.036273399510062476
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.07019415193182149,
+            -0.02263425524852768
+          ],
+          "ndcg_delta": -0.04548162978866094
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.06958171504979661,
+            -0.019788767989065786
+          ],
+          "ndcg_delta": -0.043565101468957756
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.499857142857143,
+          "ndcg_at_10": 0.31977146461604394,
+          "ndcg_ci95": [
+            0.2555204602222591,
+            0.38892380404732657
+          ],
+          "recall_at_10": 0.1553903331356277
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.4911349206349208,
+          "ndcg_at_10": 0.3171382626473217,
+          "ndcg_ci95": [
+            0.25293557648324605,
+            0.38582903077347624
+          ],
+          "recall_at_10": 0.15826436134750116
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.507873015873016,
+          "ndcg_at_10": 0.3144608040537331,
+          "ndcg_ci95": [
+            0.25008702240199576,
+            0.38351131866604166
+          ],
+          "recall_at_10": 0.15305093888835755
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.5052619047619049,
+          "ndcg_at_10": 0.3232754869384361,
+          "ndcg_ci95": [
+            0.2583039042219338,
+            0.39205907142661894
+          ],
+          "recall_at_10": 0.15692766552001894
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.4945396825396826,
+          "ndcg_at_10": 0.3216418315303152,
+          "ndcg_ci95": [
+            0.2562590765386258,
+            0.3899021032122782
+          ],
+          "recall_at_10": 0.16010122892908543
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.505873015873016,
+          "ndcg_at_10": 0.3180749610716782,
+          "ndcg_ci95": [
+            0.25249323560702697,
+            0.38736928030430445
+          ],
+          "recall_at_10": 0.1561573132055018
+        }
+      },
+      "raw_file": "e5-nfcorpus-matrix.jsonl",
+      "raw_sha256": "76902189383586056dd0b9415bedabcaaef6f205d830d7499a51853cfd852fac",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1375230,
+          "items": 3633,
+          "longest_original": 2612,
+          "original_tokens": 1425535,
+          "truncated": 524
+        },
+        "queries": {
+          "encoded_tokens": 1050,
+          "items": 100,
+          "longest_original": 23,
+          "original_tokens": 1050,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9988460187605901,
+          "mean": 0.9981588620810107,
+          "median": 0.998198684946848,
+          "min": 0.9969596668985659
+        },
+        "cpu_cuda_documents": {
+          "count": 3633,
+          "max": 0.9982748719068124,
+          "mean": 0.9943234618524294,
+          "median": 0.994712489958531,
+          "min": 0.9848913047652931
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9984798491962347,
+          "mean": 0.9973436815398312,
+          "median": 0.9975337342169868,
+          "min": 0.9946953528452718
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999998366590758,
+          "mean": 0.9999997313268801,
+          "median": 0.9999997517529585,
+          "min": 0.9999995076853573
+        },
+        "dimensions": 384,
+        "sample_ids": [
+          "MED-1351",
+          "MED-1605",
+          "MED-1623",
+          "MED-1657",
+          "MED-1687",
+          "MED-2011",
+          "MED-2047",
+          "MED-2062",
+          "MED-2372",
+          "MED-2651",
+          "MED-2672",
+          "MED-2718",
+          "MED-2825",
+          "MED-2853",
+          "MED-3055",
+          "MED-3562",
+          "MED-3597",
+          "MED-3620",
+          "MED-4121",
+          "MED-4206",
+          "MED-4265",
+          "MED-4331",
+          "MED-4439",
+          "MED-4743",
+          "MED-4751",
+          "MED-4783",
+          "MED-4880",
+          "MED-5142",
+          "MED-5202",
+          "MED-5362",
+          "MED-713",
+          "MED-870"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "jina-code",
+      "corpus": "nfcorpus",
+      "dimensions": 768,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        -0.019551223900108633,
+        -6.795309365032806e-05
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": -0.009378660757215315,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            -0.002192778966899198,
+            0.013277051335970088
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.005292401690740009,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.715,
+            "top1_agreement": 0.72
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.843,
+            "top1_agreement": 0.84
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            -0.0034979050473946277,
+            0.010643491470112086
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0031802051048989283,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.83,
+            "top1_agreement": 0.86
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.7659999999999999,
+            "top1_agreement": 0.71
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            -0.0027973508746927983,
+            0.010824208716102375
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0039563472577616166,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.846,
+            "top1_agreement": 0.8
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.701,
+            "top1_agreement": 0.66
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            0.00034164231560776775,
+            0.015586752712331082
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.007429819009325309,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.764,
+            "top1_agreement": 0.75
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8160000000000001,
+            "top1_agreement": 0.8
+          }
+        }
+      },
+      "mixed_cuda_documents": 1807,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.31602170537487995,
+            -0.2005870143501062
+          ],
+          "ndcg_delta": -0.2566749476214541
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.33048459341145475,
+            -0.2147413022846563
+          ],
+          "ndcg_delta": -0.2704219974989135
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.3237169138722347,
+            -0.2094126117234288
+          ],
+          "ndcg_delta": -0.2645090518149278
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.3239983809755097,
+            -0.20473283751804622
+          ],
+          "ndcg_delta": -0.2625623297956433
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.33611472593892405,
+            -0.21916962497006887
+          ],
+          "ndcg_delta": -0.2755592181655746
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.32850747974294603,
+            -0.2115478140264291
+          ],
+          "ndcg_delta": -0.26812697763934434
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.21520634920634918,
+          "ndcg_at_10": 0.1009429039106169,
+          "ndcg_ci95": [
+            0.0703865593697645,
+            0.13487217261982024
+          ],
+          "recall_at_10": 0.04699409057737883
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.21712301587301588,
+          "ndcg_at_10": 0.09565050221987689,
+          "ndcg_ci95": [
+            0.06516990450414262,
+            0.12889608880725262
+          ],
+          "recall_at_10": 0.043946776241081904
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.2198849206349206,
+          "ndcg_at_10": 0.09776269880571797,
+          "ndcg_ci95": [
+            0.06746317905015907,
+            0.13047473849087846
+          ],
+          "recall_at_10": 0.045458281933571355
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.2087063492063492,
+          "ndcg_at_10": 0.09698655665285529,
+          "ndcg_ci95": [
+            0.06673852089041118,
+            0.13089689972532736
+          ],
+          "recall_at_10": 0.04604976846549777
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.21655555555555556,
+          "ndcg_at_10": 0.09156424315340159,
+          "ndcg_ci95": [
+            0.061993041050090104,
+            0.12334328996149743
+          ],
+          "recall_at_10": 0.04184473013344691
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.21623412698412697,
+          "ndcg_at_10": 0.0935130849012916,
+          "ndcg_ci95": [
+            0.06405941004122698,
+            0.12566970082206125
+          ],
+          "recall_at_10": 0.04464573854817076
+        }
+      },
+      "raw_file": "jina-code-nfcorpus-matrix.jsonl",
+      "raw_sha256": "823a9a5c51b38aa1d509b7b79271e2826a62c87f112e21741323ded23bc057d1",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1438525,
+          "items": 3633,
+          "longest_original": 2840,
+          "original_tokens": 1513861,
+          "truncated": 762
+        },
+        "queries": {
+          "encoded_tokens": 826,
+          "items": 100,
+          "longest_original": 21,
+          "original_tokens": 826,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9896572052581443,
+          "mean": 0.9826409456969221,
+          "median": 0.9828419377954459,
+          "min": 0.9700322050356468
+        },
+        "cpu_cuda_documents": {
+          "count": 3633,
+          "max": 0.9904527424235186,
+          "mean": 0.9790309761623971,
+          "median": 0.9804316294510252,
+          "min": 0.9229877821898145
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9945757213466033,
+          "mean": 0.9896367983853496,
+          "median": 0.9906384750917359,
+          "min": 0.9750519119015396
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.999999545916024,
+          "mean": 0.9999990374087916,
+          "median": 0.9999990331479858,
+          "min": 0.9999980894426289
+        },
+        "dimensions": 768,
+        "sample_ids": [
+          "MED-1351",
+          "MED-1605",
+          "MED-1623",
+          "MED-1657",
+          "MED-1687",
+          "MED-2011",
+          "MED-2047",
+          "MED-2062",
+          "MED-2372",
+          "MED-2651",
+          "MED-2672",
+          "MED-2718",
+          "MED-2825",
+          "MED-2853",
+          "MED-3055",
+          "MED-3562",
+          "MED-3597",
+          "MED-3620",
+          "MED-4121",
+          "MED-4206",
+          "MED-4265",
+          "MED-4331",
+          "MED-4439",
+          "MED-4743",
+          "MED-4751",
+          "MED-4783",
+          "MED-4880",
+          "MED-5142",
+          "MED-5202",
+          "MED-5362",
+          "MED-713",
+          "MED-870"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "bge-m3",
+      "corpus": "nfcorpus",
+      "dimensions": 1024,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        -0.0024368796727358144,
+        0.0
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": -0.0008122932242453085,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 0.99
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            -0.00011113722982641905,
+            0.0024368796727358144
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0007752474809697429,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 0.99
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 1.0
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 0.99
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            -0.00011113722982641905,
+            0.0024368796727358144
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0007752474809697429,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 0.99
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.9990000000000001,
+            "top1_agreement": 1.0
+          }
+        }
+      },
+      "mixed_cuda_documents": 1807,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.03938699625658432,
+            -0.00013193399083683436
+          ],
+          "ndcg_delta": -0.01932823605268119
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.04890033813027537,
+            -0.007358788100473645
+          ],
+          "ndcg_delta": -0.027782884239400563
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.04439552442185891,
+            -0.0059075864218183045
+          ],
+          "ndcg_delta": -0.02475738262222571
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.04228375237534906,
+            -0.0012470242069387606
+          ],
+          "ndcg_delta": -0.02125927096910879
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.050539996131382325,
+            -0.009267037138027364
+          ],
+          "ndcg_delta": -0.029646139063831678
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.04399566996308436,
+            -0.004907864605433206
+          ],
+          "ndcg_delta": -0.024125694542215914
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.5275000000000001,
+          "ndcg_at_10": 0.3382896154793898,
+          "ndcg_ci95": [
+            0.2729557571988162,
+            0.4064899756298154
+          ],
+          "recall_at_10": 0.16123182420080576
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.5275000000000001,
+          "ndcg_at_10": 0.3382896154793898,
+          "ndcg_ci95": [
+            0.2729557571988162,
+            0.4064899756298154
+          ],
+          "recall_at_10": 0.16123182420080576
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.5225000000000001,
+          "ndcg_at_10": 0.33751436799842005,
+          "ndcg_ci95": [
+            0.2720569793368933,
+            0.40608349584665754
+          ],
+          "recall_at_10": 0.16123182420080576
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.5275000000000001,
+          "ndcg_at_10": 0.3382896154793898,
+          "ndcg_ci95": [
+            0.2729557571988162,
+            0.4064899756298154
+          ],
+          "recall_at_10": 0.16123182420080576
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.5225000000000001,
+          "ndcg_at_10": 0.3374773222551445,
+          "ndcg_ci95": [
+            0.2720497276200148,
+            0.4060456792931389
+          ],
+          "recall_at_10": 0.16123182420080576
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.5225000000000001,
+          "ndcg_at_10": 0.33751436799842005,
+          "ndcg_ci95": [
+            0.2720569793368933,
+            0.40608349584665754
+          ],
+          "recall_at_10": 0.16123182420080576
+        }
+      },
+      "raw_file": "bge-m3-nfcorpus-matrix.jsonl",
+      "raw_sha256": "ae134a2002150800be779d70298538f6e6942bf5c16b4746634d37e6c1e6b2fa",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1369007,
+          "items": 3633,
+          "longest_original": 2610,
+          "original_tokens": 1418269,
+          "truncated": 515
+        },
+        "queries": {
+          "encoded_tokens": 750,
+          "items": 100,
+          "longest_original": 20,
+          "original_tokens": 750,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0
+        },
+        "cpu_cuda_documents": {
+          "count": 3633,
+          "max": 0.9999999999989777,
+          "mean": 0.999999999987332,
+          "median": 0.9999999999961795,
+          "min": 0.9999999971179874
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9999999999996674,
+          "mean": 0.9999999999991703,
+          "median": 0.9999999999992558,
+          "min": 0.9999999999972653
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999999999995459,
+          "mean": 0.999999999998317,
+          "median": 0.9999999999990672,
+          "min": 0.9999999999868393
+        },
+        "dimensions": 1024,
+        "sample_ids": [
+          "MED-1351",
+          "MED-1605",
+          "MED-1623",
+          "MED-1657",
+          "MED-1687",
+          "MED-2011",
+          "MED-2047",
+          "MED-2062",
+          "MED-2372",
+          "MED-2651",
+          "MED-2672",
+          "MED-2718",
+          "MED-2825",
+          "MED-2853",
+          "MED-3055",
+          "MED-3562",
+          "MED-3597",
+          "MED-3620",
+          "MED-4121",
+          "MED-4206",
+          "MED-4265",
+          "MED-4331",
+          "MED-4439",
+          "MED-4743",
+          "MED-4751",
+          "MED-4783",
+          "MED-4880",
+          "MED-5142",
+          "MED-5202",
+          "MED-5362",
+          "MED-713",
+          "MED-870"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "arctic-256",
+      "corpus": "nfcorpus",
+      "dimensions": 256,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        0.0016376436343727375,
+        0.024278890863657636
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.012875711549487856,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            0.0005869668205165366,
+            0.012404117413045656
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.006299829399527501,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.833,
+            "top1_agreement": 0.79
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.914,
+            "top1_agreement": 0.92
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            -0.001552358000096947,
+            0.01628604152743538
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.007237460997220335,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.877,
+            "top1_agreement": 0.85
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8490000000000001,
+            "top1_agreement": 0.81
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            -0.002623802931415939,
+            0.020358932996504153
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.008642503000891533,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.9060000000000001,
+            "top1_agreement": 0.83
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8140000000000001,
+            "top1_agreement": 0.77
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            -0.004177245370554605,
+            0.01170657411284225
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0036053864042582817,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.843,
+            "top1_agreement": 0.81
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8740000000000001,
+            "top1_agreement": 0.86
+          }
+        }
+      },
+      "mixed_cuda_documents": 1807,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.018714481802522817,
+            -0.0007106509140071281
+          ],
+          "ndcg_delta": -0.009580472291719322
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.020449527126511262,
+            -0.0033191897776512617
+          ],
+          "ndcg_delta": -0.011459238328478338
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.015228299793794779,
+            -0.002018663201872257
+          ],
+          "ndcg_delta": -0.008596120828026577
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.015538359342927275,
+            0.0006843397639328644
+          ],
+          "ndcg_delta": -0.007278298659550597
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.015699671992683142,
+            0.002789563470716658
+          ],
+          "ndcg_delta": -0.006210370529136644
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.010924129918058542,
+            0.0022537075215518375
+          ],
+          "ndcg_delta": -0.004332358155054727
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.5130634920634923,
+          "ndcg_at_10": 0.34803737924035166,
+          "ndcg_ci95": [
+            0.28041054245344704,
+            0.4191349561995233
+          ],
+          "recall_at_10": 0.1673479370414086
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.5106507936507938,
+          "ndcg_at_10": 0.354613261390312,
+          "ndcg_ci95": [
+            0.28658607183605694,
+            0.42631862942678633
+          ],
+          "recall_at_10": 0.17407270300418942
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.5225515873015874,
+          "ndcg_at_10": 0.3536756297926192,
+          "ndcg_ci95": [
+            0.2858332864097086,
+            0.42575633129510665
+          ],
+          "recall_at_10": 0.17259587954713754
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.5173015873015874,
+          "ndcg_at_10": 0.352270587788948,
+          "ndcg_ci95": [
+            0.2850788392876272,
+            0.4230403669419557
+          ],
+          "recall_at_10": 0.17044055672406622
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.5237777777777779,
+          "ndcg_at_10": 0.3609130907898395,
+          "ndcg_ci95": [
+            0.29323125582187176,
+            0.4328047460515184
+          ],
+          "recall_at_10": 0.17492243364968715
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.5330912698412699,
+          "ndcg_at_10": 0.35730770438558124,
+          "ndcg_ci95": [
+            0.289743826796857,
+            0.42852879288525286
+          ],
+          "recall_at_10": 0.17191399520054731
+        }
+      },
+      "raw_file": "arctic-256-nfcorpus-matrix.jsonl",
+      "raw_sha256": "2d2b9bfd2c6f4101906f6e515b4ffcbeacd7337f83a0a384a063bc2ed9b0323e",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1369007,
+          "items": 3633,
+          "longest_original": 2610,
+          "original_tokens": 1418269,
+          "truncated": 515
+        },
+        "queries": {
+          "encoded_tokens": 1050,
+          "items": 100,
+          "longest_original": 23,
+          "original_tokens": 1050,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9902950695627043,
+          "mean": 0.9861987546450856,
+          "median": 0.9864114987630249,
+          "min": 0.979552939569483
+        },
+        "cpu_cuda_documents": {
+          "count": 3633,
+          "max": 0.9765709241781444,
+          "mean": 0.9631616433612962,
+          "median": 0.9634179469692398,
+          "min": 0.9408706567015255
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9950053695838106,
+          "mean": 0.9901913126339822,
+          "median": 0.9900512713282956,
+          "min": 0.9829459353704559
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999997179276207,
+          "mean": 0.9999995905829212,
+          "median": 0.9999995873604646,
+          "min": 0.9999993840611935
+        },
+        "dimensions": 256,
+        "sample_ids": [
+          "MED-1351",
+          "MED-1605",
+          "MED-1623",
+          "MED-1657",
+          "MED-1687",
+          "MED-2011",
+          "MED-2047",
+          "MED-2062",
+          "MED-2372",
+          "MED-2651",
+          "MED-2672",
+          "MED-2718",
+          "MED-2825",
+          "MED-2853",
+          "MED-3055",
+          "MED-3562",
+          "MED-3597",
+          "MED-3620",
+          "MED-4121",
+          "MED-4206",
+          "MED-4265",
+          "MED-4331",
+          "MED-4439",
+          "MED-4743",
+          "MED-4751",
+          "MED-4783",
+          "MED-4880",
+          "MED-5142",
+          "MED-5202",
+          "MED-5362",
+          "MED-713",
+          "MED-870"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "arctic",
+      "corpus": "scifact",
+      "dimensions": 768,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        -0.0118173956908408,
+        0.029697687581562257
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.008577035002021338,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            -0.00532359377256312,
+            0.017613765606342834
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.004335738838048164,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.838,
+            "top1_agreement": 0.91
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.888,
+            "top1_agreement": 0.93
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            -0.0070708264624209675,
+            0.03050416106143585
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.009805418760408968,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.868,
+            "top1_agreement": 0.89
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8170000000000001,
+            "top1_agreement": 0.86
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            -0.004614633916655655,
+            0.03352779402306957
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.011872691694153392,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.884,
+            "top1_agreement": 0.92
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.83,
+            "top1_agreement": 0.89
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            -0.014646426082771714,
+            0.017014477252171905
+          ],
+          "ndcg_loss_vs_better_homogeneous": -0.0002996300890355519,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.836,
+            "top1_agreement": 0.88
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.889,
+            "top1_agreement": 0.9
+          }
+        }
+      },
+      "mixed_cuda_documents": 2609,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cpu/cuda": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cpu/mixed": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cuda/cpu": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cuda/cuda": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        },
+        "cuda/mixed": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_delta": 0.0
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.6973611111111111,
+          "ndcg_at_10": 0.7200479889553045,
+          "ndcg_ci95": [
+            0.6440627407325461,
+            0.7924659804536909
+          ],
+          "recall_at_10": 0.821
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.7068452380952382,
+          "ndcg_at_10": 0.7242892851192777,
+          "ndcg_ci95": [
+            0.6488984472862317,
+            0.7967426405060476
+          ],
+          "recall_at_10": 0.821
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.6945833333333334,
+          "ndcg_at_10": 0.7188196051969169,
+          "ndcg_ci95": [
+            0.6426510361917479,
+            0.7921011865293458
+          ],
+          "recall_at_10": 0.821
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.6920277777777778,
+          "ndcg_at_10": 0.7167523322631725,
+          "ndcg_ci95": [
+            0.6422680045280545,
+            0.7883147600784746
+          ],
+          "recall_at_10": 0.831
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.7064285714285714,
+          "ndcg_at_10": 0.7286250239573259,
+          "ndcg_ci95": [
+            0.6530074843643212,
+            0.8000935667647227
+          ],
+          "recall_at_10": 0.826
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.7111904761904762,
+          "ndcg_at_10": 0.7289246540463614,
+          "ndcg_ci95": [
+            0.6536858537185252,
+            0.8012864485875598
+          ],
+          "recall_at_10": 0.821
+        }
+      },
+      "raw_file": "arctic-scifact-matrix.jsonl",
+      "raw_sha256": "f5ee3e4387ad738651bcf3bd6331b1ad664aec838c2fddabc5ce6ef88cdb9f3e",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1861812,
+          "items": 5183,
+          "longest_original": 2256,
+          "original_tokens": 1944533,
+          "truncated": 712
+        },
+        "queries": {
+          "encoded_tokens": 2861,
+          "items": 100,
+          "longest_original": 60,
+          "original_tokens": 2861,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9875771769971341,
+          "mean": 0.9837786194170466,
+          "median": 0.9840021660460258,
+          "min": 0.9770518445473882
+        },
+        "cpu_cuda_documents": {
+          "count": 5183,
+          "max": 0.9708277143478654,
+          "mean": 0.9569544532623783,
+          "median": 0.9573243427195173,
+          "min": 0.915720468664916
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9901551760254947,
+          "mean": 0.97811100890295,
+          "median": 0.977050206026095,
+          "min": 0.9600321749286491
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 1.0,
+          "mean": 0.999999442212142,
+          "median": 0.9999994397918108,
+          "min": 0.9999990895245783
+        },
+        "dimensions": 768,
+        "sample_ids": [
+          "10852047",
+          "12561083",
+          "1391126",
+          "140874",
+          "14180565",
+          "14252892",
+          "14973286",
+          "15365719",
+          "16284655",
+          "17088791",
+          "1709625",
+          "18872233",
+          "188911",
+          "21363424",
+          "24285403",
+          "25355575",
+          "25970224",
+          "26064942",
+          "2686003",
+          "29399239",
+          "32023005",
+          "33796570",
+          "3391547",
+          "34982259",
+          "38712515",
+          "3929361",
+          "40817021",
+          "45457778",
+          "5641851",
+          "5885376",
+          "6397191",
+          "67787658"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "granite",
+      "corpus": "scifact",
+      "dimensions": 384,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        0.0,
+        0.0
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.0,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        }
+      },
+      "mixed_cuda_documents": 2609,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.12415824942439166,
+            -0.02796057475769097
+          ],
+          "ndcg_delta": -0.07467519530318656
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.12272094310378837,
+            -0.03650271631638919
+          ],
+          "ndcg_delta": -0.07891649146715973
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.11973700180434328,
+            -0.02862577733510032
+          ],
+          "ndcg_delta": -0.07344681154479893
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.11936143298019115,
+            -0.025727956585140533
+          ],
+          "ndcg_delta": -0.0713795386110545
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.12793531149188597,
+            -0.04068563132943293
+          ],
+          "ndcg_delta": -0.0832522303052079
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.12949071124004466,
+            -0.03867832001365028
+          ],
+          "ndcg_delta": -0.08355186039424345
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.616968253968254,
+          "ndcg_at_10": 0.645372793652118,
+          "ndcg_ci95": [
+            0.5664610087276336,
+            0.7216118782242248
+          ],
+          "recall_at_10": 0.784
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.616968253968254,
+          "ndcg_at_10": 0.645372793652118,
+          "ndcg_ci95": [
+            0.5664610087276336,
+            0.7216118782242248
+          ],
+          "recall_at_10": 0.784
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.616968253968254,
+          "ndcg_at_10": 0.645372793652118,
+          "ndcg_ci95": [
+            0.5664610087276336,
+            0.7216118782242248
+          ],
+          "recall_at_10": 0.784
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.616968253968254,
+          "ndcg_at_10": 0.645372793652118,
+          "ndcg_ci95": [
+            0.5664610087276336,
+            0.7216118782242248
+          ],
+          "recall_at_10": 0.784
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.616968253968254,
+          "ndcg_at_10": 0.645372793652118,
+          "ndcg_ci95": [
+            0.5664610087276336,
+            0.7216118782242248
+          ],
+          "recall_at_10": 0.784
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.616968253968254,
+          "ndcg_at_10": 0.645372793652118,
+          "ndcg_ci95": [
+            0.5664610087276336,
+            0.7216118782242248
+          ],
+          "recall_at_10": 0.784
+        }
+      },
+      "raw_file": "granite-scifact-matrix.jsonl",
+      "raw_sha256": "6b7571a194b3dc52c65fe4d65704b89813197b94f9c0aa416ae3514b6aac8610",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1861812,
+          "items": 5183,
+          "longest_original": 2256,
+          "original_tokens": 1944533,
+          "truncated": 712
+        },
+        "queries": {
+          "encoded_tokens": 2561,
+          "items": 100,
+          "longest_original": 57,
+          "original_tokens": 2561,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0
+        },
+        "cpu_cuda_documents": {
+          "count": 5183,
+          "max": 0.9999999999999358,
+          "mean": 0.9999999999999266,
+          "median": 0.9999999999998836,
+          "min": 0.9999999999997488
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9999999999999358,
+          "mean": 0.999999999999904,
+          "median": 0.9999999999999062,
+          "min": 0.9999999999998398
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999999999999492,
+          "mean": 0.9999999999999291,
+          "median": 0.9999999999999336,
+          "min": 0.9999999999998959
+        },
+        "dimensions": 384,
+        "sample_ids": [
+          "10852047",
+          "12561083",
+          "1391126",
+          "140874",
+          "14180565",
+          "14252892",
+          "14973286",
+          "15365719",
+          "16284655",
+          "17088791",
+          "1709625",
+          "18872233",
+          "188911",
+          "21363424",
+          "24285403",
+          "25355575",
+          "25970224",
+          "26064942",
+          "2686003",
+          "29399239",
+          "32023005",
+          "33796570",
+          "3391547",
+          "34982259",
+          "38712515",
+          "3929361",
+          "40817021",
+          "45457778",
+          "5641851",
+          "5885376",
+          "6397191",
+          "67787658"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "e5",
+      "corpus": "scifact",
+      "dimensions": 384,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        -0.011575902310776808,
+        0.0491611452317065
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.018422864126766747,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            0.0017400116599593399,
+            0.03421177487004291
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.015435187099575809,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.753,
+            "top1_agreement": 0.82
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8860000000000001,
+            "top1_agreement": 0.93
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            0.025540785190123122,
+            0.07361819250837788
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.04701776351451825,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.7909999999999999,
+            "top1_agreement": 0.85
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.758,
+            "top1_agreement": 0.83
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            -0.0037269665775736564,
+            0.04352851586337912
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.017598459579739156,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.889,
+            "top1_agreement": 0.9
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.773,
+            "top1_agreement": 0.82
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            0.008842675466242891,
+            0.043938789473197896
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.02382650523651808,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.7709999999999999,
+            "top1_agreement": 0.84
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.807,
+            "top1_agreement": 0.89
+          }
+        }
+      },
+      "mixed_cuda_documents": 2609,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.12223877873965208,
+            -0.022830234932244228
+          ],
+          "ndcg_delta": -0.07036750036025918
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.12088105289775765,
+            -0.02523175020963274
+          ],
+          "ndcg_delta": -0.07162111949704142
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.1528809587300134,
+            -0.04792451377713243
+          ],
+          "ndcg_delta": -0.09773401598962306
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.11654890145255137,
+            -0.021158144760077147
+          ],
+          "ndcg_delta": -0.06624743912109954
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.10938173540410329,
+            -0.015285036916489077
+          ],
+          "ndcg_delta": -0.060521671235513774
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.13511496930053643,
+            -0.03834165717748624
+          ],
+          "ndcg_delta": -0.0846478065610674
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.6289285714285715,
+          "ndcg_at_10": 0.6496804885950453,
+          "ndcg_ci95": [
+            0.5661452988842324,
+            0.7293892484323519
+          ],
+          "recall_at_10": 0.757
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.6275000000000001,
+          "ndcg_at_10": 0.6526681656222363,
+          "ndcg_ci95": [
+            0.5717238409109131,
+            0.7327841667996856
+          ],
+          "recall_at_10": 0.769
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.5974285714285715,
+          "ndcg_at_10": 0.6210855892072938,
+          "ndcg_ci95": [
+            0.5371291042491162,
+            0.7032155421337523
+          ],
+          "recall_at_10": 0.727
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.6252738095238096,
+          "ndcg_at_10": 0.6505048931420729,
+          "ndcg_ci95": [
+            0.5697716893847987,
+            0.7294252452254474
+          ],
+          "recall_at_10": 0.767
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.6404166666666667,
+          "ndcg_at_10": 0.6681033527218121,
+          "ndcg_ci95": [
+            0.5893337441312825,
+            0.7454828845705027
+          ],
+          "recall_at_10": 0.789
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.6206785714285714,
+          "ndcg_at_10": 0.644276847485294,
+          "ndcg_ci95": [
+            0.5613149391302957,
+            0.7257953737004526
+          ],
+          "recall_at_10": 0.7490000000000001
+        }
+      },
+      "raw_file": "e5-scifact-matrix.jsonl",
+      "raw_sha256": "f0064dfe87e8c93309b1794d861c9ef3a73c4eb6d57763c866c9de66e9130700",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1870727,
+          "items": 5183,
+          "longest_original": 2258,
+          "original_tokens": 1954899,
+          "truncated": 731
+        },
+        "queries": {
+          "encoded_tokens": 2861,
+          "items": 100,
+          "longest_original": 60,
+          "original_tokens": 2861,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9989744188745798,
+          "mean": 0.9979712066799146,
+          "median": 0.9980254910650495,
+          "min": 0.9966036515040503
+        },
+        "cpu_cuda_documents": {
+          "count": 5183,
+          "max": 0.9979752534066986,
+          "mean": 0.9943358323394443,
+          "median": 0.9950955715027154,
+          "min": 0.9766575264461812
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.998076527800163,
+          "mean": 0.99641498033446,
+          "median": 0.9966065378884341,
+          "min": 0.9901350813295642
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999998317961574,
+          "mean": 0.9999997147947971,
+          "median": 0.9999996969153382,
+          "min": 0.9999996151780116
+        },
+        "dimensions": 384,
+        "sample_ids": [
+          "10852047",
+          "12561083",
+          "1391126",
+          "140874",
+          "14180565",
+          "14252892",
+          "14973286",
+          "15365719",
+          "16284655",
+          "17088791",
+          "1709625",
+          "18872233",
+          "188911",
+          "21363424",
+          "24285403",
+          "25355575",
+          "25970224",
+          "26064942",
+          "2686003",
+          "29399239",
+          "32023005",
+          "33796570",
+          "3391547",
+          "34982259",
+          "38712515",
+          "3929361",
+          "40817021",
+          "45457778",
+          "5641851",
+          "5885376",
+          "6397191",
+          "67787658"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "jina-code",
+      "corpus": "scifact",
+      "dimensions": 768,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        -0.021721994433767725,
+        0.027264705040165864
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.0025008370068271,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            -0.005268179022801612,
+            0.02272371202716737
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.003097992954152806,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.708,
+            "top1_agreement": 0.61
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8340000000000001,
+            "top1_agreement": 0.79
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            -0.003469810338108632,
+            0.024508878030583634
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.005002174804782961,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.818,
+            "top1_agreement": 0.79
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.736,
+            "top1_agreement": 0.65
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            -0.01967714542615045,
+            0.015154655801000842
+          ],
+          "ndcg_loss_vs_better_homogeneous": -0.006943250750501284,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.836,
+            "top1_agreement": 0.86
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.7190000000000001,
+            "top1_agreement": 0.59
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            -0.008880778935862163,
+            0.024178361025574083
+          ],
+          "ndcg_loss_vs_better_homogeneous": 1.8170603146877573e-05,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.738,
+            "top1_agreement": 0.74
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8270000000000001,
+            "top1_agreement": 0.69
+          }
+        }
+      },
+      "mixed_cuda_documents": 2609,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.6077341099359042,
+            -0.4309979456927213
+          ],
+          "ndcg_delta": -0.5212757041616711
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.6148177487051838,
+            -0.43603585179401466
+          ],
+          "ndcg_delta": -0.52611415627297
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.6127999642403926,
+            -0.431924686802683
+          ],
+          "ndcg_delta": -0.5225486582012393
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.5918177481968077,
+            -0.42330935867464464
+          ],
+          "ndcg_delta": -0.5085359597122107
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.6136476210425681,
+            -0.43908162581873633
+          ],
+          "ndcg_delta": -0.5273519021568653
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.6155005433668241,
+            -0.43798317965508704
+          ],
+          "ndcg_delta": -0.5276697028490478
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.19427777777777777,
+          "ndcg_at_10": 0.19877228479363343,
+          "ndcg_ci95": [
+            0.12990450690796182,
+            0.2716502980067416
+          ],
+          "recall_at_10": 0.24916666666666665
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.19051190476190477,
+          "ndcg_at_10": 0.19817512884630772,
+          "ndcg_ci95": [
+            0.12943135184913623,
+            0.2703602294738395
+          ],
+          "recall_at_10": 0.24833333333333332
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.18916666666666668,
+          "ndcg_at_10": 0.19627094699567757,
+          "ndcg_ci95": [
+            0.1278469920857071,
+            0.26813411178387414
+          ],
+          "recall_at_10": 0.24583333333333332
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.19428968253968254,
+          "ndcg_at_10": 0.20821637255096181,
+          "ndcg_ci95": [
+            0.14093557109970242,
+            0.2794797033796025
+          ],
+          "recall_at_10": 0.2891666666666666
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.18645634920634918,
+          "ndcg_at_10": 0.20127312180046053,
+          "ndcg_ci95": [
+            0.1332186849374092,
+            0.27298031295602987
+          ],
+          "recall_at_10": 0.27166666666666667
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.18744047619047613,
+          "ndcg_at_10": 0.20125495119731365,
+          "ndcg_ci95": [
+            0.13329595234309594,
+            0.2729363949286758
+          ],
+          "recall_at_10": 0.26916666666666667
+        }
+      },
+      "raw_file": "jina-code-scifact-matrix.jsonl",
+      "raw_sha256": "41b100c405182113392510d241dfb885dfef8169aae287a2719ed43f14df9516",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1900535,
+          "items": 5183,
+          "longest_original": 2327,
+          "original_tokens": 2005353,
+          "truncated": 892
+        },
+        "queries": {
+          "encoded_tokens": 2679,
+          "items": 100,
+          "longest_original": 54,
+          "original_tokens": 2679,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9911641646341368,
+          "mean": 0.9849445022476445,
+          "median": 0.9852668197282133,
+          "min": 0.9728751505597117
+        },
+        "cpu_cuda_documents": {
+          "count": 5183,
+          "max": 0.9920234761396056,
+          "mean": 0.9789142991831118,
+          "median": 0.9800509239564665,
+          "min": 0.9151622059044997
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9933347188627424,
+          "mean": 0.9891534728594216,
+          "median": 0.989814729018163,
+          "min": 0.9783086894098211
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999994385075317,
+          "mean": 0.9999989647631349,
+          "median": 0.9999989448128875,
+          "min": 0.9999982342146418
+        },
+        "dimensions": 768,
+        "sample_ids": [
+          "10852047",
+          "12561083",
+          "1391126",
+          "140874",
+          "14180565",
+          "14252892",
+          "14973286",
+          "15365719",
+          "16284655",
+          "17088791",
+          "1709625",
+          "18872233",
+          "188911",
+          "21363424",
+          "24285403",
+          "25355575",
+          "25970224",
+          "26064942",
+          "2686003",
+          "29399239",
+          "32023005",
+          "33796570",
+          "3391547",
+          "34982259",
+          "38712515",
+          "3929361",
+          "40817021",
+          "45457778",
+          "5641851",
+          "5885376",
+          "6397191",
+          "67787658"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "bge-m3",
+      "corpus": "scifact",
+      "dimensions": 1024,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        0.0,
+        0.0
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.0,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            0.0,
+            0.0
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 1.0,
+            "top1_agreement": 1.0
+          }
+        }
+      },
+      "mixed_cuda_documents": 2609,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.11178391472233644,
+            -0.017605461721875694
+          ],
+          "ndcg_delta": -0.06426588409337963
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.1143460343321191,
+            -0.02151579656622678
+          ],
+          "ndcg_delta": -0.0685071802573528
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.10821210210892786,
+            -0.01746912111674729
+          ],
+          "ndcg_delta": -0.063037500334992
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.10725180856370534,
+            -0.014928717533778264
+          ],
+          "ndcg_delta": -0.06097022740124758
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.11708897088347733,
+            -0.02826998011044698
+          ],
+          "ndcg_delta": -0.07284291909540097
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.11984758457939322,
+            -0.025448511982311055
+          ],
+          "ndcg_delta": -0.07314254918443652
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.6303293650793652,
+          "ndcg_at_10": 0.6557821048619249,
+          "ndcg_ci95": [
+            0.5742908400178505,
+            0.73348278296409
+          ],
+          "recall_at_10": 0.7626666666666665
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.6303293650793652,
+          "ndcg_at_10": 0.6557821048619249,
+          "ndcg_ci95": [
+            0.5742908400178505,
+            0.73348278296409
+          ],
+          "recall_at_10": 0.7626666666666665
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.6303293650793652,
+          "ndcg_at_10": 0.6557821048619249,
+          "ndcg_ci95": [
+            0.5742908400178505,
+            0.73348278296409
+          ],
+          "recall_at_10": 0.7626666666666665
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.6303293650793652,
+          "ndcg_at_10": 0.6557821048619249,
+          "ndcg_ci95": [
+            0.5742908400178505,
+            0.73348278296409
+          ],
+          "recall_at_10": 0.7626666666666665
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.6303293650793652,
+          "ndcg_at_10": 0.6557821048619249,
+          "ndcg_ci95": [
+            0.5742908400178505,
+            0.73348278296409
+          ],
+          "recall_at_10": 0.7626666666666665
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.6303293650793652,
+          "ndcg_at_10": 0.6557821048619249,
+          "ndcg_ci95": [
+            0.5742908400178505,
+            0.73348278296409
+          ],
+          "recall_at_10": 0.7626666666666665
+        }
+      },
+      "raw_file": "bge-m3-scifact-matrix.jsonl",
+      "raw_sha256": "7c0545c310898342610b2c638e1a8769ff2c259810feee515597673c70f06539",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1861812,
+          "items": 5183,
+          "longest_original": 2256,
+          "original_tokens": 1944533,
+          "truncated": 712
+        },
+        "queries": {
+          "encoded_tokens": 2561,
+          "items": 100,
+          "longest_original": 57,
+          "original_tokens": 2561,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0
+        },
+        "cpu_cuda_documents": {
+          "count": 5183,
+          "max": 0.9999999999988949,
+          "mean": 0.9999999999893063,
+          "median": 0.9999999999963387,
+          "min": 0.999999990017353
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9999999999996141,
+          "mean": 0.9999999999985347,
+          "median": 0.999999999998732,
+          "min": 0.9999999999878537
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9999999999995125,
+          "mean": 0.9999999999979532,
+          "median": 0.9999999999989382,
+          "min": 0.9999999999852497
+        },
+        "dimensions": 1024,
+        "sample_ids": [
+          "10852047",
+          "12561083",
+          "1391126",
+          "140874",
+          "14180565",
+          "14252892",
+          "14973286",
+          "15365719",
+          "16284655",
+          "17088791",
+          "1709625",
+          "18872233",
+          "188911",
+          "21363424",
+          "24285403",
+          "25355575",
+          "25970224",
+          "26064942",
+          "2686003",
+          "29399239",
+          "32023005",
+          "33796570",
+          "3391547",
+          "34982259",
+          "38712515",
+          "3929361",
+          "40817021",
+          "45457778",
+          "5641851",
+          "5885376",
+          "6397191",
+          "67787658"
+        ],
+        "type": "vector_drift"
+      }
+    },
+    {
+      "candidate": "arctic-256",
+      "corpus": "scifact",
+      "dimensions": 256,
+      "homogeneous_cuda_minus_cpu_ci95": [
+        -0.00935438542675382,
+        0.04093819558106727
+      ],
+      "homogeneous_cuda_minus_cpu_ndcg": 0.015190479287360281,
+      "mixed_checks": {
+        "cpu/cuda": {
+          "loss_ci95": [
+            0.0016845447019730399,
+            0.030813300425593354
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.01390863584386981,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.8260000000000001,
+            "top1_agreement": 0.92
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.883,
+            "top1_agreement": 0.9
+          }
+        },
+        "cpu/mixed": {
+          "loss_ci95": [
+            -0.006935525993974306,
+            0.034659960213139794
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.011872263558022289,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.87,
+            "top1_agreement": 0.91
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8270000000000001,
+            "top1_agreement": 0.83
+          }
+        },
+        "cuda/cpu": {
+          "loss_ci95": [
+            0.0007589243288214697,
+            0.03344129506749437
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.014261208925528623,
+          "passes_pilot_loss_threshold": false,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.875,
+            "top1_agreement": 0.92
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.8320000000000001,
+            "top1_agreement": 0.88
+          }
+        },
+        "cuda/mixed": {
+          "loss_ci95": [
+            -0.015336835015290425,
+            0.022249288799983422
+          ],
+          "ndcg_loss_vs_better_homogeneous": 0.0019405799563825266,
+          "passes_pilot_loss_threshold": true,
+          "threshold": 0.01,
+          "vs_cpu_homogeneous": {
+            "top10_overlap": 0.8360000000000001,
+            "top1_agreement": 0.89
+          },
+          "vs_cuda_homogeneous": {
+            "top10_overlap": 0.888,
+            "top1_agreement": 0.92
+          }
+        }
+      },
+      "mixed_cuda_documents": 2609,
+      "paired_delta_vs_arctic768": {
+        "cpu/cpu": {
+          "ci95": [
+            -0.040661174465856466,
+            -0.0011760873050754958
+          ],
+          "ndcg_delta": -0.020422098090320362
+        },
+        "cpu/cuda": {
+          "ci95": [
+            -0.04266072687995262,
+            -0.007582128514548254
+          ],
+          "ndcg_delta": -0.023381550810803065
+        },
+        "cpu/mixed": {
+          "ci95": [
+            -0.03724245860227175,
+            0.0036786184052936535
+          ],
+          "ndcg_delta": -0.01587549860259474
+        },
+        "cuda/cpu": {
+          "ci95": [
+            -0.03235926191407254,
+            -0.0014534462186703932
+          ],
+          "ndcg_delta": -0.01619717103635665
+        },
+        "cuda/cuda": {
+          "ci95": [
+            -0.03313486837670407,
+            0.004530142094338797
+          ],
+          "ndcg_delta": -0.013808653804981419
+        },
+        "cuda/mixed": {
+          "ci95": [
+            -0.03477436567342864,
+            0.0014144459119188244
+          ],
+          "ndcg_delta": -0.016048863850399497
+        }
+      },
+      "qualities": {
+        "cpu/cpu": {
+          "mrr_at_10": 0.6751349206349206,
+          "ndcg_at_10": 0.6996258908649842,
+          "ndcg_ci95": [
+            0.6242166830441173,
+            0.7727506126131536
+          ],
+          "recall_at_10": 0.816
+        },
+        "cpu/cuda": {
+          "mrr_at_10": 0.6774563492063492,
+          "ndcg_at_10": 0.7009077343084746,
+          "ndcg_ci95": [
+            0.6242602403423068,
+            0.7746884694777547
+          ],
+          "recall_at_10": 0.8109999999999999
+        },
+        "cpu/mixed": {
+          "mrr_at_10": 0.6784722222222223,
+          "ndcg_at_10": 0.7029441065943222,
+          "ndcg_ci95": [
+            0.6272540486633851,
+            0.7767825869256475
+          ],
+          "recall_at_10": 0.8109999999999999
+        },
+        "cuda/cpu": {
+          "mrr_at_10": 0.6760277777777779,
+          "ndcg_at_10": 0.7005551612268158,
+          "ndcg_ci95": [
+            0.6252064576760371,
+            0.774245891348597
+          ],
+          "recall_at_10": 0.816
+        },
+        "cuda/cuda": {
+          "mrr_at_10": 0.6904404761904763,
+          "ndcg_at_10": 0.7148163701523444,
+          "ndcg_ci95": [
+            0.6385739722761047,
+            0.7872832650765741
+          ],
+          "recall_at_10": 0.826
+        },
+        "cuda/mixed": {
+          "mrr_at_10": 0.6900396825396826,
+          "ndcg_at_10": 0.7128757901959619,
+          "ndcg_ci95": [
+            0.6371192357367237,
+            0.7858975156025425
+          ],
+          "recall_at_10": 0.821
+        }
+      },
+      "raw_file": "arctic-256-scifact-matrix.jsonl",
+      "raw_sha256": "30feff0a3657fce7f36877dff48dea2d761adf13bfda652b330fc5f09cc0b489",
+      "token_statistics": {
+        "documents": {
+          "encoded_tokens": 1861812,
+          "items": 5183,
+          "longest_original": 2256,
+          "original_tokens": 1944533,
+          "truncated": 712
+        },
+        "queries": {
+          "encoded_tokens": 2861,
+          "items": 100,
+          "longest_original": 60,
+          "original_tokens": 2861,
+          "truncated": 0
+        }
+      },
+      "vector_drift": {
+        "cpu_batch8_single_documents": {
+          "count": 32,
+          "max": 0.9909392673190215,
+          "mean": 0.9872191099671136,
+          "median": 0.9873930401183569,
+          "min": 0.9831002705750452
+        },
+        "cpu_cuda_documents": {
+          "count": 5183,
+          "max": 0.9777856750561225,
+          "mean": 0.9647812686556033,
+          "median": 0.9652047622854905,
+          "min": 0.9319647356869127
+        },
+        "cpu_cuda_queries": {
+          "count": 100,
+          "max": 0.9923943715711241,
+          "mean": 0.9819025651772988,
+          "median": 0.9809051564343743,
+          "min": 0.9651640552094964
+        },
+        "cuda_batch8_single_documents": {
+          "count": 32,
+          "max": 1.0,
+          "mean": 0.9999995862980118,
+          "median": 0.9999995968975093,
+          "min": 0.9999993696618217
+        },
+        "dimensions": 256,
+        "sample_ids": [
+          "10852047",
+          "12561083",
+          "1391126",
+          "140874",
+          "14180565",
+          "14252892",
+          "14973286",
+          "15365719",
+          "16284655",
+          "17088791",
+          "1709625",
+          "18872233",
+          "188911",
+          "21363424",
+          "24285403",
+          "25355575",
+          "25970224",
+          "26064942",
+          "2686003",
+          "29399239",
+          "32023005",
+          "33796570",
+          "3391547",
+          "34982259",
+          "38712515",
+          "3929361",
+          "40817021",
+          "45457778",
+          "5641851",
+          "5885376",
+          "6397191",
+          "67787658"
+        ],
+        "type": "vector_drift"
+      }
+    }
+  ],
+  "scope": "two-corpus exploratory pilot; no weighted score or shipping winner"
+}

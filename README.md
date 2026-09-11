@@ -1,7 +1,7 @@
 # ree
 
 **r**ust, **e**mbed **e**verything. Linux-first, local inference, SQLite storage,
-no daemon. `ree` ingests and synchronizes documents; it does not implement search.
+no mandatory daemon. `ree` ingests, synchronizes, and searches documents.
 
 ```sh
 cargo build --release --locked
@@ -10,12 +10,18 @@ cargo build --release --locked
 ./target/release/ree https://example.com/article
 ./target/release/ree https://github.com/org/repository.git
 cat report.md | ./target/release/ree - --source reports/current
+./target/release/ree search "how does CUDA fallback work?"
+./target/release/ree search "SQLITE_BUSY" --mode lexical
+./target/release/ree search "writer lock timeout" --mode hybrid --limit 10
 ```
 
 First use downloads checksum-verified, revision-pinned Snowflake Arctic Embed M
 v2 artifacts (17 MB tokenizer, 311 MB CPU INT8; 613 MB FP16 lazily for CUDA).
+Explicit CUDA skips CPU rescue provisioning; `auto` retains it.
 Passages use no prefix, CLS pooling, L2 normalization, and 768 dimensions.
-The revision is **provisional pending the local qualification gate**.
+**Arctic 768 is selected for the beta.** Broader model evaluation is deliberately
+deferred; mixed CPU INT8 / CUDA FP16 retrieval remains a documented limitation.
+See the [model decision and pinned recipe](docs/model-decision-v1.md).
 
 ## Behavior
 
@@ -29,7 +35,8 @@ The revision is **provisional pending the local qualification gate**.
   files replace old chunks; complete directory walks prune confirmed deletions
   **only in that exact source root**. Failed files retain their old vectors.
 - Plain text/code, Markdown, structured text, HTML, and notebooks work natively.
-  PDF uses `pdftotext`; DOCX/ODT/EPUB use `pandoc`; images use `tesseract`.
+  PDFs use `pdfinfo`/`pdftotext`, with bounded `pdftoppm` + `tesseract` OCR for
+  textless pages; DOCX/ODT/EPUB use `pandoc`; images use `tesseract`.
   Missing helpers are reported, never installed automatically.
 - HTTP(S) fetches enforce size/time/redirect limits and DNS-pinned private-network
   protection. `--allow-private-network` explicitly permits local HTTP endpoints.
@@ -38,6 +45,7 @@ The revision is **provisional pending the local qualification gate**.
   retains errors only; `--progress` enables TTY-only stderr progress.
 
 ```sh
+ree migrate                   # schema 2 + lexical backfill; no model/re-embedding
 ree status
 ree sources
 ree remove /absolute/source/root
@@ -45,6 +53,21 @@ ree rebuild                   # stored token inputs; originals are not reopened
 ree doctor                    # offline diagnostics, no downloads
 ree --help
 ```
+
+Search defaults to semantic retrieval; `--mode lexical` uses FTS5 without loading
+models, and `--mode hybrid` fuses both rankings. `--root ID_OR_PATH` and
+`--media-type TYPE` filter **before** top-k. Search is database-read-only, takes no
+writer lock, and returns exact stored chunks with source/location metadata as
+JSONL. Schema-1 databases support semantic search immediately; run `ree migrate`
+with the same `--db` for lexical/hybrid search. See [retrieval](docs/retrieval.md)
+for scoring, query limits, concurrency, and mixed-precision limitations.
+
+For repeated queries, `ree search --stream` accepts versioned JSONL on stdin and
+reuses an engine. An optional `ree worker` exposes the same service on a private
+Unix socket; route explicitly with `ree search "query" --socket PATH`. Both release
+the engine process after five idle minutes by default. Standalone behavior stays
+the default; no service is installed or auto-started. See [speedup v2](docs/speedup-v2.md)
+for framing, lifecycle, bounds, measured latency, and opt-in experiments.
 
 Exit codes: **0** success, **1** partial success, **2** invalid arguments/config,
 **3** fatal storage/model/runtime failure, **4** writer lock unavailable.
@@ -78,7 +101,7 @@ See [runtime packaging](docs/runtime.md); `cargo install` alone installs the CPU
 executable, not the optional provider libraries.
 
 ```sh
-cargo test --locked
+cargo test --locked --all-targets
 cargo clippy --all-targets --locked -- -D warnings
 cargo fmt --all -- --check
 ```
@@ -92,6 +115,6 @@ are ignored by default and restricted to the development machine.
 - [Implementation status and remaining release gates](docs/implementation-status.md)
 
 This is a pre-1.0 implementation, not a claim that all performance/security
-qualification in [PLAN.md](PLAN.md) is complete. Schema version 1 remains unstable.
+qualification in [PLAN.md](PLAN.md) is complete. Schema version 2 remains unstable.
 
 Licensed under **MIT OR Apache-2.0**.

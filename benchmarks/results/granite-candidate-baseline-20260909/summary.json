@@ -1,0 +1,226 @@
+{
+  "aggregation": "median of three within-process mean embeddings/second values, per cell",
+  "cells": [
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 240.1356362917179,
+      "median_embeddings_per_second": 192.28892195061886,
+      "min_embeddings_per_second": 176.390038167982,
+      "process_embeddings_per_second": [
+        240.1356362917179,
+        192.28892195061886,
+        176.390038167982
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 403.0560150422117,
+      "median_embeddings_per_second": 383.8296999822019,
+      "min_embeddings_per_second": 277.11980491209124,
+      "process_embeddings_per_second": [
+        383.8296999822019,
+        403.0560150422117,
+        277.11980491209124
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 82.86431440842213,
+      "median_embeddings_per_second": 75.86140012955913,
+      "min_embeddings_per_second": 69.41578536616952,
+      "process_embeddings_per_second": [
+        69.41578536616952,
+        82.86431440842213,
+        75.86140012955913
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 77.51388221793115,
+      "median_embeddings_per_second": 75.06849390136986,
+      "min_embeddings_per_second": 73.32719638472871,
+      "process_embeddings_per_second": [
+        77.51388221793115,
+        73.32719638472871,
+        75.06849390136986
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 1,
+      "device": "cpu",
+      "max_embeddings_per_second": 33.24770652499473,
+      "median_embeddings_per_second": 30.736877226836807,
+      "min_embeddings_per_second": 29.627148498592106,
+      "process_embeddings_per_second": [
+        29.627148498592106,
+        33.24770652499473,
+        30.736877226836807
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 8,
+      "device": "cpu",
+      "max_embeddings_per_second": 28.756106573104343,
+      "median_embeddings_per_second": 28.567089863035367,
+      "min_embeddings_per_second": 27.196505598233752,
+      "process_embeddings_per_second": [
+        28.567089863035367,
+        28.756106573104343,
+        27.196505598233752
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 768.3109237525167,
+      "median_embeddings_per_second": 765.5359394626428,
+      "min_embeddings_per_second": 760.0751379878409,
+      "process_embeddings_per_second": [
+        765.5359394626428,
+        760.0751379878409,
+        768.3109237525167
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 2448.4545232626438,
+      "median_embeddings_per_second": 2426.0707994176214,
+      "min_embeddings_per_second": 2158.5946469550995,
+      "process_embeddings_per_second": [
+        2426.0707994176214,
+        2158.5946469550995,
+        2448.4545232626438
+      ],
+      "tokens": 64
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 440.0760345769501,
+      "median_embeddings_per_second": 440.0486517789406,
+      "min_embeddings_per_second": 434.55414657650414,
+      "process_embeddings_per_second": [
+        434.55414657650414,
+        440.0486517789406,
+        440.0760345769501
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 639.1010762158551,
+      "median_embeddings_per_second": 637.3875168387823,
+      "min_embeddings_per_second": 621.2404951951473,
+      "process_embeddings_per_second": [
+        621.2404951951473,
+        639.1010762158551,
+        637.3875168387823
+      ],
+      "tokens": 256
+    },
+    {
+      "batch": 1,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 254.58411800401575,
+      "median_embeddings_per_second": 231.72608123389497,
+      "min_embeddings_per_second": 228.9322047952414,
+      "process_embeddings_per_second": [
+        228.9322047952414,
+        254.58411800401575,
+        231.72608123389497
+      ],
+      "tokens": 512
+    },
+    {
+      "batch": 8,
+      "device": "cuda:0",
+      "max_embeddings_per_second": 252.43271776668487,
+      "median_embeddings_per_second": 236.25883194578523,
+      "min_embeddings_per_second": 192.67814846992957,
+      "process_embeddings_per_second": [
+        192.67814846992957,
+        252.43271776668487,
+        236.25883194578523
+      ],
+      "tokens": 512
+    }
+  ],
+  "recipes": {
+    "cpu": {
+      "model": "ibm-granite/granite-embedding-107m-multilingual",
+      "model_sha256": "387e6f91dce3c651cb3dc06661d74fb1d3947f20ed9c3ecf49d2b3b77086b954",
+      "power_mode": "balanced",
+      "precision": "fp32",
+      "recipe": {
+        "cls_id": 0,
+        "dimensions": 384,
+        "pad_id": 1,
+        "pooling": "cls",
+        "sep_id": 2,
+        "token_output": "logits"
+      },
+      "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+      "runtime": "onnxruntime-1.28.0",
+      "threads": 8,
+      "tokenizer_sha256": "7fc9e475f2ac473f070052d92b0c46ec2b91d9cd672935feb6fd837a65d33f78"
+    },
+    "cuda:0": {
+      "model": "ibm-granite/granite-embedding-107m-multilingual",
+      "model_sha256": "387e6f91dce3c651cb3dc06661d74fb1d3947f20ed9c3ecf49d2b3b77086b954",
+      "power_mode": "balanced",
+      "precision": "fp32",
+      "recipe": {
+        "cls_id": 0,
+        "dimensions": 384,
+        "pad_id": 1,
+        "pooling": "cls",
+        "sep_id": 2,
+        "token_output": "logits"
+      },
+      "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+      "runtime": "onnxruntime-1.28.0",
+      "threads": 8,
+      "tokenizer_sha256": "7fc9e475f2ac473f070052d92b0c46ec2b91d9cd672935feb6fd837a65d33f78"
+    }
+  },
+  "runs": [
+    {
+      "file": "cpu-1.jsonl",
+      "sha256": "4db27dbe5cc48ecbea06f7fb5ca9f15bfba79c748127ee95ce1ab1b0d2bde5c6"
+    },
+    {
+      "file": "cpu-2.jsonl",
+      "sha256": "08f0a99df5beb08c47259a2c52872b02c1a93fdc07d27d7ca40761632055636a"
+    },
+    {
+      "file": "cpu-3.jsonl",
+      "sha256": "ace96d3a7f3ae034cbba89dbf757fb872d4d61efa96c4b6b68c24b3ca0ee555b"
+    },
+    {
+      "file": "cuda-0-1.jsonl",
+      "sha256": "9d79ec432ea7dc66d837a69a0573f8c72d9f88c98426fbce06e4b9e6df896fe0"
+    },
+    {
+      "file": "cuda-0-2.jsonl",
+      "sha256": "6684fd5978b23dea8fc96062911cf2e3dffed3a3e9faeb73ebffcdc3b4307cb3"
+    },
+    {
+      "file": "cuda-0-3.jsonl",
+      "sha256": "34872480e9f06cba2736190795de9ec8d4a051f83ff909f020cd0a97cf2215c8"
+    }
+  ],
+  "scope": "serial local throughput baseline, synthetic token IDs, no retrieval quality scores"
+}

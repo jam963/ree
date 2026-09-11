@@ -1,4 +1,4 @@
-pub const VERSION: i64 = 1;
+pub const VERSION: i64 = 2;
 pub const INITIAL: &str = r#"
 CREATE TABLE schema_metadata(key TEXT PRIMARY KEY, value TEXT NOT NULL);
 INSERT INTO schema_metadata VALUES('schema_version','1');
@@ -56,4 +56,38 @@ CREATE VIEW active_embeddings AS
  SELECT r.vector_id,r.chunk_id,r.generation_id FROM embedding_records r
  JOIN embedding_generations g ON g.id=r.generation_id WHERE g.status='active';
 PRAGMA user_version=1;
+"#;
+
+/// Stable explicit integer IDs avoid coupling FTS to chunks' implicit rowids
+/// (which can change on VACUUM). Text remains in chunks, not duplicated in FTS.
+pub const RETRIEVAL: &str = r#"
+CREATE TABLE chunk_search_ids(
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ chunk_id TEXT NOT NULL UNIQUE REFERENCES chunks(id) ON DELETE CASCADE
+);
+INSERT INTO chunk_search_ids(chunk_id) SELECT id FROM chunks ORDER BY id;
+CREATE VIEW chunk_search_content AS
+ SELECT m.id, c.text FROM chunk_search_ids m JOIN chunks c ON c.id=m.chunk_id;
+CREATE VIRTUAL TABLE chunk_fts USING fts5(
+ text, content='chunk_search_content', content_rowid='id', tokenize='unicode61'
+);
+CREATE TRIGGER chunk_search_insert AFTER INSERT ON chunks BEGIN
+ INSERT INTO chunk_search_ids(chunk_id) VALUES(new.id);
+ INSERT INTO chunk_fts(rowid,text)
+  SELECT id,new.text FROM chunk_search_ids WHERE chunk_id=new.id;
+END;
+-- Run before the parent disappears and before cascading mapping deletion.
+CREATE TRIGGER chunk_search_delete BEFORE DELETE ON chunks BEGIN
+ INSERT INTO chunk_fts(chunk_fts,rowid,text)
+  SELECT 'delete',id,old.text FROM chunk_search_ids WHERE chunk_id=old.id;
+END;
+CREATE TRIGGER chunk_search_update AFTER UPDATE OF text ON chunks BEGIN
+ INSERT INTO chunk_fts(chunk_fts,rowid,text)
+  SELECT 'delete',id,old.text FROM chunk_search_ids WHERE chunk_id=old.id;
+ INSERT INTO chunk_fts(rowid,text)
+  SELECT id,new.text FROM chunk_search_ids WHERE chunk_id=new.id;
+END;
+INSERT INTO chunk_fts(chunk_fts) VALUES('rebuild');
+UPDATE schema_metadata SET value='2' WHERE key='schema_version';
+PRAGMA user_version=2;
 "#;

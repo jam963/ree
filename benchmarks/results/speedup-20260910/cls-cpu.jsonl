@@ -1,0 +1,12 @@
+{"device":"cpu","profile":null,"type":"cls_verification","variant":"token_output"}
+{"device":"cpu","profile":null,"type":"cls_verification","variant":"arctic-cls-gather-v1"}
+{"baseline_seconds":[0.015259357,0.026030729,0.025276889],"batch":1,"bitwise":true,"cls_seconds":[0.01557837,0.016532678,0.016124509],"device":"cpu","length":64,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[0.08137942,0.087669289,0.092545145],"batch":1,"bitwise":true,"cls_seconds":[0.056320638,0.058152148,0.053210748],"device":"cpu","length":256,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[0.135557977,0.131740615,0.109957157],"batch":1,"bitwise":true,"cls_seconds":[0.125367822,0.128838331,0.125624596],"device":"cpu","length":512,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[0.085019878,0.0975907,0.092491153],"batch":8,"bitwise":true,"cls_seconds":[0.104302345,0.103512827,0.103177796],"device":"cpu","length":64,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[0.476460882,0.444047189,0.500149932],"batch":8,"bitwise":true,"cls_seconds":[0.496192825,0.47241473,0.497421452],"device":"cpu","length":256,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[1.110713943,1.086067647,1.166287049],"batch":8,"bitwise":true,"cls_seconds":[1.115828172,1.089105241,1.095443598],"device":"cpu","length":512,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[0.204704437,0.202663934,0.195949544],"batch":16,"bitwise":true,"cls_seconds":[0.206252394,0.204734835,0.195737555],"device":"cpu","length":64,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[0.968187489,0.969419025,0.969417566],"batch":16,"bitwise":true,"cls_seconds":[0.993712036,0.998839802,1.007112843],"device":"cpu","length":256,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"baseline_seconds":[2.236813617,2.267264409,2.255614494],"batch":16,"bitwise":true,"cls_seconds":[2.270457719,2.305832831,2.321451922],"device":"cpu","length":512,"max_abs":0.0,"min_cosine":1.0,"type":"cls_shape"}
+{"derivative_sha256":"27b7e290193aa20738c81753b1f82a0c8d44ac03fe4bd9cab019eb52218be366","device":"cpu","parent_sha256":"03d923bb1850ebdccb068e2f3abd8aa43fe81c50d07d037ef103fe3d0fb78e3b","scope":"single process, fixed shapes only; not end-to-end speedup or broad retrieval qualification","type":"cls_qualification_completed"}

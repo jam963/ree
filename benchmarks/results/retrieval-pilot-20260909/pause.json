@@ -1,0 +1,39 @@
+{
+  "archived_incomplete_export": "/home/jacob/.cache/ree-eval/gate1-20260909.2pMnco/retrieval-pilot-5b_j09cu/interrupted-attempts/jina-code-nfcorpus-cpu",
+  "archived_log_files": [
+    {
+      "bytes": 5531,
+      "name": "jina-code-nfcorpus-cpu.jsonl",
+      "sha256": "7c649f0a92e593bc7452aa989f6983f1e0d484c45734b996af97f2953d24b01a"
+    },
+    {
+      "bytes": 0,
+      "name": "jina-code-nfcorpus-cpu.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 12354,
+      "name": "jina-code-nfcorpus-cpu-before.json",
+      "sha256": "ee76379f066c26afa1d9127dbe2276d4c53b6acd17a34b8d19d555985b3b109d"
+    }
+  ],
+  "archived_logs": "benchmarks/results/retrieval-pilot-20260909/interrupted-attempts/jina-code-nfcorpus-cpu",
+  "completed_encoding_runs": 12,
+  "interrupted_job": "jina-code-nfcorpus-cpu",
+  "last_document_progress": {
+    "documents_encoded": 2176,
+    "documents_total": 3633,
+    "elapsed_seconds": 321.992703223,
+    "type": "quality_progress"
+  },
+  "partial_results": "partial-analysis/summary.json",
+  "reason": "AC disconnected and platform profile changed from balanced to quiet",
+  "remaining_encoding_runs": 8,
+  "resume_requires": {
+    "AC_online": 1,
+    "platform_profile": "balanced",
+    "unchanged_frozen_sources_and_executables": true
+  },
+  "retry_policy": "Old incomplete attempt preserved separately; original job paths are now new-output targets for --resume.",
+  "state": "paused; no inference running"
+}

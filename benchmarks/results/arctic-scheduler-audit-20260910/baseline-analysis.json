@@ -1,0 +1,71 @@
+{
+  "baseline_invocation_sha256": "42f746afac9be96c15f6634e0e8e63771c106b000cc02b5ce525a8dc76749b8e",
+  "baseline_summary_sha256": "da979642e1d0af7d2c606c47bba8d8acca30608163158b749888c8669e5b0307",
+  "caveats": [
+    "Synthetic repeated token IDs, lengths 64/256/512, batches 1/8 only",
+    "Eight threads, balanced power, serial three-process medians",
+    "Direct Onnx::infer; does not exercise production Scheduler::calibrate or full ingestion",
+    "No current saturation optimum, end-to-end bottleneck, or speedup is established by this audit"
+  ],
+  "cells": [
+    {
+      "batch1_embeddings_per_second": 75.63992358673383,
+      "batch8_embeddings_per_second": 99.0990015401496,
+      "batch8_relative_change_percent": 31.01414813899965,
+      "device": "cpu",
+      "tokens": 64
+    },
+    {
+      "batch1_embeddings_per_second": 21.293827162681048,
+      "batch8_embeddings_per_second": 19.727562451321287,
+      "batch8_relative_change_percent": -7.355487106163572,
+      "device": "cpu",
+      "tokens": 256
+    },
+    {
+      "batch1_embeddings_per_second": 9.274938577275767,
+      "batch8_embeddings_per_second": 8.13534338808015,
+      "batch8_relative_change_percent": -12.286821952521642,
+      "device": "cpu",
+      "tokens": 512
+    },
+    {
+      "batch1_embeddings_per_second": 377.6603623318835,
+      "batch8_embeddings_per_second": 1012.1500516500171,
+      "batch8_relative_change_percent": 168.00537006331405,
+      "device": "cuda:0",
+      "tokens": 64
+    },
+    {
+      "batch1_embeddings_per_second": 207.57876721627164,
+      "batch8_embeddings_per_second": 267.63824524028297,
+      "batch8_relative_change_percent": 28.933343631160845,
+      "device": "cuda:0",
+      "tokens": 256
+    },
+    {
+      "batch1_embeddings_per_second": 132.60959964604905,
+      "batch8_embeddings_per_second": 119.86787204200554,
+      "batch8_relative_change_percent": -9.608450397296053,
+      "device": "cuda:0",
+      "tokens": 512
+    }
+  ],
+  "reviewed_source_sha256": {
+    "examples/qualify.rs": "2f4ed4ff0828f1c84d5fe3faa08ce7590f4c2c7f2e2c112397e6557020f4d281",
+    "src/chunk/mod.rs": "5fd40a42d07d6294dd3dca6cf111632093fdd3cbfcab00baf7b0c0aa5deb2bf3",
+    "src/model/batch.rs": "d591f5ce79a8c3ffe86c179ea90514f989516fa8ad66a7ea92f81bcaa7967c1e",
+    "src/model/device.rs": "76ad7ba35e87d31c5b021bd8ce73a2d9ec051aa94a05f40dbe9be2b451b91df7",
+    "src/model/mod.rs": "e586799ddb713564441f11019c30d606af4f877021672d6bffef6e3a8015e293",
+    "src/model/onnx.rs": "4335167ae1ce9833a5f6ba2c83f711c0c1f1aa15097e82ae69e7f80940bbdd23",
+    "src/model/telemetry.rs": "cc6529dcc1a6a0504525a6e829c1bc726e07e4f2559d0ca44a723370a2ae2382",
+    "src/pipeline/rebuild.rs": "965608e4adca2c496d0b9bc4bad4bc418819ea3d5b3080460ef0f29601c0b08d",
+    "src/pipeline/sync.rs": "7bf0c99e214ba6afb1b56b8febf83cb3e1a3b57bbe6c140a67d3082df043c7c4",
+    "src/storage/sqlite.rs": "ae40d8327791d01de2e23fc9b3cc76aea5192740a872bab9fcf86b07a3ee34a2",
+    "tests/batching.rs": "f4afd9085f3e979bd6a91c172cb862c892fe9a82ccf904e4d33f7a78ccd05657",
+    "tests/cuda_recovery.rs": "a41078a04d57378cf1b93136c13405483b2e540984589fa52e7b4030184306c7"
+  },
+  "scope": "Offline arithmetic over retained Arctic speed logs; not new measurements or ingestion throughput",
+  "verified_process_runs": 6,
+  "verified_timed_samples": 180
+}

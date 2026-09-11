@@ -1,12 +1,13 @@
 pub mod external;
 pub mod html;
 pub mod notebook;
+pub mod pdf;
 pub mod text;
 use crate::config::{Config, ExtractorConfig};
 use anyhow::{Context, Result, bail};
 use serde_json::{Value, json};
 
-pub const VERSION: &str = "ree-extract-v1";
+pub const VERSION: &str = "ree-extract-v2";
 #[derive(Debug)]
 pub struct Extracted {
     pub text: String,
@@ -16,7 +17,6 @@ pub struct Extracted {
 }
 fn builtin(extension: &str) -> Option<ExtractorConfig> {
     let command: &[&str] = match extension {
-        "pdf" => &["pdftotext", "-layout", "-enc", "UTF-8", "{path}", "-"],
         "docx" | "odt" | "epub" => &["pandoc", "{path}", "-t", "plain"],
         "png" | "jpg" | "jpeg" | "tif" | "tiff" | "bmp" | "webp" => {
             &["tesseract", "{path}", "stdout"]
@@ -36,7 +36,9 @@ pub fn extract(
 ) -> Result<Extracted> {
     let extension = extension.to_ascii_lowercase();
     let custom = if let Some(name) = forced {
-        if !matches!(name, "text" | "html" | "notebook") {
+        if !matches!(name, "text" | "html" | "notebook")
+            && (name != "pdf" || config.extractors.contains_key(name))
+        {
             Some((
                 name.to_string(),
                 config
@@ -68,29 +70,20 @@ pub fn extract(
             metadata: json!({}),
         });
     }
+    if forced == Some("pdf")
+        || (forced.is_none() && (bytes.starts_with(b"%PDF-") || extension == "pdf"))
+    {
+        return pdf::extract(bytes, &config.pdf);
+    }
     if forced.is_none() {
-        let hint = if bytes.starts_with(b"%PDF-") {
-            "pdf"
-        } else {
-            &extension
-        };
+        let hint = &extension;
         if let Some(c) = builtin(hint) {
             let text = external::extract(bytes, hint, &c)?;
-            if hint == "pdf" && text.trim().is_empty() {
-                bail!(
-                    "unsupported: PDF has no extractable text; scanned-PDF OCR is not yet supported"
-                );
-            }
             return Ok(Extracted {
                 text,
-                media_type: if hint == "pdf" {
-                    "application/pdf"
-                } else {
-                    "application/octet-stream"
-                }
-                .into(),
+                media_type: "application/octet-stream".into(),
                 extractor: format!("external:{hint}:{VERSION}"),
-                metadata: json!({}),
+                metadata: json!({"helper_versions":{&c.command[0]:external::version(&c.command[0])}}),
             });
         }
         if bytes.starts_with(b"PK\x03\x04")

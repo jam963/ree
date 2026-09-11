@@ -1,0 +1,278 @@
+{
+  "candidates": [
+    {
+      "cpu": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/arctic/onnx/model_int8.onnx",
+          "sha256": "03d923bb1850ebdccb068e2f3abd8aa43fe81c50d07d037ef103fe3d0fb78e3b"
+        },
+        "name": "Snowflake/snowflake-arctic-embed-m-v2.0",
+        "precision": "int8",
+        "query_prompt": "query: ",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 768,
+          "pad_id": 1,
+          "pooling": "cls",
+          "sep_id": 2
+        },
+        "revision": "95c2741480856aa9666782eb4afe11959938017f",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/arctic/tokenizer.json",
+          "sha256": "f1cc44ad7faaeec47241864835473fd5403f2da94673f3f764a77ebcb0a803ec"
+        }
+      },
+      "cuda": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/arctic/onnx/model_fp16.onnx",
+          "sha256": "f27ab40ab6e230265ba49a202a37f1ad031556256cbbc105d0ca9c0bdc7ec42e"
+        },
+        "name": "Snowflake/snowflake-arctic-embed-m-v2.0",
+        "precision": "fp16",
+        "query_prompt": "query: ",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 768,
+          "pad_id": 1,
+          "pooling": "cls",
+          "sep_id": 2
+        },
+        "revision": "95c2741480856aa9666782eb4afe11959938017f",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/arctic/tokenizer.json",
+          "sha256": "f1cc44ad7faaeec47241864835473fd5403f2da94673f3f764a77ebcb0a803ec"
+        }
+      },
+      "declared_license": "apache-2.0",
+      "id": "arctic",
+      "license_evidence": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/blob/95c2741480856aa9666782eb4afe11959938017f/README.md",
+      "status": "Pinned/hash-verified; Rust CPU/CUDA capability and repeated throughput pass; retrieval quality and cross-precision compatibility pending"
+    },
+    {
+      "cpu": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/granite/model.onnx",
+          "sha256": "387e6f91dce3c651cb3dc06661d74fb1d3947f20ed9c3ecf49d2b3b77086b954"
+        },
+        "name": "ibm-granite/granite-embedding-107m-multilingual",
+        "precision": "fp32",
+        "query_prompt": "",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 384,
+          "pad_id": 1,
+          "pooling": "cls",
+          "sep_id": 2,
+          "token_output": "logits"
+        },
+        "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/granite/tokenizer.json",
+          "sha256": "7fc9e475f2ac473f070052d92b0c46ec2b91d9cd672935feb6fd837a65d33f78"
+        }
+      },
+      "cuda": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/granite/model.onnx",
+          "sha256": "387e6f91dce3c651cb3dc06661d74fb1d3947f20ed9c3ecf49d2b3b77086b954"
+        },
+        "name": "ibm-granite/granite-embedding-107m-multilingual",
+        "precision": "fp32",
+        "query_prompt": "",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 384,
+          "pad_id": 1,
+          "pooling": "cls",
+          "sep_id": 2,
+          "token_output": "logits"
+        },
+        "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/granite/tokenizer.json",
+          "sha256": "7fc9e475f2ac473f070052d92b0c46ec2b91d9cd672935feb6fd837a65d33f78"
+        }
+      },
+      "declared_license": "apache-2.0",
+      "id": "granite",
+      "license_evidence": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/blob/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/README.md",
+      "status": "Pinned/hash-verified; Rust CPU/CUDA capability and repeated throughput pass; retrieval quality and cross-precision compatibility pending"
+    },
+    {
+      "cpu": {
+        "document_prompt": "passage: ",
+        "model": {
+          "path": "models/e5/onnx/model_qint8_avx512_vnni.onnx",
+          "sha256": "dd476dd0c2514e9b9be83aeb3853fac0763e0bdf4a71645407587d77c48a2d88"
+        },
+        "name": "intfloat/multilingual-e5-small",
+        "precision": "int8",
+        "query_prompt": "query: ",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 384,
+          "pad_id": 1,
+          "pooling": "mean",
+          "sep_id": 2
+        },
+        "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/e5/tokenizer.json",
+          "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+        }
+      },
+      "cuda": {
+        "document_prompt": "passage: ",
+        "model": {
+          "path": "models/e5/onnx/model_O4.onnx",
+          "sha256": "4654c156f3e4171abc9c716cdb771bf9116455d15ac1aab364aeeede0e3205b0"
+        },
+        "name": "intfloat/multilingual-e5-small",
+        "precision": "fp16",
+        "query_prompt": "query: ",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 384,
+          "pad_id": 1,
+          "pooling": "mean",
+          "sep_id": 2
+        },
+        "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/e5/tokenizer.json",
+          "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+        }
+      },
+      "declared_license": "mit",
+      "id": "e5",
+      "license_evidence": "https://huggingface.co/intfloat/multilingual-e5-small/blob/614241f622f53c4eeff9890bdc4f31cfecc418b3/README.md",
+      "status": "Pinned/hash-verified; Rust CPU/CUDA capability and repeated throughput pass; retrieval quality and cross-precision compatibility pending"
+    },
+    {
+      "cpu": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/bge-m3/onnx/model.onnx",
+          "sha256": "f84251230831afb359ab26d9fd37d5936d4d9bb5d1d5410e66442f630f24435b"
+        },
+        "name": "BAAI/bge-m3",
+        "precision": "fp32",
+        "query_prompt": "",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 1024,
+          "pad_id": 1,
+          "pooling": "cls",
+          "sep_id": 2
+        },
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "sidecars": [
+          {
+            "path": "models/bge-m3/onnx/model.onnx_data",
+            "sha256": "1eebfb28493f67bba03ce0ef64bfdc7fc5a3bd9d7493f818bb1d78cd798416b4"
+          }
+        ],
+        "tokenizer": {
+          "path": "models/bge-m3/tokenizer.json",
+          "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+        }
+      },
+      "cuda": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/bge-m3/onnx/model.onnx",
+          "sha256": "f84251230831afb359ab26d9fd37d5936d4d9bb5d1d5410e66442f630f24435b"
+        },
+        "name": "BAAI/bge-m3",
+        "precision": "fp32",
+        "query_prompt": "",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 1024,
+          "pad_id": 1,
+          "pooling": "cls",
+          "sep_id": 2
+        },
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "sidecars": [
+          {
+            "path": "models/bge-m3/onnx/model.onnx_data",
+            "sha256": "1eebfb28493f67bba03ce0ef64bfdc7fc5a3bd9d7493f818bb1d78cd798416b4"
+          }
+        ],
+        "tokenizer": {
+          "path": "models/bge-m3/tokenizer.json",
+          "sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08"
+        }
+      },
+      "declared_license": "mit",
+      "id": "bge-m3",
+      "license_evidence": "https://huggingface.co/BAAI/bge-m3/blob/5617a9f61b028005a4858fdac845db406aefb181/README.md",
+      "status": "Pinned/hash-verified; Rust CPU/CUDA capability and repeated throughput pass; retrieval quality and cross-precision compatibility pending"
+    },
+    {
+      "cpu": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/jina-code/onnx/model_quantized.onnx",
+          "sha256": "ed45870251c9f0cf656e78aab0d37a23489066df8a222bb1c8caf8a45f2cb16d"
+        },
+        "name": "jinaai/jina-embeddings-v2-base-code",
+        "precision": "int8",
+        "query_prompt": "",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 768,
+          "pad_id": 1,
+          "pooling": "mean",
+          "sep_id": 2
+        },
+        "revision": "516f4baf13dec4ddddda8631e019b5737c8bc250",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/jina-code/tokenizer.json",
+          "sha256": "b01c78a902aa4facb2f47f95449f48e2f7bbfea5d2472ee2f6ce92323c6f86e5"
+        }
+      },
+      "cuda": {
+        "document_prompt": "",
+        "model": {
+          "path": "models/jina-code/onnx/model_fp16.onnx",
+          "sha256": "1aafc4fcd63d2e6899e88402ff731e7c646c2e435048294a3cbc908a40d45d7c"
+        },
+        "name": "jinaai/jina-embeddings-v2-base-code",
+        "precision": "fp16",
+        "query_prompt": "",
+        "recipe": {
+          "cls_id": 0,
+          "dimensions": 768,
+          "pad_id": 1,
+          "pooling": "mean",
+          "sep_id": 2
+        },
+        "revision": "516f4baf13dec4ddddda8631e019b5737c8bc250",
+        "sidecars": [],
+        "tokenizer": {
+          "path": "models/jina-code/tokenizer.json",
+          "sha256": "b01c78a902aa4facb2f47f95449f48e2f7bbfea5d2472ee2f6ce92323c6f86e5"
+        }
+      },
+      "declared_license": "apache-2.0",
+      "id": "jina-code",
+      "license_evidence": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/blob/516f4baf13dec4ddddda8631e019b5737c8bc250/README.md",
+      "status": "Pinned/hash-verified; Rust CPU/CUDA capability and repeated throughput pass; retrieval quality and cross-precision compatibility pending"
+    }
+  ],
+  "scope": "Qualification only; production remains pinned to Arctic",
+  "version": 1
+}

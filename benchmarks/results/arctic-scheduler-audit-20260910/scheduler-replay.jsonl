@@ -1,0 +1,4 @@
+{"after":{"max_items":9,"max_padded_tokens":4352},"before":{"max_items":8,"max_padded_tokens":4096},"case":"cpu_underfilled_growth","explicit_batch":null,"single_item_calls":32}
+{"after":{"max_items":8,"max_padded_tokens":4096},"before":{"max_items":8,"max_padded_tokens":4096},"case":"cpu_underfilled_growth","explicit_batch":8,"single_item_calls":32}
+{"case":"cached_64_validated_at_16","first_workload_call":[64,512],"retained_limits":{"max_items":64,"max_padded_tokens":32768},"scheduler_calibration_calls":[[16,512]]}
+{"case":"nominal_16_probe_is_16_singletons","nominal_items":16,"retained_limits":{"max_items":16,"max_padded_tokens":512},"scheduler_calibration_calls":[[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512],[1,512]]}

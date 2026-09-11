@@ -4,7 +4,7 @@ use std::path::PathBuf;
 #[derive(Debug, Parser)]
 #[command(
     version,
-    about = "Embed files into a local SQLite database",
+    about = "Index and search documents locally with SQLite",
     subcommand_precedence_over_arg = true
 )]
 pub struct Cli {
@@ -58,6 +58,14 @@ pub struct Options {
 
 #[derive(Debug, Subcommand)]
 pub enum Command {
+    /// Search stored chunks without modifying the database or reopening sources
+    Search(SearchArgs),
+    /// Serve reusable queries on an explicitly started local Unix socket
+    Worker(WorkerArgs),
+    #[command(name = "__query-engine", hide = true)]
+    QueryEngine,
+    /// Upgrade/initialize the database, including the lexical index; no model required
+    Migrate,
     /// Show database counts and the active embedding generation
     Status,
     /// List synchronization roots
@@ -68,4 +76,62 @@ pub enum Command {
     Rebuild,
     /// Diagnose storage, runtime, model cache, and optional extractors
     Doctor,
+}
+
+#[derive(Debug, Clone, clap::Args)]
+pub struct SearchArgs {
+    /// Literal query text (quote multiple words); no FTS query syntax
+    #[arg(required_unless_present = "stream", conflicts_with = "stream")]
+    pub query: Option<String>,
+    /// Read versioned JSONL requests from stdin and reuse a query engine
+    #[arg(long, conflicts_with_all = ["query", "socket", "mode", "limit", "root", "media_type"])]
+    pub stream: bool,
+    /// Route this query to an explicitly started worker (never auto-started)
+    #[arg(long)]
+    pub socket: Option<PathBuf>,
+    /// Release the engine process after this many idle seconds (streaming only)
+    #[arg(long, default_value = "300s", value_parser = parse_idle, requires = "stream")]
+    pub idle_timeout: u64,
+    #[arg(long, default_value_t = 10)]
+    pub limit: usize,
+    #[arg(long, value_enum, default_value_t = crate::retrieval::SearchMode::Semantic)]
+    pub mode: crate::retrieval::SearchMode,
+    /// Exact root ID/identity, or a local path resolved to its canonical identity
+    #[arg(long)]
+    pub root: Option<String>,
+    /// Exact stored document media type
+    #[arg(long)]
+    pub media_type: Option<String>,
+}
+#[derive(Debug, clap::Args)]
+pub struct WorkerArgs {
+    #[arg(long)]
+    pub socket: Option<PathBuf>,
+    #[arg(long, default_value = "300s", value_parser = parse_idle)]
+    pub idle_timeout: u64,
+}
+fn parse_idle(s: &str) -> Result<u64, String> {
+    let n = s
+        .strip_suffix('s')
+        .unwrap_or(s)
+        .parse::<u64>()
+        .map_err(|_| "idle timeout must be seconds, e.g. 300s".to_owned())?;
+    if !(1..=86400).contains(&n) {
+        return Err("idle timeout must be 1..86400 seconds".into());
+    }
+    Ok(n)
+}
+impl TryFrom<SearchArgs> for crate::retrieval::SearchRequest {
+    type Error = anyhow::Error;
+    fn try_from(args: SearchArgs) -> Result<Self, Self::Error> {
+        Ok(Self {
+            query: args
+                .query
+                .ok_or_else(|| crate::error::AppError::new(2, "search requires query text"))?,
+            limit: args.limit,
+            mode: args.mode,
+            root: args.root,
+            media_type: args.media_type,
+        })
+    }
 }

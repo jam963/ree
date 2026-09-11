@@ -1,0 +1,103 @@
+{
+  "files": [
+    {
+      "bytes": 613266244,
+      "path": "models/arctic/onnx/model_fp16.onnx",
+      "sha256": "f27ab40ab6e230265ba49a202a37f1ad031556256cbbc105d0ca9c0bdc7ec42e",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/onnx/model_fp16.onnx"
+    },
+    {
+      "bytes": 310916060,
+      "path": "models/arctic/onnx/model_int8.onnx",
+      "sha256": "03d923bb1850ebdccb068e2f3abd8aa43fe81c50d07d037ef103fe3d0fb78e3b",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0/resolve/95c2741480856aa9666782eb4afe11959938017f/onnx/model_int8.onnx"
+    },
+    {
+      "bytes": 428102968,
+      "path": "models/granite/model.onnx",
+      "sha256": "387e6f91dce3c651cb3dc06661d74fb1d3947f20ed9c3ecf49d2b3b77086b954",
+      "url": "https://huggingface.co/ibm-granite/granite-embedding-107m-multilingual/resolve/d6cffd338414d6a1c1f5decfad5fec62eebc90d5/model.onnx"
+    },
+    {
+      "bytes": 235052531,
+      "path": "models/e5/onnx/model_O4.onnx",
+      "sha256": "4654c156f3e4171abc9c716cdb771bf9116455d15ac1aab364aeeede0e3205b0",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/onnx/model_O4.onnx"
+    },
+    {
+      "bytes": 118346824,
+      "path": "models/e5/onnx/model_qint8_avx512_vnni.onnx",
+      "sha256": "dd476dd0c2514e9b9be83aeb3853fac0763e0bdf4a71645407587d77c48a2d88",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/resolve/614241f622f53c4eeff9890bdc4f31cfecc418b3/onnx/model_qint8_avx512_vnni.onnx"
+    },
+    {
+      "bytes": 65552,
+      "git_blob_sha1": "3cdc05e5f550d8bd136f28efcea0ad5e6b4169c8",
+      "path": "models/bge-m3/onnx/Constant_7_attr__value",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/Constant_7_attr__value"
+    },
+    {
+      "bytes": 724923,
+      "path": "models/bge-m3/onnx/model.onnx",
+      "sha256": "f84251230831afb359ab26d9fd37d5936d4d9bb5d1d5410e66442f630f24435b",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/model.onnx"
+    },
+    {
+      "bytes": 2266820608,
+      "path": "models/bge-m3/onnx/model.onnx_data",
+      "sha256": "1eebfb28493f67bba03ce0ef64bfdc7fc5a3bd9d7493f818bb1d78cd798416b4",
+      "url": "https://huggingface.co/BAAI/bge-m3/resolve/5617a9f61b028005a4858fdac845db406aefb181/onnx/model.onnx_data"
+    },
+    {
+      "bytes": 321072580,
+      "path": "models/jina-code/onnx/model_fp16.onnx",
+      "sha256": "1aafc4fcd63d2e6899e88402ff731e7c646c2e435048294a3cbc908a40d45d7c",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/onnx/model_fp16.onnx"
+    },
+    {
+      "bytes": 161895621,
+      "path": "models/jina-code/onnx/model_quantized.onnx",
+      "sha256": "ed45870251c9f0cf656e78aab0d37a23489066df8a222bb1c8caf8a45f2cb16d",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v2-base-code/resolve/516f4baf13dec4ddddda8631e019b5737c8bc250/onnx/model_quantized.onnx"
+    }
+  ],
+  "repositories": [
+    {
+      "candidate": "arctic",
+      "declared_license": "apache-2.0",
+      "repository": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "revision": "95c2741480856aa9666782eb4afe11959938017f",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "granite",
+      "declared_license": "apache-2.0",
+      "repository": "ibm-granite/granite-embedding-107m-multilingual",
+      "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "e5",
+      "declared_license": "mit",
+      "repository": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "bge-m3",
+      "declared_license": "mit",
+      "repository": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    },
+    {
+      "candidate": "jina-code",
+      "declared_license": "apache-2.0",
+      "repository": "jinaai/jina-embeddings-v2-base-code",
+      "revision": "516f4baf13dec4ddddda8631e019b5737c8bc250",
+      "status": "pinned upstream files; runtime/recipe validation pending"
+    }
+  ],
+  "scope": "candidate provisioning only; no model selection result",
+  "version": 1
+}
